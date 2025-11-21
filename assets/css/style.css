@@ -1,8 +1,9 @@
 :root {
     --text-dark: #3c3023;
-    --accent-gold: #f5a623;
-    --accent-gold-soft: #f4a63a;
+    --accent-gold: #E8B77A;
+    --accent-gold-soft: #e8c08f;
     --accent-beige-pill: #f9eee0;
+    --subtitles-marron: #b98878;
     --body-text: #f5e7c2;
 }
 
@@ -14,7 +15,10 @@
 }
 
 body {
-    font-family: "Inter", sans-serif;
+    display: flex;
+    flex-direction: column;
+    font-family: "Playfair Display",serif;
+    font-weight: 200;
     background-color: white;
     color: var(--text-dark);
 }
@@ -30,14 +34,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 80px;
-    background: white;
+    padding: 16px 50px;
+    background: rgb(255, 255, 255);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .nav-left {
     display: flex;
     align-items: center;
+    background-color: #3c3023;
 }
 
 .logo {
@@ -47,6 +52,9 @@ body {
 }
 
 .nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 32px;
@@ -58,10 +66,13 @@ body {
     font-weight: 500;
     font-size: 0.95rem;
     position: relative;
+    padding: 10px;
+    margin: 0px;
+    border-radius: 10px;
 }
 
-.nav-link.active {
-    color: black;
+.nav-link:hover {
+    background-color: var(--accent-beige-pill);
 }
 
 .nav-right {
@@ -75,34 +86,56 @@ body {
     border: none;
     font-size: 1.3rem;
     cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
 }
 
-.btn-signup, .btn-signin{
-    background-color: var(--accent-gold);
-    color: white;
+.icon-btn:hover {
+    background-color: var(--accent-beige-pill);
+
+}
+
+.btn-signup,
+.btn-signin {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    font-weight: 500;
     padding: 8px 18px;
-    border-radius: 999px;
+    border-radius: 10px;
     text-decoration: none;
-    font-weight: 600;
+    border: 2px transparent solid;
+}
+
+.btn-signin:hover {
+    background-color: var(--accent-beige-pill);
+}
+
+.btn-signup {
+    background-color: var(--accent-gold);
+}
+
+.btn-signup:hover {
+    border: 2px var(--accent-gold) solid;
+    background-color: transparent; 
 }
 
 /* --------------------------------------------- */
-/*                     body                      */
+/*                     search                    */
 /* --------------------------------------------- */
 
-.body {
+.search {
     position: relative;
     width: 100%;
     height: calc(100vh - 70px);
     min-height: 550px;
-    background: url("../img/body_artisanal.jpeg") center center / cover
+    background: url("../img/placeholder0.jpeg") center center / cover
         no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.body-overlay {
+.search-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -112,7 +145,7 @@ body {
     );
 }
 
-.body-inner {
+.search-inner {
     position: relative;
     z-index: 2;
     max-width: 900px;
@@ -120,52 +153,50 @@ body {
     padding: 0 30px;
 }
 
-.body h1 {
+.search h1 {
     font-family: "Playfair Display", serif;
     font-size: 3rem;
-    font-weight: 600;
+    font-weight: 100;
     color: var(--body-text);
     margin-bottom: 30px;
 }
 
-/* --------------------------------------------- */
-/*                 SEARCH BAR                     */
-/* --------------------------------------------- */
-
-.search-bar {
+.search-search-bar {
     max-width: 620px;
     margin: 0 auto 28px;
 }
 
-.search-bar input {
+.search-search-bar input {
     width: 100%;
     padding: 16px 24px;
     border-radius: 999px;
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0,0,0,0.08);
     border: none;
     outline: none;
     color: white;
     font-size: 1rem;
+    backdrop-filter: blur(12px);
 }
 
-.search-bar input::placeholder {
+.search-search-bar input::placeholder {
     color: #ccc;
 }
 
 /* --------------------------------------------- */
-/*                body BUTTONS                    */
+/*                search BUTTONS                 */
 /* --------------------------------------------- */
 
-.body-actions {
+.search-actions {
     display: flex;
     justify-content: center;
-    gap: 18px;
+    gap: 30px;
+
 }
 
 .btn-primary,
 .btn-secondary {
     padding: 12px 22px;
-    border-radius: 999px;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
@@ -175,10 +206,61 @@ body {
 .btn-primary {
     background-color: var(--accent-gold);
     color: #3a260f;
+    border: 1px solid transparent;
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: white;
+    background-color: rgb(0, 0, 0,0.80);
+    color: var(--accent-beige-pill);
     border: 1px solid white;
 }
+
+
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: transparent;
+    color: var(--accent-beige-pill);
+    border: 1px solid white;
+    margin: 0px;
+}
+
+/* --------------------------------------------- */
+/*                  Nos artisans
+/* --------------------------------------------- */
+
+.artisans {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 70px);
+    min-height: 550px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+}
+
+.artisans-header {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    margin-top: 80px;
+    align-items: center;
+    gap: 10px;
+}
+
+.artisans-header .part-title {
+    color: var(--subtitles-marron);
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.artisans-header .part-subtitle{
+    color: var(--text-dark);
+    font-weight: 100;
+    text-align: center;
+}
+
+
