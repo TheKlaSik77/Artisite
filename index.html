@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arti'Site – Accueil</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Arti'Site – Accueil</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="stylesheet" href="assets/css/style.css?v=4">
-</head>
-<body>
+        <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="nav-left">
+                <img
+                    src="assets/img/logo_site_artisans.jpeg"
+                    alt="Logo Arti'Site"
+                    class="logo"
+                />
+            </div>
 
-<header class="navbar">
-    <div class="nav-left">
-        <img src="assets/img/logo_site_artisans.jpeg" alt="Logo Arti'Site" class="logo">
-    </div>
+            <nav class="nav-center">
+                <a href="#" class="nav-link active">Accueil</a>
+                <a href="#" class="nav-link">Artisans</a>
+                <a href="#" class="nav-link">Événements</a>
+                <a href="#" class="nav-link">Galerie</a>
+            </nav>
 
-    <nav class="nav-center">
-        <a href="#" class="nav-link active">Accueil</a>
-        <a href="#" class="nav-link">Artisans</a>
-        <a href="#" class="nav-link">Événements</a>
-        <a href="#" class="nav-link">Galerie</a>
-    </nav>
+            <div class="nav-right">
+                <button class="icon-btn" aria-label="Panier">&#128722;</button>
+                <a href="#" class="btn-signin">Connexion</a>
+                <a href="#" class="btn-signup">S’inscrire</a>
+            </div>
+        </header>
 
-    <div class="nav-right">
-        <button class="icon-btn" aria-label="Panier">&#128722;</button>
-        <a href="#" class="nav-link small">Connexion</a>
-        <a href="#" class="btn-signup">S’inscrire</a>
-    </div>
-</header>
+        <section class="body">
+            <div class="body-overlay"></div>
 
+            <div class="body-inner">
+                <h1>
+                    Découvrez et soutenez le savoir-faire artisanal français
+                </h1>
 
-<section class="hero">
-    <div class="hero-overlay"></div>
+                <form class="search-bar" action="#">
+                    <input
+                        type="text"
+                        placeholder="Recherchez un artisan, un métier ou un produit…"
+                    />
+                </form>
 
-    <div class="hero-inner">
-        <h1>Découvrez et soutenez le savoir-faire artisanal français</h1>
-
-        <form class="search-bar" action="#">
-            <input type="text" placeholder="Recherchez un artisan, un métier ou un produit…">
-        </form>
-
-        <div class="hero-actions">
-            <a href="#" class="btn-primary">Découvrir les artisans</a>
-            <a href="#" class="btn-secondary">Voir la galerie</a>
-        </div>
-    </div>
-</section>
-
-</body>
+                <div class="body-actions">
+                    <a href="#" class="btn-primary">Découvrir les artisans</a>
+                    <a href="#" class="btn-secondary">Voir la galerie</a>
+                </div>
+            </div>
+        </section>
+    </body>
 </html>
