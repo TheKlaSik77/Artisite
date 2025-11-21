@@ -64,27 +64,6 @@ body {
     color: black;
 }
 
-.nav-link.active::before {
-    content: "";
-    position: absolute;
-    inset: -10px -14px;
-    background-color: var(--accent-beige-pill);
-    border-radius: 999px;
-    z-index: -1;
-}
-
-.nav-link.active::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background-color: var(--accent-gold-soft);
-    border-radius: 50%;
-}
-
 .nav-right {
     display: flex;
     align-items: center;
@@ -98,7 +77,7 @@ body {
     cursor: pointer;
 }
 
-.btn-signup {
+.btn-signup, .btn-signin{
     background-color: var(--accent-gold);
     color: white;
     padding: 8px 18px;
