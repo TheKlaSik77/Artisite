@@ -3,104 +3,618 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artisans - Arti'site</title>
-  <link rel="stylesheet" href="../assets/css/artisan_codé.css">
+  <title>Tous nos Artisans</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #b08d57;
+      --secondary: #e2c275;
+      --accent: #f6e7c1;
+      --bg: #f8f8fa;
+      --card-shadow: 0 4px 24px 0 rgba(0,0,0,0.06);
+      --card-border: #f3f3f6;
+      --input-bg: #fafbfc;
+      --input-border: #e5e7eb;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f3f6;
+      --gray-200: #e5e7eb;
+      --gray-600: #666;
+      --gray-700: #444;
+      --gray-800: #222;
+      --gold-light: #e2c275;
+      --gold-dark: #b08d57;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--gray-800);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .header-bg {
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+    }
+    .header-bg .bg-blur1,
+    .header-bg .bg-blur2 {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(64px);
+      z-index: 1;
+    }
+    .header-bg .bg-blur1 {
+      top: 0; right: 0; width: 24rem; height: 24rem;
+      background: var(--secondary);
+      opacity: 0.20;
+    }
+    .header-bg .bg-blur2 {
+      bottom: 0; left: 0; width: 24rem; height: 24rem;
+      background: var(--primary);
+      opacity: 0.10;
+    }
+    .header-bg .bg-img {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+    .header-bg .bg-img img {
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.20;
+      display: block;
+    }
+    .header-bg .bg-img .bg-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.3), transparent);
+    }
+    .header-content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      max-width: 700px;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+      margin-left: 2.5rem;
+      margin-right: auto;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    @media (max-width: 900px) {
+      .header-content {
+        margin-left: 1.2rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .header-content {
+        margin-left: 0.5rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      .header-content h1 { font-size: 2.1rem; }
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 1rem;
+      padding: 0.5rem 1.25rem;
+      margin-bottom: 2rem;
+      transition: background 0.2s, color 0.2s;
+      font-weight: 500;
+      gap: 0.5rem;
+      align-self: flex-start;
+      margin-left: 0.2rem;
+    }
+    .btn-back:hover {
+      background: rgba(255,255,255,0.10);
+      color: var(--secondary);
+    }
+    .header-content .subtitle {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--secondary);
+      font-family: 'Inter', Arial, sans-serif;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      font-weight: 500;
+    }
+    .header-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--secondary);
+      margin: 0 0 1.5rem 0;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+    .header-content p {
+      font-size: 1.15rem;
+      color: #fff;
+      opacity: 0.92;
+      margin: 0;
+      max-width: 600px;
+      font-family: 'Inter', Arial, sans-serif;
+      font-weight: 400;
+    }
+    .search-filters {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.06);
+      border: 1px solid var(--card-border);
+      padding: 3.5rem 2rem 2.5rem 2rem;
+      margin-top: 3.5rem;
+      margin-bottom: 4.5rem;
+      position: relative;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .filters-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .filters-header .icon-filter {
+      width: 2.5rem; height: 2.5rem;
+      background: var(--secondary);
+      opacity: 0.13;
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--secondary);
+      font-size: 1.25rem;
+    }
+    .filters-header span {
+      color: var(--gray-700);
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.08rem;
+      font-weight: 500;
+    }
+    .search-bars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 900px) {
+      .search-bars {
+        grid-template-columns: 1fr;
+      }
+    }
+    .search-bar {
+      position: relative;
+      min-width: 0;
+    }
+    .search-bar input {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 1.2rem 1rem 1.2rem 3rem;
+      border-radius: 1rem;
+      border: 1px solid var(--input-border);
+      font-size: 1.08rem;
+      font-family: 'Inter', Arial, sans-serif;
+      outline: none;
+      transition: border 0.2s;
+      background: var(--input-bg);
+      font-weight: 400;
+    }
+    .search-bar input:focus {
+      border-color: var(--secondary);
+    }
+    .search-bar .icon-search,
+    .search-bar .icon-map-pin {
+      position: absolute;
+      left: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b08d57;
+      font-size: 1.25rem;
+      opacity: 0.7;
+      width: 1.25rem;
+      height: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .categories-label {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 0.7rem;
+      font-family: 'Inter', Arial, sans-serif;
+      font-weight: 500;
+    }
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .category-btn {
+      padding: 0.7rem 2rem;
+      border-radius: 1rem;
+      font-size: 1rem;
+      font-family: 'Inter', Arial, sans-serif;
+      border: 1px solid var(--input-border);
+      background: #fff;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+      box-shadow: none;
+    }
+    .category-btn.selected,
+    .category-btn:hover {
+      background: linear-gradient(90deg, var(--gold-light), var(--gold-dark));
+      color: var(--gray-800);
+      border-color: var(--secondary);
+      box-shadow: 0 2px 8px 0 rgba(176,141,87,0.10);
+    }
+    .results-count {
+      color: #888;
+      font-family: 'Inter', Arial, sans-serif;
+      margin-bottom: 2.5rem;
+      font-size: 1.08rem;
+      font-weight: 500;
+      text-align: left;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .artisans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 1000px) {
+      .artisans-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .artisans-grid { grid-template-columns: 1fr; }
+    }
+    .artisan-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--card-border);
+      transition: box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .artisan-card:hover {
+      box-shadow: 0 12px 36px 0 rgba(176,141,87,0.18), 0 2px 16px 0 rgba(176,141,87,0.10);
+      z-index: 2;
+    }
+    .artisan-card-img-wrap {
+      position: relative;
+      aspect-ratio: 1/1;
+      background: var(--gray-100);
+      overflow: hidden;
+    }
+    .artisan-card-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.7s;
+      display: block;
+    }
+    .artisan-card:hover .artisan-card-img-wrap img {
+      transform: scale(1.10);
+    }
+    .artisan-card-img-wrap .img-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.40), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .artisan-card:hover .artisan-card-img-wrap .img-gradient {
+      opacity: 1;
+    }
+    .artisan-card-content {
+      padding: 2rem 1.75rem 1.75rem 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .artisan-card-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      color: var(--primary);
+      margin: 0 0 0.5rem 0;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    .artisan-card-content p {
+      color: var(--gray-600);
+      margin: 0 0 1.5rem 0;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+    .btn-discover {
+      width: 100%;
+      border: none;
+      background: none;
+      color: #111;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1rem;
+      border-radius: 1rem;
+      padding: 0.85rem 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.2s, color 0.2s;
+      font-weight: 500;
+    }
+    .btn-discover:hover {
+      background: linear-gradient(90deg, var(--gold-light), var(--gold-dark));
+      color: #111;
+    }
+    .btn-discover .icon-arrow-right {
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+    }
+    .btn-discover:hover .icon-arrow-right {
+      transform: translateX(0.25rem);
+    }
+    .no-results {
+      text-align: center;
+      padding: 4rem 0;
+      color: #888;
+      font-size: 1.15rem;
+      font-family: 'Inter', Arial, sans-serif;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 700px) {
+      .search-filters, .results-count, .artisans-grid, .no-results {
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <header class="navbar">
-    <div class="logo">Arti'site</div>
-    <nav>
-      <a href="accueil.html">Accueil</a>
-      <a href="artisans.html" class="active">Artisans</a>
-      <a href="#">Événements</a>
-      <a href="#">Galerie</a>
-    </nav>
-    <div class="actions">
-      <a href="#" class="icon">🛒</a>
-      <a href="#" class="link">Connexion</a>
-      <a href="#" class="btn">S'inscrire</a>
+  <div class="header-bg">
+    <div class="bg-blur1"></div>
+    <div class="bg-blur2"></div>
+    <div class="bg-img">
+      <img src="https://images.unsplash.com/photo-1739664664067-310787d23cff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBhcnRpc2FuJTIwZGFyayUyMHdvcmtzaG9wfGVufDF8fHx8MTc2MTA1NzMwM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Atelier artisan luxe">
+      <div class="bg-gradient"></div>
     </div>
-  </header>
-
-  <!--  Section principale -->
-  <section class="hero">
-    <a href="accueil.html" class="back">← Retour</a>
-    <h5 class="subtitle">NOTRE SÉLECTION</h5>
-    <h1>Tous nos Artisans</h1>
-    <p>Découvrez tous les créateurs talentueux qui perpétuent des savoir-faire d'excellence à travers la France.</p>
-  </section>
-
-  <!--  Section recherche -->
-  <section class="search-section">
-    <h3>Rechercher et filtrer</h3>
-    <div class="search-bar">
-      <input type="text" placeholder="Rechercher par nom ou métier...">
-      <input type="text" placeholder="Rechercher par lieu...">
-    </div>
-    <div class="categories">
-      <button class="active">Tous</button>
-      <button>Céramique</button>
-      <button>Bois</button>
-      <button>Cuir</button>
-      <button>Textile</button>
-      <button>Bijoux</button>
-      <button>Métal</button>
-      <button>Verre</button>
-      <button>Papier</button>
-      <button>Autre</button>
-    </div>
-  </section>
-
-  <!--  Liste d’artisans -->
-  <section class="artisans-list">
-    <h3>9 artisans trouvés</h3>
-    <div class="cards">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1581092335349-8f1ff1c92f29" alt="Céramique">
-        <h4>Sophie Martin</h4>
-        <p>Céramiste</p>
-        <a href="#" class="discover">Découvrir →</a>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1581091012184-7a677307f1b9" alt="Menuisier">
-        <h4>Thomas Dubois</h4>
-        <p>Menuisier ébéniste</p>
-        <a href="#" class="discover">Découvrir →</a>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1602526218810-fb9b7f4f36e0" alt="Maroquinerie">
-        <h4>Marie Leroux</h4>
-        <p>Maroquinière</p>
-        <a href="#" class="discover">Découvrir →</a>
+    <div class="container header-content">
+      <button class="btn-back">
+        <span class="icon-arrow-left">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </span>
+        <span>Retour</span>
+      </button>
+      <div>
+        <span class="subtitle">Notre sélection</span>
+        <h1>Tous nos Artisans</h1>
+        <p>
+          Découvrez tous les créateurs talentueux qui perpétuent des savoir-faire d'excellence à travers la France.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!--  Pied de page -->
-  <footer class="footer">
-    <div class="footer-info">
-      <h3>Arti'site</h3>
-      <p>Plateforme dédiée à la promotion et à la vente des créations d'artisans et de créateurs français.</p>
+  <div class="container">
+    <div class="search-filters">
+      <div class="filters-header">
+        <span class="icon-filter">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 13.5 10 19 14 21 14 13.5 22 3"/></svg>
+        </span>
+        <span>Rechercher et filtrer</span>
+      </div>
+      <form>
+        <div class="search-bars">
+          <div class="search-bar">
+            <span class="icon-search">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <input type="text" placeholder="Rechercher par nom ou métier...">
+          </div>
+          <div class="search-bar">
+            <span class="icon-map-pin">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <input type="text" placeholder="Rechercher par lieu...">
+          </div>
+        </div>
+        <div>
+          <div class="categories-label">Catégorie :</div>
+          <div class="categories">
+            <button type="button" class="category-btn selected">Tous</button>
+            <button type="button" class="category-btn">Céramique</button>
+            <button type="button" class="category-btn">Bois</button>
+            <button type="button" class="category-btn">Cuir</button>
+            <button type="button" class="category-btn">Textile</button>
+            <button type="button" class="category-btn">Bijoux</button>
+            <button type="button" class="category-btn">Métal</button>
+            <button type="button" class="category-btn">Verre</button>
+            <button type="button" class="category-btn">Papier</button>
+            <button type="button" class="category-btn">Autre</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="footer-links">
-      <h4>Liens Rapides</h4>
-      <ul>
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Nos Artisans</a></li>
-        <li><a href="#">Événements</a></li>
-        <li><a href="#">Galerie</a></li>
-      </ul>
-    </div>
-    <div class="footer-contact">
-      <h4>Contact</h4>
-      <p>Email : contact@artisite.fr</p>
-      <p>Téléphone : +33 1 23 45 67 89</p>
-      <p>Adresse : Paris, France</p>
-    </div>
-  </footer>
 
+    <div class="results-count">
+      9 artisans trouvés
+    </div>
+
+    <div class="artisans-grid">
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1695740633675-d060b607f5c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3R0ZXJ5JTIwY2VyYW1pYyUyMGhhbmRtYWRlfGVufDF8fHx8MTc2MDk1NTMyMXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Sophie Martin">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Sophie Martin</h3>
+          <p>Céramiste</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1675721128213-a9052641488e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b29kd29ya2luZyUyMGNhcnBlbnRlciUyMHRvb2xzfGVufDF8fHx8MTc2MTA1MTk1OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Thomas Dubois">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Thomas Dubois</h3>
+          <p>Menuisier ébéniste</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1638410644502-e622c5c11e61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsZWF0aGVyJTIwY3JhZnQlMjBoYW5kbWFkZXxlbnwxfHx8fDE3NjEwNTE5NTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Marie Leroux">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Marie Leroux</h3>
+          <p>Maroquinière</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1562469162-c17fc5155156?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZXh0aWxlJTIwd2VhdmluZyUyMGZhYnJpY3xlbnwxfHx8fDE3NjEwNTE5NjB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Julien Rousseau">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Julien Rousseau</h3>
+          <p>Tisserand</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1758974504445-65b1ee86e47e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kbWFkZSUyMGpld2VscnklMjBhcnRpc2FufGVufDF8fHx8MTc2MTAzODQzOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Claire Bernard">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Claire Bernard</h3>
+          <p>Joaillière</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1602224307648-b5d5f28d9132?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpc2FuJTIwd29ya3Nob3AlMjBjcmFmdHNtYW58ZW58MXx8fHwxNzYxMDUxOTU4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Antoine Moreau">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Antoine Moreau</h3>
+          <p>Ferronnier d'art</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1695740633675-d060b607f5c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3R0ZXJ5JTIwY2VyYW1pYyUyMGhhbmRtYWRlfGVufDF8fHx8MTc2MDk1NTMyMXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Isabelle Fontaine">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Isabelle Fontaine</h3>
+          <p>Souffleuse de verre</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1602224307648-b5d5f28d9132?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpc2FuJTIwd29ya3Nob3AlMjBjcmFmdHNtYW58ZW58MXx8fHwxNzYxMDUxOTU4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Laurent Petit">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Laurent Petit</h3>
+          <p>Relieur d'art</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="artisan-card">
+        <div class="artisan-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1638410644502-e622c5c11e61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsZWF0aGVyJTIwY3JhZnQlMjBoYW5kbWFkZXxlbnwxfHx8fDE3NjEwNTE5NTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Camille Durand">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="artisan-card-content">
+          <h3>Camille Durand</h3>
+          <p>Parfumeuse artisanale</p>
+          <a href="page_artisan_carte.html" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
