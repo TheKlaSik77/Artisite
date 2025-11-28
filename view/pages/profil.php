@@ -10,8 +10,8 @@
             rel="stylesheet"
         />
 
-        <link rel="stylesheet" href="../assets/css/style.css?v=5" />
-        <link rel="stylesheet" href="../assets/css/profil.css?v=1" />
+        <link rel="stylesheet" href="../../assets/css/style.css" />
+        <link rel="stylesheet" href="../../assets/css/profil.css" />
     </head>
     <main>
         <!-- réutilise la navbar identique -->

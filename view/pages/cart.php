@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../styles.css">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
 
             <!-- PRODUIT 1 -->
             <div class="cart-item">
-                <img src="https://via.placeholder.com/80" class="cart-img">
+                <img src="https://picsum.photos/200/300" class="cart-img">
 
                 <div class="cart-info">
                     <h3>Bol artisanal en céramique</h3>
@@ -47,7 +47,7 @@
 
             <!-- PRODUIT 2 -->
             <div class="cart-item">
-                <img src="https://via.placeholder.com/80" class="cart-img">
+                <img src="https://picsum.photos/200/300" class="cart-img">
 
                 <div class="cart-info">
                     <h3>Planche en bois sculptée</h3>
@@ -91,68 +91,6 @@
 
         </div>
     </div>
-
-
-    <!-- ------------------ JAVASCRIPT ------------------ -->
-    <script>
-        function changeQty(btn, delta) {
-            let input = btn.parentElement.querySelector("input");
-            let value = parseInt(input.value);
-
-            value += delta;
-            if (value < 1) value = 1;
-
-            input.value = value;
-
-            updateTotal();
-        }
-
-        // 🔥 Suppression d’un article
-        function removeItem(button) {
-            const item = button.closest(".cart-item");
-
-            // Petite animation
-            item.style.opacity = "0";
-            item.style.transform = "translateX(-20px)";
-
-            setTimeout(() => {
-                item.remove();
-                updateTotal();
-            }, 200);
-        }
-
-        // 🔥 Mise à jour automatique du total
-        function updateTotal() {
-            const items = document.querySelectorAll(".cart-item");
-
-            let subtotal = 0;
-
-            items.forEach(item => {
-                const price = parseFloat(
-                    item.querySelector(".price").textContent.replace("€", "").replace(",", ".")
-                );
-                const qty = parseInt(
-                    item.querySelector(".qty-box input").value
-                );
-
-                subtotal += price * qty;
-            });
-
-            // Livraison : seulement si le panier n'est pas vide
-            const shipping = items.length > 0 ? 5.90 : 0;
-            const total = subtotal + shipping;
-
-            // Mise à jour de l'affichage
-            document.getElementById("subtotal").textContent =
-                subtotal.toFixed(2).replace(".", ",") + " €";
-
-            document.getElementById("shipping").textContent =
-                shipping.toFixed(2).replace(".", ",") + " €";
-
-            document.getElementById("total").textContent =
-                total.toFixed(2).replace(".", ",") + " €";
-        }
-    </script>
 
 </body>
 
