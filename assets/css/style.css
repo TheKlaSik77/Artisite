@@ -13,7 +13,7 @@ iframe {
     min-height: 100vh;
     display: block;
     overflow: hidden;
-    
+
 }
 
 
@@ -26,7 +26,7 @@ iframe {
 
 body {
     display: flex;
-    flex-direction: column;aq
+    flex-direction: column;
     font-family: "Playfair Display",serif;
     font-weight: 200;
     background-color: white;

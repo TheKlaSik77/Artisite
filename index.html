@@ -26,11 +26,11 @@
         </nav>
 
         <div class="nav-right">
-            <button class="icon-btn" data-page="pages/cart.html">🛒</button>
+            <button class="icon-btn" data-page="pages/panier.html">🛒</button>
 
             <a href="#" class="btn-signin" data-page="pages/login.html">Se connecter</a>
 
-            <a href="#" class="btn-signup" data-page="pages/signup.html">S'inscrire</a>
+            <a href="#" class="btn-signup" data-page="pages/Inscription.html">S'inscrire</a>
         </div>
 
     </header>
@@ -105,26 +105,30 @@
             <p>© 2025 Arti’site — Tous droits réservés.</p>
         </div>
     </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const iframe = document.getElementById("main-frame");
-            const links = document.querySelectorAll(".nav-link[data-page]");
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const iframe = document.getElementById("main-frame");
+    const links = document.querySelectorAll("[data-page]");
 
-            links.forEach(link => {
-                link.addEventListener("click", event => {
-                    event.preventDefault();
-
-
-                    const page = link.getAttribute("data-page");
-                    iframe.src = page;
+    links.forEach(link => {
+        link.addEventListener("click", event => {
+            event.preventDefault();
 
 
-                    links.forEach(l => l.classList.remove("active"));
-                    link.classList.add("active");
-                });
-            });
+            iframe.src = link.getAttribute("data-page");
+
+
+            if (link.classList.contains("nav-link")) {
+                document.querySelectorAll(".nav-link").forEach(l => 
+                    l.classList.remove("active")
+                );
+                link.classList.add("active");
+            }
         });
-    </script>
+    });
+});
+</script>
+
 
 </body>
 
