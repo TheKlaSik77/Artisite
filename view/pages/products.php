@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Nos Produits – Marketplace Artisans</title>
-    <link rel="stylesheet" href="produit.css">
+    <link rel="stylesheet" href="./assets/css/pages/products.css">
 </head>
 <body>
-
-    <!-- Ici tu peux coller ta navbar si tu veux -->
-
     <section class="products-section">
         <h1 class="products-title">Nos Produits Artisanaux</h1>
         <p class="products-subtitle">
@@ -94,7 +91,7 @@
                 nom: "Bol en céramique",
                 artisan: "Sophie Martin",
                 prix: "29€",
-                image: "img/1.jpg",
+                image: "img/2.jpg",
                 categorie: "Poterie",
                 matiere: "Céramique"
             },
@@ -198,7 +195,7 @@
                 matiere: "Cuir"
             }
         ];
-
+        
         const PER_PAGE = 9;
         let currentPage = 1;
         let searchTerm = "";

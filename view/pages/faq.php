@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FAQ</title>
-
-    <!-- LIEN VERS TON FICHIER CSS -->
-    <link rel="stylesheet" href="faq.css">
+    <link rel="stylesheet" href="./assets/css/pages/faq.css">
 </head>
 
 <body>

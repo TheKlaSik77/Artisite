@@ -1,0 +1,77 @@
+
+/* --------------------------------------------- */
+/*                PAGES LÉGALES (CGU)            */
+/* --------------------------------------------- */
+
+.legal-section {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.legal-inner {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.legal-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.legal-intro {
+    font-size: 0.98rem;
+    color: var(--text-dark);
+    opacity: 0.85;
+    margin-bottom: 12px;
+}
+
+.legal-block {
+    background-color: #fdf8f1;
+    border-radius: 12px;
+    border: 1px solid var(--accent-beige-pill);
+    padding: 18px 18px 16px;
+}
+
+.legal-block h2 {
+    font-size: 1.1rem;
+    color: var(--subtitles-marron);
+    margin-bottom: 8px;
+}
+
+.legal-block p,
+.legal-block ul {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+.legal-block ul {
+    margin-left: 18px;
+    margin-top: 6px;
+}
+
+.legal-block li {
+    margin-bottom: 4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 12px 18px;
+    }
+
+    .legal-section {
+        padding: 60px 16px;
+    }
+
+    .legal-block {
+        padding: 14px 14px 12px;
+    }
+}

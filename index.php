@@ -17,7 +17,7 @@
 $page = $_GET['page'] ?? 'homepage';
 
 // Par sécurité, on précise une "white-list" de page dont l'accès est autorisé.
-$pages_autorisees = ['homepage', 'cart', 'profil', 'signin', 'signup'];
+$pages_autorisees = ['homepage', 'cart', 'profil', 'signin', 'signup','cgu','contact','mentions-legales','faq','products'];
 
 // Si page non autorisée, on renvoie vers homepage en fixant l'attribut page à homepage
 if (!in_array($page, $pages_autorisees)) {
