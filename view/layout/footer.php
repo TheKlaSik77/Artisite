@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil – Arti'Site</title>
+    <link rel="stylesheet" href="./assets/css/layout/footer.css" />
+</head>
+
 
 <footer class="footer">
     <div class="footer-container">
@@ -24,10 +34,10 @@
             <h3 class="footer-title">Liens Rapides</h3>
 
             <ul class="footer-links">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Nos Artisans</a></li>
-                <li><a href="#">Événements</a></li>
-                <li><a href="#">Galerie</a></li>
+                <li><a href="index.php?page=homepage">Accueil</a></li>
+                <li><a href="index.php?page=craftmen">Nos Artisans</a></li>
+                <li><a href="index.php?page=products">Produits</a></li>
+                <li><a href="index.php?page=events">Événements</a></li>
                 <li><a href="#">Devenir Artisan</a></li>
             </ul>
         </div>

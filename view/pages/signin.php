@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="../../styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/pages/signin_signup.css">
 </head>
+
 <body>
-    <div class="container">
+    <main>
         <div class="login-card">
             <p class="subtitle">BON RETOUR</p>
             <h1>Connexion</h1>
@@ -20,7 +19,7 @@
                 <label>Adresse email</label>
                 <div class="input-group">
                     <span class="icon">📧</span>
-                    <input type="email" placeholder="votre@email.fr">
+                    <input type="email" placeholder="Votre@email.fr">
                 </div>
 
                 <label>Mot de passe</label>
@@ -39,7 +38,7 @@
             </form>
 
             <p class="signup-text">
-                Vous n'avez pas de compte ? <a href="inscription.html" class="signup">S’inscrire</a>
+                Vous n'avez pas de compte ? <a href="index.php?page=signup" class="signup">S’inscrire</a>
             </p>
 
             <div class="divider"></div>
@@ -51,6 +50,7 @@
                 <button class="facebook">Facebook</button>
             </div>
         </div>
-    </div>
+    </main>
 </body>
+
 </html>

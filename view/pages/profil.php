@@ -1,46 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Profil – Arti'Site</title>
 
-        <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap"
-            rel="stylesheet"
-        />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil – Arti'Site</title>
+    <link rel="stylesheet" href="./assets/css/pages/profil.css" />
+</head>
 
-        <link rel="stylesheet" href="../../assets/css/style.css" />
-        <link rel="stylesheet" href="../../assets/css/profil.css" />
-    </head>
+<body>
     <main>
-        <!-- réutilise la navbar identique -->
-        <header class="navbar">
-            <div class="nav-left">
-                <img src="../assets/img/logo_site_artisans.jpeg" class="logo" />
-            </div>
-
-            <nav class="nav-center">
-                <a href="index.html" class="nav-link">Accueil</a>
-                <a href="#" class="nav-link">Artisans</a>
-                <a href="#" class="nav-link">Événements</a>
-                <a href="#" class="nav-link">Galerie</a>
-            </nav>
-
-            <div class="nav-right">
-                <button class="icon-btn">&#128722;</button>
-                <a href="#" class="btn-signin">Déconnexion</a>
-            </div>
-        </header>
-
         <section class="profile-container">
             <div class="profile-card">
                 <!-- Photo de profil -->
                 <div class="profile-photo">
-                    <img
-                        src="assets/img/default_user.jpg"
-                        alt="Photo de profil"
-                    />
+                    <img src="https://picsum.photos/300/300" alt="Photo de profil" />
                     <button class="change-photo-btn">Changer la photo</button>
                 </div>
 
@@ -76,4 +50,6 @@
             </div>
         </section>
     </main>
+</body>
+
 </html>

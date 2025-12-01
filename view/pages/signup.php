@@ -5,19 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" href="../../styles.css">
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/pages/signin_signup.css">
 </head>
 
 <body>
-
-    <div class="container">
+    <main>
         <div class="login-card">
-
             <p class="subtitle">REJOIGNEZ-NOUS</p>
             <h1>Inscription</h1>
             <p class="description">Créez votre compte et découvrez nos artisans</p>
@@ -41,7 +34,7 @@
             </div>
 
             <!-- FORMULAIRE -->
-            <form name="myForm" onsubmit="return validateEmail()">
+            <form name="myForm">
 
                 <div class="row">
                     <div class="col">
@@ -105,44 +98,7 @@
             </p>
 
         </div>
-    </div>
-    <script>
-        function validateEmail() {
-            var emailID = document.myForm.EMail.value;
-            atpos = emailID.indexOf("@");
-            dotpos = emailID.lastIndexOf(".");
-            if (atpos < 1 || (dotpos - atpos < 2)) {
-                alert("Please enter correct email ID")
-                document.myForm.EMail.focus();
-                return false;
-            }
-        }
-        function selectType(type) {
-            const client = document.getElementById("clientBtn");
-            const artisan = document.getElementById("artisanBtn");
-            const metierField = document.getElementById("metierField");
-
-            if (type === "client") {
-                client.classList.add("selected");
-                artisan.classList.remove("selected");
-
-                client.querySelector(".circle").classList.add("active");
-                artisan.querySelector(".circle").classList.remove("active");
-
-                metierField.style.display = "none";
-            }
-            else if (type === "artisan") {
-                artisan.classList.add("selected");
-                client.classList.remove("selected");
-
-                artisan.querySelector(".circle").classList.add("active");
-                client.querySelector(".circle").classList.remove("active");
-
-                metierField.style.display = "block";
-            }
-        }
-    </script>
-
+    </main>
 </body>
 
 </html>
