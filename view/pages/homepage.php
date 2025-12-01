@@ -100,59 +100,58 @@
             </div>
         </section>
 
-        <section class="events-section-bg">
-            <section class="events">
-                <p class="section-subtitle">PROCHAINEMENT</p>
-                <h1 class="section-title">Événements à venir</h1>
-                <p class="section-desc">
-                    Participez à nos ateliers, salons et expositions pour rencontrer les artisans
-                    et découvrir leurs techniques.
-                </p>
+        <section class="events">
+            <p class="section-subtitle">PROCHAINEMENT</p>
+            <h1 class="section-title">Événements à venir</h1>
+            <p class="section-desc">
+                Participez à nos ateliers, salons et expositions pour rencontrer les artisans
+                et découvrir leurs techniques.
+            </p>
 
-                <div class="events-grid">
-                    <div class="event-card">
-                        <img src="assets/img/poterie.jpg" class="event-img">
-                        <div class="event-content">
-                            <h3 class="event-name">Atelier poterie traditionnelle</h3>
-                            <div class="event-info">
-                                <p>📅 15 novembre 2025</p>
-                                <p>📍 Paris 11ème</p>
-                            </div>
-                            <a href="#" class="event-btn">Participer →</a>
+            <div class="events-grid">
+                <div class="event-card">
+                    <img src="assets/img/poterie.jpg" class="event-img">
+                    <div class="event-content">
+                        <h3 class="event-name">Atelier poterie traditionnelle</h3>
+                        <div class="event-info">
+                            <p>📅 15 novembre 2025</p>
+                            <p>📍 Paris 11ème</p>
                         </div>
+                        <a href="#" class="event-btn">Participer →</a>
                     </div>
-
-                    <div class="event-card">
-                        <img src="assets/img/poterie.jpg" class="event-img">
-                        <div class="event-content">
-                            <h3 class="event-name">Salon des Métiers d’Art</h3>
-                            <div class="event-info">
-                                <p>📅 22 novembre 2025</p>
-                                <p>📍 Lyon</p>
-                            </div>
-                            <a href="#" class="event-btn">Participer →</a>
-                        </div>
-                    </div>
-
-                    <div class="event-card">
-                        <img src="assets/img/poterie.jpg" class="event-img">
-                        <div class="event-content">
-                            <h3 class="event-name">Exposition de maroquinerie artisanale</h3>
-                            <div class="event-info">
-                                <p>📅 5 décembre 2025</p>
-                                <p>📍 Bordeaux</p>
-                            </div>
-                            <a href="#" class="event-btn">Participer →</a>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="events-center">
-                    <a href="#" class="events-all-btn">Tous les événements</a>
+                <div class="event-card">
+                    <img src="assets/img/poterie.jpg" class="event-img">
+                    <div class="event-content">
+                        <h3 class="event-name">Salon des Métiers d’Art</h3>
+                        <div class="event-info">
+                            <p>📅 22 novembre 2025</p>
+                            <p>📍 Lyon</p>
+                        </div>
+                        <a href="#" class="event-btn">Participer →</a>
+                    </div>
                 </div>
-            </section>
+
+                <div class="event-card">
+                    <img src="assets/img/poterie.jpg" class="event-img">
+                    <div class="event-content">
+                        <h3 class="event-name">Exposition de maroquinerie artisanale</h3>
+                        <div class="event-info">
+                            <p>📅 5 décembre 2025</p>
+                            <p>📍 Bordeaux</p>
+                        </div>
+                        <a href="#" class="event-btn">Participer →</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="events-center">
+                <a href="#" class="events-all-btn">Tous les événements</a>
+            </div>
         </section>
+
 
     </main>
 
