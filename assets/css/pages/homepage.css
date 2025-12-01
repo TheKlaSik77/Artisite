@@ -1,0 +1,289 @@
+
+
+
+/* --------------------------------------------- */
+/*             Search Section                    */
+/* --------------------------------------------- */
+
+.search {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 70px);
+    min-height: 550px;
+    background: url("../../img/placeholder0.jpeg") center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.65)
+    );
+}
+
+.search-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+    padding: 0 30px;
+}
+
+.search h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    font-weight: 100;
+    color: var(--body-text);
+    margin-bottom: 30px;
+}
+
+.search-search-bar {
+    max-width: 620px;
+    margin: 0 auto 28px;
+}
+
+.search-search-bar input {
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.08);
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 1rem;
+    backdrop-filter: blur(12px);
+}
+
+.search-search-bar input::placeholder {
+    color: #ccc;
+}
+
+/* --------------------------------------------- */
+/*                 Search BTN                    */
+/* --------------------------------------------- */
+
+.search-actions {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--accent-gold);
+    color: #3a260f;
+    border: 1px solid transparent;
+}
+
+.btn-secondary {
+    background-color: rgb(0, 0, 0, 0.8);
+    color: var(--accent-beige-pill);
+    border: 1px solid white;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    background-color: transparent;
+    color: var(--accent-beige-pill);
+    border: 1px solid white;
+}
+
+.section-subtitle {
+    color: #c48d6a;
+    letter-spacing: 1px;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #533b2d;
+}
+
+.section-desc {
+    max-width: 600px;
+    margin: 0 auto 50px;
+    color: #666;
+    line-height: 1.5;
+}
+
+
+/* --------------------------------------------- */
+/*               ARTISANS section                */
+/* --------------------------------------------- */
+
+.artisans {
+    background: white;
+    padding: 80px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.artisans-header {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    margin-top: 80px;
+    align-items: center;
+    gap: 10px;
+}
+
+.artisans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    width: 100%;
+}
+
+.artisan-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.artisan-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.artisan-content {
+    padding: 20px 25px;
+}
+
+.artisan-name {
+    color: #533b2d;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.artisan-job {
+    color: #8a6b55;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.artisan-btn {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #533b2d;
+}
+
+.artisans-center {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.artisans-all-btn {
+    padding: 10px 26px;
+    border-radius: 30px;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    text-decoration: none;
+}
+
+
+/* --------------------------------------------- */
+/*                EVENTS Section                 */
+/* --------------------------------------------- */
+
+.events {
+    text-align: center;
+    padding: 0px 0;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+}
+
+.event-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+}
+
+.event-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.event-content {
+    padding: 20px 25px;
+}
+
+.event-name {
+    font-size: 18px;
+    color: #533b2d;
+    margin-bottom: 18px;
+}
+
+.event-info p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.event-btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(to right, #d9a066, #b77d42);
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.events-center {
+    margin-top: 10px;
+}
+
+.events-all-btn {
+    padding: 12px 28px;
+    border: 1px solid #c48d6a;
+    border-radius: 25px;
+    background: #fff;
+    text-decoration: none;
+    color: #c48d6a;
+}
+
+.events-section-bg {
+    background: #f5efe8;
+    padding: 80px 0;
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mentions légales - Artisite</title>
+    <link rel="stylesheet" href="./assets/css/pages/cgu_legal.css">
+</head>
+
+<body>
+    <main>
+        <section class="legal-section">
+            <div class="legal-inner">
+                <h1 class="legal-title">Mentions légales</h1>
+                <p class="legal-intro">
+                    Le présent site est édité par la plateforme Artisite, mettant en relation des artisans et des
+                    acheteurs
+                    pour la vente de produits artisanaux.
+                </p>
+
+                <!-- Éditeur du site -->
+                <article class="legal-block">
+                    <h2>1. Éditeur du site</h2>
+                    <p>
+                        Raison sociale / Nom : <strong>Artisite</strong><br>
+                        Forme juridique : <strong> SARL</strong><br>
+                        Capital social : <strong>1000 000€</strong><br>
+                        Siège social : <strong>10 Rue de Vanves, 92130 Issy-les-Moulineaux</strong><br>
+                        SIRET : <strong>123 456 789 00012</strong><br>
+                        Numéro de TVA intracommunautaire (le cas échéant) : <strong>FR12 345678912</strong><br>
+                        Email de contact : <strong>contactartisite@gmail.com</strong><br>
+                        Téléphone : <strong>012345678</strong>
+                    </p>
+                </article>
+
+                <!-- Directeur de publication -->
+                <article class="legal-block">
+                    <h2>2. Directeur de la publication</h2>
+                    <p>
+                        Le directeur de la publication est : <strong>DevA5</strong>, en qualité de
+                        <strong> président</strong>.
+                    </p>
+                </article>
+
+                <!-- Hébergeur -->
+                <article class="legal-block">
+                    <h2>3. Hébergeur du site</h2>
+                    <p>
+                        Le site est hébergé par :<br>
+                        <strong>DevA5</strong><br>
+                        Adresse : <strong>10 Rue de Vanves, 92130 Issy-les-Moulineaux</strong><br>
+                        Site web : <strong>http://deva5.fr</strong><br>
+                        Téléphone : <strong>012345678</strong>
+                    </p>
+                </article>
+
+                <!-- Activité -->
+                <article class="legal-block">
+                    <h2>4. Activité de la plateforme</h2>
+                    <p>
+                        Artisite est une plateforme en ligne mettant en relation des artisans indépendants et des
+                        acheteurs,
+                        afin de faciliter la vente de produits artisanaux. Les artisans restent seuls responsables :
+                    </p>
+                    <ul>
+                        <li>de la création, de la qualité et de la conformité de leurs produits ;</li>
+                        <li>du respect de la réglementation applicable (normes, sécurité, hygiène, etc.) ;</li>
+                        <li>de l’exécution des ventes et des livraisons auprès des acheteurs.</li>
+                    </ul>
+                    <p>
+                        Artisite agit en qualité d’intermédiaire technique et ne devient pas propriétaire des produits
+                        proposés
+                        à la vente par les artisans.
+                    </p>
+                </article>
+
+                <!-- Propriété intellectuelle -->
+                <article class="legal-block">
+                    <h2>5. Propriété intellectuelle</h2>
+                    <p>
+                        L’ensemble des éléments présents sur le site (textes, images, logo, graphisme, structure, etc.)
+                        est,
+                        sauf mention contraire, la propriété exclusive de [Nom du site] ou de ses partenaires, et est
+                        protégé
+                        par le droit de la propriété intellectuelle.
+                    </p>
+                    <p>
+                        Toute reproduction, représentation, modification, adaptation, totale ou partielle du site ou de
+                        l’un
+                        quelconque des éléments qui le composent, sans l’autorisation préalable écrite de [Nom du site],
+                        est strictement interdite.
+                    </p>
+                </article>
+
+                <!-- Données personnelles -->
+                <article class="legal-block">
+                    <h2>6. Données personnelles</h2>
+                    <p>
+                        Les informations collectées via le site (formulaire de contact, création de compte, commandes,
+                        etc.)
+                        sont traitées conformément à la réglementation en vigueur et notamment au Règlement Général sur
+                        la
+                        Protection des Données (RGPD).
+                    </p>
+                    <p>
+                        Pour plus d’informations sur l’utilisation de vos données, veuillez consulter notre
+                        <strong>politique de confidentialité</strong> (à créer sur une page dédiée).
+                    </p>
+                </article>
+
+                <!-- Cookies -->
+                <article class="legal-block">
+                    <h2>7. Cookies</h2>
+                    <p>
+                        Le site peut utiliser des cookies afin d’améliorer l’expérience utilisateur, mesurer l’audience
+                        et proposer des contenus adaptés. Vous pouvez paramétrer l’utilisation des cookies via les
+                        réglages de votre navigateur.
+                    </p>
+                </article>
+
+                <!-- Droit applicable -->
+                <article class="legal-block">
+                    <h2>8. Droit applicable</h2>
+                    <p>
+                        Les présentes mentions légales sont soumises au droit français. En cas de litige, et à défaut
+                        de résolution amiable, les tribunaux du ressort de [Ville du tribunal compétent] seront
+                        compétents.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

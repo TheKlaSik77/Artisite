@@ -1,0 +1,30 @@
+:root {
+    --text-dark: #3c3023;
+    --accent-gold: #e8b77a;
+    --accent-gold-soft: #e8c08f;
+    --accent-beige-pill: #f9eee0;
+    --subtitles-marron: #b98878;
+    --body-text: #f5e7c2;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Playfair Display", "Comic Sans MS";
+    font-weight: 200;
+    background-color: white;
+    color: var(--text-dark);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0px;
+}
+

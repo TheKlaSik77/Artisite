@@ -1,0 +1,99 @@
+/* --------------------------------------------- */
+/*                HEADER                         */
+/* --------------------------------------------- */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 50px;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    background-color: #3c3023;
+}
+
+.logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 10px;
+    margin: 0px;
+    border-radius: 10px;
+}
+
+.nav-link:hover {
+    background-color: var(--accent-beige-pill);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.icon-btn{
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+a:visited{
+    text-decoration: none;
+}
+
+.icon-btn:hover {
+    background-color: var(--accent-beige-pill);
+}
+
+.btn-signup,
+.btn-signin {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 2px transparent solid;
+}
+
+.btn-signin:hover {
+    background-color: var(--accent-beige-pill);
+}
+
+.btn-signup {
+    background-color: var(--accent-gold);
+}
+
+.btn-signup:hover {
+    border: 2px var(--accent-gold) solid;
+    background-color: transparent; 
+}
