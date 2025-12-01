@@ -1,0 +1,197 @@
+:root {
+    --text-dark: #3c3023;
+    --accent-gold: #E8B77A;
+    --accent-gold-soft: #e8c08f;
+    --accent-beige-pill: #f9eee0;
+    --subtitles-marron: #b98878;
+    --body-text: #f5e7c2;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: "Playfair Display", serif;
+    font-weight: 200;
+    background-color: white;
+    color: var(--text-dark);
+}
+
+/* --------------------------------------------- */
+/*                    NAVBAR                     */
+/* --------------------------------------------- */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 50px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    background-color: #3c3023;
+}
+
+.logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 10px;
+    margin: 0px;
+    border-radius: 10px;
+}
+
+.nav-link:hover {
+    background-color: var(--accent-beige-pill);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.icon-btn:hover {
+    background-color: var(--accent-beige-pill);
+}
+
+.btn-signup,
+.btn-signin {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 2px transparent solid;
+}
+
+.btn-signin:hover {
+    background-color: var(--accent-beige-pill);
+}
+
+.btn-signup {
+    background-color: var(--accent-gold);
+}
+
+.btn-signup:hover {
+    border: 2px var(--accent-gold) solid;
+    background-color: transparent; 
+}
+
+/* --------------------------------------------- */
+/*                PAGES LÉGALES (CGU)            */
+/* --------------------------------------------- */
+
+.legal-section {
+    width: 100%;
+    padding: 80px 20px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.legal-inner {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.legal-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.legal-intro {
+    font-size: 0.98rem;
+    color: var(--text-dark);
+    opacity: 0.85;
+    margin-bottom: 12px;
+}
+
+.legal-block {
+    background-color: #fdf8f1;
+    border-radius: 12px;
+    border: 1px solid var(--accent-beige-pill);
+    padding: 18px 18px 16px;
+}
+
+.legal-block h2 {
+    font-size: 1.1rem;
+    color: var(--subtitles-marron);
+    margin-bottom: 8px;
+}
+
+.legal-block p,
+.legal-block ul {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+.legal-block ul {
+    margin-left: 18px;
+    margin-top: 6px;
+}
+
+.legal-block li {
+    margin-bottom: 4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 12px 18px;
+    }
+
+    .legal-section {
+        padding: 60px 16px;
+    }
+
+    .legal-block {
+        padding: 14px 14px 12px;
+    }
+}
