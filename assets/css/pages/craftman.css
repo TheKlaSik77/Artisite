@@ -1,21 +1,14 @@
-:root {
-    --primary: #b08d57;
-    --secondary: #e2c275;
-    --accent: #f6e7c1;
-    --bg: #f8f8fa;
-    --muted: #6b7280;
-    --card-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-    --card-border: #f3f3f6;
+main {
+    padding-top: 0;
 }
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-    background: var(--bg);
-    font-family: 'Inter', Arial, sans-serif;
-    color: #222;
+.cover {
+    position: relative;
+    height: 24rem;
+    background: linear-gradient(135deg, rgba(176, 141, 87, 0.08), rgba(226, 194, 117, 0.06));
+    overflow: hidden;
 }
+
 
 .back-btn {
     position: absolute;
@@ -32,20 +25,6 @@ body {
     background: rgba(255, 255, 255, 0.88);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     cursor: pointer;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
-    box-sizing: border-box;
-}
-
-.cover {
-    position: relative;
-    height: 24rem;
-    background: linear-gradient(135deg, rgba(176, 141, 87, 0.08), rgba(226, 194, 117, 0.06));
-    overflow: hidden;
 }
 
 .cover img {
@@ -81,6 +60,10 @@ body {
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
 }
 
 .profile-wrap {

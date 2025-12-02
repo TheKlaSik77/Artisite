@@ -17,6 +17,23 @@
     --gold-dark: #b08d57;
 }
 
+.products-section {
+    padding: 60px 40px;
+    background-color: white;
+    text-align: center;
+}
+
+.products-title {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.products-subtitle {
+    color: var(--subtitles-marron);
+    margin-bottom: 40px;
+}
+
 html,
 body {
     margin: 0;

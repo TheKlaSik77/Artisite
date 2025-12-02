@@ -91,7 +91,7 @@
                 nom: "Bol en céramique",
                 artisan: "Sophie Martin",
                 prix: "29€",
-                image: "img/2.jpg",
+                image: "./assets/img/products/2.jpg",
                 categorie: "Poterie",
                 matiere: "Céramique"
             },
@@ -100,7 +100,7 @@
                 nom: "Planche en bois massif",
                 artisan: "Thomas Dubois",
                 prix: "45€",
-                image: "img/2.jpg",
+                image: "./assets/img/products/2.jpg",
                 categorie: "Décoration",
                 matiere: "Bois"
             },
@@ -109,7 +109,7 @@
                 nom: "Porte-cartes en cuir",
                 artisan: "Marie Leroux",
                 prix: "39€",
-                image: "img/3.jpg",
+                image: "./assets/img/products/3.jpg",
                 categorie: "Accessoires",
                 matiere: "Cuir"
             },
@@ -118,7 +118,7 @@
                 nom: "Tasse artisanale",
                 artisan: "Sophie Martin",
                 prix: "25€",
-                image: "img/4.jpg",
+                image: "./assets/img/products/4.jpg",
                 categorie: "Poterie",
                 matiere: "Céramique"
             },
@@ -127,7 +127,7 @@
                 nom: "Tablette murale",
                 artisan: "Thomas Dubois",
                 prix: "79€",
-                image: "img/5.jpg",
+                image: "./assets/img/products/5.jpg",
                 categorie: "Décoration",
                 matiere: "Bois"
             },
@@ -136,7 +136,7 @@
                 nom: "Portefeuille en cuir",
                 artisan: "Marie Leroux",
                 prix: "59€",
-                image: "img/6.jpg",
+                image: "./assets/img/products/6.jpg",
                 categorie: "Accessoires",
                 matiere: "Cuir"
             },
@@ -145,7 +145,7 @@
                 nom: "Vase en grès",
                 artisan: "Sophie Martin",
                 prix: "42€",
-                image: "img/7.jpg",
+                image: "./assets/img/products/7.jpg",
                 categorie: "Poterie",
                 matiere: "Céramique"
             },
@@ -154,7 +154,7 @@
                 nom: "Boîte sculptée",
                 artisan: "Thomas Dubois",
                 prix: "65€",
-                image: "img/8.jpg",
+                image: "./assets/img/products/8.jpg",
                 categorie: "Décoration",
                 matiere: "Bois"
             },
@@ -163,7 +163,7 @@
                 nom: "Ceinture en cuir",
                 artisan: "Marie Leroux",
                 prix: "70€",
-                image: "img/9.jpg",
+                image: "./assets/img/products/9.jpg",
                 categorie: "Vêtements",
                 matiere: "Cuir"
             },
@@ -172,7 +172,7 @@
                 nom: "Assiette décorative",
                 artisan: "Sophie Martin",
                 prix: "34€",
-                image: "img/10.jpg",
+                image: "./assets/img/products/10.jpg",
                 categorie: "Poterie",
                 matiere: "Céramique"
             },
@@ -181,7 +181,7 @@
                 nom: "Étagère minimaliste",
                 artisan: "Thomas Dubois",
                 prix: "89€",
-                image: "img/11.jpg",
+                image: "./assets/img/products/11.jpg",
                 categorie: "Décoration",
                 matiere: "Bois"
             },
@@ -190,7 +190,7 @@
                 nom: "Étui à lunettes en cuir",
                 artisan: "Marie Leroux",
                 prix: "49€",
-                image: "img/12.jpg",
+                image: "./assets/img/products/12.jpg",
                 categorie: "Accessoires",
                 matiere: "Cuir"
             }
