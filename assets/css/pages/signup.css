@@ -32,6 +32,18 @@ h1 {
 }
 
 /* ---------------------------------------------------
+   FORM Visibility (Selon bouton sélectionné
+---------------------------------------------------- */
+
+.form-visible {
+    display: block;
+}
+
+.form-hidden {
+    display: none;
+}
+
+/* ---------------------------------------------------
    FORM ELEMENTS
 ---------------------------------------------------- */
 
@@ -91,6 +103,26 @@ label {
 
 .col {
     flex: 1;
+}
+
+
+.textarea-group {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+}
+
+/* Textarea stylé comme les inputs */
+.textarea-simple {
+    width: 100%;
+    height: 120px;       /* Taille similaire */
+    border: none;
+    outline: none;
+    resize: vertical;    /* On peut agrandir seulement vers le bas */
+    font-size: 15px;
+    font-family: inherit;
+    padding: 0;          /* Pas de padding interne supplémentaire */
 }
 
 /* ---------------------------------------------------
@@ -202,4 +234,12 @@ label {
 .circle.active {
     background: #d49a6c;
     border-color: #d49a6c;
+}
+
+/* ---------------------------------------------------
+   Erreur sur input
+---------------------------------------------------- */
+
+.input-error {
+    border: 1px solid red;
 }
