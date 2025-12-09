@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bol en céramique - Artisite</title>
-    <link rel="stylesheet" href="produit1.css">
+    <link rel="stylesheet" href="./assets/css/pages/product1.css">
 </head>
 <body>
 

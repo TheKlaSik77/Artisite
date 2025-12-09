@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin – Validation produits</title>
-    <link rel="stylesheet" href="admin-produits-validation.css">
+    <link rel="stylesheet" href="./assets/css/pages/admin/admin-produits-validation.css">
 </head>
 <body>
 <div class="admin-layout">

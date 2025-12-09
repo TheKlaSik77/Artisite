@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Admin – Détail commande</title>
-    <link rel="stylesheet" href="admin-commande-detail.css">
+    <title>Admin – Détail produit</title>
+    <link rel="stylesheet" href="./assets/css/pages/admin/admin-produit-detail.css">
 </head>
 <body>
 <div class="admin-layout">
@@ -15,8 +15,8 @@
             <a href="admin-dashboard.html" class="nav-item">Dashboard</a>
             <a href="admin-artisans.html" class="nav-item">Artisans</a>
             <a href="admin-clients.html" class="nav-item">Clients</a>
-            <a href="admin-produits.html" class="nav-item">Produits</a>
-            <a href="admin-commandes.html" class="nav-item active">Commandes</a>
+            <a href="admin-produits.html" class="nav-item active">Produits</a>
+            <a href="admin-commandes.html" class="nav-item">Commandes</a>
             <a href="admin-avis.html" class="nav-item">Avis</a>
             <a href="admin-support.html" class="nav-item">Support</a>
         </nav>
@@ -33,68 +33,65 @@
 
         <section class="main-content">
             <button class="btn-small-outline" onclick="history.back()">← Retour</button>
-            <h1 class="page-title" id="commandeTitle">Commande #1024</h1>
+            <h1 class="page-title">Bol en céramique</h1>
 
             <div class="cards-row">
                 <article class="card">
-                    <p class="card-label">Client</p>
-                    <p class="card-value">Camille Dupont</p>
+                    <p class="card-label">Artisan</p>
+                    <p class="card-value">Sophie Martin</p>
                 </article>
                 <article class="card">
-                    <p class="card-label">Montant</p>
-                    <p class="card-value">79 €</p>
+                    <p class="card-label">Prix</p>
+                    <p class="card-value">29 €</p>
                 </article>
                 <article class="card">
-                    <p class="card-label">Date</p>
-                    <p class="card-value">12/11/2025</p>
+                    <p class="card-label">Stock</p>
+                    <p class="card-value">7</p>
                 </article>
             </div>
 
             <section class="panel" style="margin-top:16px;">
                 <div class="panel-header">
-                    <h2>Détails commande</h2>
-                    <select id="commandeStatus">
-                        <option value="en_cours">En cours</option>
-                        <option value="expediee">Expédiée</option>
-                        <option value="livree">Livrée</option>
-                        <option value="remboursee">Remboursée</option>
+                    <h2>Informations produit</h2>
+                    <select id="statutProduit">
+                        <option value="en_ligne">En ligne</option>
+                        <option value="brouillon">Brouillon</option>
+                        <option value="attente">En attente</option>
+                        <option value="refuse">Refusé</option>
                     </select>
                 </div>
                 <div class="panel-body">
-                    <p><strong>Adresse de livraison :</strong></p>
-                    <p>10 Rue des Fleurs, 75000 Paris, France</p>
-                    <p style="margin-top:8px;"><strong>Méthode de paiement :</strong> Carte bancaire</p>
+                    <p><strong>Catégorie :</strong> Poterie</p>
+                    <p><strong>Matière :</strong> Céramique émaillée</p>
+                    <p><strong>Description :</strong> Bol façonné à la main, adapté au contact alimentaire...</p>
                 </div>
             </section>
 
             <div class="table-wrapper" style="margin-top:20px;">
                 <div class="table-header">
-                    <h2>Articles</h2>
+                    <h2>Avis sur ce produit</h2>
                 </div>
                 <table>
                     <thead>
                         <tr>
-                            <th>Produit</th>
-                            <th>Artisan</th>
-                            <th>Qté</th>
-                            <th>Prix unitaire</th>
-                            <th>Total</th>
+                            <th>Client</th>
+                            <th>Note</th>
+                            <th>Aperçu</th>
+                            <th>Statut</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Bol en céramique</td>
-                            <td>Sophie Martin</td>
-                            <td>1</td>
-                            <td>29 €</td>
-                            <td>29 €</td>
+                            <td>Camille</td>
+                            <td>5/5</td>
+                            <td>Très joli bol, conforme aux photos...</td>
+                            <td><span class="badge badge-success">Visible</span></td>
                         </tr>
                         <tr>
-                            <td>Planche en bois massif</td>
-                            <td>Atelier des Bois</td>
-                            <td>1</td>
-                            <td>50 €</td>
-                            <td>50 €</td>
+                            <td>Julien</td>
+                            <td>4/5</td>
+                            <td>Belle qualité, un peu plus clair que sur les photos...</td>
+                            <td><span class="badge badge-success">Visible</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -108,14 +105,14 @@
         document.querySelector(".sidebar").classList.toggle("sidebar-open");
     });
 
-    const commandeStatus = document.getElementById("commandeStatus");
-    commandeStatus.addEventListener("change", () => {
-        alert("Statut de la commande mis à jour (simulation) : " + commandeStatus.value);
+    const statutProduit = document.getElementById("statutProduit");
+    statutProduit.addEventListener("change", () => {
+        alert("Statut du produit mis à jour (simulation) : " + statutProduit.value);
     });
 
     const params = new URLSearchParams(window.location.search);
-    const commandeId = params.get("id");
-    console.log("Commande ID:", commandeId);
+    const produitId = params.get("id");
+    console.log("Produit ID:", produitId);
 </script>
 </body>
 </html>

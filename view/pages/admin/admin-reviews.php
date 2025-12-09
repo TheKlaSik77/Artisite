@@ -3,25 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin – Avis</title>
-    <link rel="stylesheet" href="admin-avis.css">
+    <link rel="stylesheet" href="./assets/css/pages/admin/admin-reviews.css">
 </head>
 <body>
 <div class="admin-layout">
-    <aside class="sidebar">
-        <div class="sidebar-logo">
-            <span>Artisite</span><small>Admin</small>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="admin-dashboard.html" class="nav-item">Dashboard</a>
-            <a href="admin-artisans.html" class="nav-item">Artisans</a>
-            <a href="admin-clients.html" class="nav-item">Clients</a>
-            <a href="admin-produits.html" class="nav-item">Produits</a>
-            <a href="admin-commandes.html" class="nav-item">Commandes</a>
-            <a href="admin-avis.html" class="nav-item active">Avis</a>
-            <a href="admin-support.html" class="nav-item">Support</a>
-        </nav>
-    </aside>
-
     <main class="main">
         <header class="main-header">
             <button id="toggleSidebar" class="btn-icon">☰</button>

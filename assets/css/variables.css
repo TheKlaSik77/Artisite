@@ -5,6 +5,15 @@
     --accent-beige-pill: #f9eee0;
     --subtitles-marron: #b98878;
     --body-text: #f5e7c2;
+    --bg: #f5f3ef;
+    --bg-panel: #ffffff;
+    --border-soft: #e3ded6;
+    --accent: #E8B77A;
+    --accent-soft: #f5e4c8;
+    --text: #3c3023;
+    --text-soft: #8b7c6a;
+    --danger: #d46b6b;
+    --success: #4ea27b;
 }
 
 /* RESET */
@@ -28,3 +37,23 @@ main {
     padding: 40px 0px;
 }
 
+.admin-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+
+/* Layout admin */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    justify-self: center;
+    border: 1px solid black;
+    width: 100%;
+}
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}

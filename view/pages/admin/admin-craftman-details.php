@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin – Détail Artisan</title>
-    <link rel="stylesheet" href="admin-artisan-detail.css">
+    <link rel="stylesheet" href="./assets/css/pages/admin/admin-craftman-details.css">
 </head>
 <body>
 <div class="admin-layout">
@@ -12,13 +12,13 @@
             <span>Artisite</span><small>Admin</small>
         </div>
         <nav class="sidebar-nav">
-            <a href="admin-dashboard.html" class="nav-item">Dashboard</a>
-            <a href="admin-artisans.html" class="nav-item active">Artisans</a>
-            <a href="admin-clients.html" class="nav-item">Clients</a>
-            <a href="admin-produits.html" class="nav-item">Produits</a>
-            <a href="admin-commandes.html" class="nav-item">Commandes</a>
-            <a href="admin-avis.html" class="nav-item">Avis</a>
-            <a href="admin-support.html" class="nav-item">Support</a>
+            <a href="index.php?page=admin-dashboard" class="nav-item">Dashboard</a>
+            <a href="index.php?page=admin-craftmen" class="nav-item active">Artisans</a>
+            <a href="index.php?page=admin-customers" class="nav-item">Clients</a>
+            <a href="index.php?page=admin-products" class="nav-item">Produits</a>
+            <a href="index.php?page=admin-orders" class="nav-item">Commandes</a>
+            <a href="index.php?page=admin-reviews" class="nav-item">Avis</a>
+            <a href="index.php?page=admin-support" class="nav-item">Support</a>
         </nav>
     </aside>
 
