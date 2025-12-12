@@ -1,0 +1,509 @@
+:root {
+    --text-dark: #3c3023;
+    --accent-gold: #E8B77A;
+    --accent-gold-soft: #e8c08f;
+    --accent-beige-pill: #f9eee0;
+    --subtitles-marron: #b98878;
+    --body-text: #f5e7c2;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: "Playfair Display", serif;
+    font-weight: 200;
+    background-color: #ffffff;
+    color: var(--text-dark);
+}
+
+/* Tu peux recoller ici ta NAVBAR si tu veux la même que sur les autres pages */
+
+/* ================== PAGE PRODUIT ================== */
+
+.product-page {
+    max-width: 1200px;
+    margin: 40px auto 80px;
+    padding: 0 20px;
+}
+
+/* Fil d’Ariane */
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #8f857a;
+    margin-bottom: 24px;
+}
+
+.breadcrumb a {
+    color: #8f857a;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    color: var(--text-dark);
+}
+
+/* Bloc principal produit */
+.product-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Galerie */
+.product-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.product-main-image {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    background-color: #f4ede2;
+}
+
+.product-main-image img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    max-height: 480px;
+}
+
+.product-thumbs {
+    display: flex;
+    gap: 10px;
+}
+
+.thumb {
+    border: 0;
+    padding: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+    flex: 1;
+    opacity: 0.7;
+    transition: transform 0.15s ease, opacity 0.15s ease,
+                box-shadow 0.15s ease;
+}
+
+.thumb img {
+    width: 100%;
+    display: block;
+    height: 90px;
+    object-fit: cover;
+}
+
+.thumb:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+}
+
+.thumb-active {
+    opacity: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Infos produit */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.product-category {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtitles-marron);
+}
+
+.product-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+}
+
+.product-artisan {
+    font-size: 0.95rem;
+    color: #7a6b59;
+}
+
+.product-artisan span {
+    font-weight: 500;
+}
+
+/* Note */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.stars,
+.review-stars,
+.summary-stars {
+    color: #f3b340;
+    letter-spacing: 2px;
+}
+
+.rating-text {
+    color: #8f857a;
+}
+
+/* Prix + courte description */
+.product-price {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.product-short-desc {
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: #5f5244;
+}
+
+/* Détails (tableau 2 colonnes) */
+.product-details {
+    list-style: none;
+    border-radius: 16px;
+    background-color: #fdf8f1;
+    border: 1px solid var(--accent-beige-pill);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.product-details li {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.product-details li span:first-child {
+    color: #8f857a;
+}
+
+.product-details li span:last-child {
+    font-weight: 500;
+}
+
+/* Actions (quantité + boutons) */
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.quantity {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 160px;
+}
+
+.quantity label {
+    font-size: 0.9rem;
+    color: #8f857a;
+}
+
+.quantity-input {
+    display: flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid var(--accent-beige-pill);
+    overflow: hidden;
+}
+
+.quantity-input button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background-color: #f5e9d8;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.quantity-input input {
+    width: 52px;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    background-color: #fff;
+}
+
+/* Boutons */
+.btn-primary,
+.btn-secondary {
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: 0.18s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent-gold);
+    color: #3c3023;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    border: 2px solid var(--accent-gold);
+}
+
+.btn-secondary {
+    background-color: #fdf8f1;
+    color: #3c3023;
+    border: 1px solid var(--accent-beige-pill);
+}
+
+.btn-secondary:hover {
+    background-color: #f5e9d8;
+}
+
+/* Infos supplémentaires */
+.product-extra {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: #7a6b59;
+}
+
+.product-extra p + p {
+    margin-top: 4px;
+}
+
+/* ================== DESCRIPTION DÉTAILLÉE ================== */
+
+.product-description {
+    margin-top: 50px;
+    padding-top: 32px;
+    border-top: 1px solid #efe3d3;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-description h2 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.product-description p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #5f5244;
+}
+
+.product-description ul {
+    margin-top: 6px;
+    margin-left: 18px;
+    font-size: 0.95rem;
+    color: #5f5244;
+}
+
+.product-description li + li {
+    margin-top: 2px;
+}
+
+/* ================== AVIS CLIENTS ================== */
+
+.reviews-section {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.reviews-header h2 {
+    font-size: 1.4rem;
+}
+
+.reviews-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.summary-main {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.summary-note {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.summary-text {
+    font-size: 0.9rem;
+    color: #8f857a;
+}
+
+/* Liste des avis */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.review-card {
+    border-radius: 16px;
+    border: 1px solid var(--accent-beige-pill);
+    background-color: #fdf8f1;
+    padding: 14px 16px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.review-author {
+    font-weight: 500;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #8f857a;
+}
+
+.review-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #5f5244;
+}
+
+/* Formulaire d’avis */
+.review-form-card {
+    margin-top: 10px;
+    border-radius: 18px;
+    border: 1px solid #e6ddcf;
+    padding: 18px 16px 20px;
+    background-color: #ffffff;
+}
+
+.review-form-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.form-field {
+    flex: 1;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-field label {
+    font-size: 0.9rem;
+    color: #8f857a;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    border-radius: 10px;
+    border: 1px solid #e1d4c2;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.form-field textarea {
+    resize: vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 2px rgba(232, 183, 122, 0.25);
+}
+
+/* Bouton d’envoi du formulaire = même style que .btn-primary */
+.review-form .btn-primary {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+.review-feedback {
+    font-size: 0.9rem;
+    color: var(--subtitles-marron);
+    margin-top: 4px;
+}
+
+/* ================== RESPONSIVE ================== */
+
+@media (max-width: 900px) {
+    .product-hero {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .product-page {
+        margin-top: 20px;
+        padding: 0 14px;
+    }
+
+    .product-main-image img {
+        max-height: 360px;
+    }
+
+    .reviews-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reviews-summary {
+        align-items: flex-start;
+    }
+}

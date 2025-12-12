@@ -1,0 +1,59 @@
+:root {
+    --text-dark: #3c3023;
+    --accent-gold: #e8b77a;
+    --accent-gold-soft: #e8c08f;
+    --accent-beige-pill: #f9eee0;
+    --subtitles-marron: #b98878;
+    --body-text: #f5e7c2;
+    --bg: #f5f3ef;
+    --bg-panel: #ffffff;
+    --border-soft: #e3ded6;
+    --accent: #E8B77A;
+    --accent-soft: #f5e4c8;
+    --text: #3c3023;
+    --text-soft: #8b7c6a;
+    --danger: #d46b6b;
+    --success: #4ea27b;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Playfair Display", "Comic Sans MS";
+    font-weight: 200;
+    background-color: white;
+    color: var(--text-dark);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0px;
+}
+
+.admin-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+
+/* Layout admin */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    justify-self: center;
+    border: 1px solid black;
+    width: 100%;
+}
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
