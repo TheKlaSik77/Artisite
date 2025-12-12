@@ -21,6 +21,14 @@
                     <span class="icon">📧</span>
                     <input type="email" placeholder="Votre@email.fr">
                 </div>
+                <div class="divider"></div>
+
+                <p class="continue">Ou en tant qu'Artisan</p>
+
+                <div class="social-buttons">
+                    <button class="google">Google</button>
+                    <button class="facebook">Facebook</button>
+                </div>
 
                 <label>Mot de passe</label>
                 <div class="input-group">
@@ -41,14 +49,7 @@
                 Vous n'avez pas de compte ? <a href="index.php?page=signup" class="signup">S’inscrire</a>
             </p>
 
-            <div class="divider"></div>
 
-            <p class="continue">Ou continuer avec</p>
-
-            <div class="social-buttons">
-                <button class="google">Google</button>
-                <button class="facebook">Facebook</button>
-            </div>
         </div>
     </main>
 </body>

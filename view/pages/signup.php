@@ -133,7 +133,7 @@
             <!-- Bouton Renvoyant sur connexion -->
             <p class="signup-text">
                 Vous avez déjà un compte ?
-                <a href="login.html" class="signup">Se connecter</a>
+                <a href="index.php?page=signin" class="signup">Se connecter</a>
             </p>
 
         </div>
