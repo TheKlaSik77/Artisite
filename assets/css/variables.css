@@ -14,6 +14,22 @@
     --text-soft: #8b7c6a;
     --danger: #d46b6b;
     --success: #4ea27b;
+    --primary: #b08d57;
+    --secondary: #e2c275;
+    --accent: #f6e7c1;
+    --bg: #f8f8fa;
+    --card-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
+    --card-border: #f3f3f6;
+    --input-bg: #fafbfc;
+    --input-border: #e5e7eb;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f3f6;
+    --gray-200: #e5e7eb;
+    --gray-600: #666;
+    --gray-700: #444;
+    --gray-800: #222;
+    --gold-light: #e2c275;
+    --gold-dark: #b08d57;
 }
 
 /* RESET */
