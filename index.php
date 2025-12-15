@@ -24,7 +24,7 @@ $pages_autorisees_admin = ['admin-dashboard', 'admin-craftmen', 'admin-customers
 $admin = false;
 
 // Si page non autorisée, on renvoie vers homepage en fixant l'attribut page à homepage
-if (!in_array($page, $pages_autorisees) && !in_array($page, $pages_autorisees_admin)) {
+if (!in_array($page, $pages_autorisees)) {
     $page = 'homepage';
     
 }

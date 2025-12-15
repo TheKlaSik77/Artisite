@@ -14,7 +14,7 @@
       <img
         src="https://picsum.photos/1600/300"
         alt="atelier cover">
-      <button type="button" class="back-btn" aria-label="Retour" onclick="location.href='artisan.html'">
+      <button type="button" class="back-btn" aria-label="Retour" onclick="location.href='index.php?page=craftmen'">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round" style="color:#000000">
           <line x1="19" y1="12" x2="5" y2="12"></line>

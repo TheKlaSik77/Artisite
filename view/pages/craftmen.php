@@ -6,24 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tous nos Artisans</title>
   <link rel="stylesheet" href="./assets/css/pages/craftmen.css" />
+  <link rel="stylesheet" href="./assets/css/pages/products.css" />
 </head>
 
 <body>
   <main>
     <section class="products-section">
-        <h1 class="products-title">Nos Produits Artisanaux</h1>
+        <h1 class="products-title">Nos Artisans</h1>
         <p class="products-subtitle">
-            Découvrez des pièces uniques créées par nos artisans.
+            Découvrez le savoir-faire de nos artisans.
         </p>
 
         <!-- ================== FILTRES ================== -->
         <div class="filter-card">
 
             <div class="filter-header">
-                <div class="filter-icon">⭮</div>
                 <div>
                     <h2 class="filter-title">Rechercher et filtrer</h2>
-                    <p class="filter-subtitle">Affinez par produit, artisan, catégorie ou matière.</p>
+                    <p class="filter-subtitle">Affinez par nom d'artisan ou métier.</p>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
         <div class="artisan-card-content">
           <h3>Sophie Martin</h3>
           <p>Céramiste</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -106,7 +106,7 @@
         <div class="artisan-card-content">
           <h3>Thomas Dubois</h3>
           <p>Menuisier ébéniste</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -128,7 +128,7 @@
         <div class="artisan-card-content">
           <h3>Marie Leroux</h3>
           <p>Maroquinière</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -150,7 +150,7 @@
         <div class="artisan-card-content">
           <h3>Julien Rousseau</h3>
           <p>Tisserand</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -172,7 +172,7 @@
         <div class="artisan-card-content">
           <h3>Claire Bernard</h3>
           <p>Joaillière</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -194,7 +194,7 @@
         <div class="artisan-card-content">
           <h3>Antoine Moreau</h3>
           <p>Ferronnier d'art</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -216,7 +216,7 @@
         <div class="artisan-card-content">
           <h3>Isabelle Fontaine</h3>
           <p>Souffleuse de verre</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -238,7 +238,7 @@
         <div class="artisan-card-content">
           <h3>Laurent Petit</h3>
           <p>Relieur d'art</p>
-          <a href="artisan.html" class="btn-discover">
+          <a href="index.php?page=craftman" class="btn-discover">
             <span>Découvrir</span>
             <span class="icon-arrow-right">
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -275,6 +275,65 @@
     </div>
     </div>
   </main>
+  <!-- JS: recherche + filtres (réutilise le comportement de products.php adapté aux cartes artisans) -->
+  <script>
+    (function(){
+      const searchInput = document.getElementById('productSearch');
+      const categoryChips = document.getElementById('categoryChips');
+      const materialChips = document.getElementById('materialChips');
+      const artisanCards = Array.from(document.querySelectorAll('.artisan-card'));
+
+      let searchTerm = '';
+      let selectedCategory = 'Tous';
+      let selectedMaterial = 'Tous';
+
+      function cardText(card){
+        const name = (card.querySelector('h3') && card.querySelector('h3').textContent) || '';
+        const prof = (card.querySelector('.artisan-card-content p') && card.querySelector('.artisan-card-content p').textContent) || '';
+        return (name + ' ' + prof).toLowerCase();
+      }
+
+      function updateFilters(){
+        artisanCards.forEach(card => {
+          const text = cardText(card);
+          const matchText = text.includes(searchTerm.toLowerCase());
+          const matchCategory = selectedCategory === 'Tous' || text.includes(selectedCategory.toLowerCase());
+          const matchMaterial = selectedMaterial === 'Tous' || text.includes(selectedMaterial.toLowerCase());
+          card.style.display = (matchText && matchCategory && matchMaterial) ? '' : 'none';
+        });
+      }
+
+      if(searchInput){
+        searchInput.addEventListener('input', (e) => {
+          searchTerm = e.target.value.trim();
+          updateFilters();
+        });
+      }
+
+      if(categoryChips){
+        categoryChips.addEventListener('click', (e) => {
+          if(e.target.classList.contains('chip')){
+            categoryChips.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
+            e.target.classList.add('chip-active');
+            selectedCategory = e.target.dataset.category || 'Tous';
+            updateFilters();
+          }
+        });
+      }
+
+      if(materialChips){
+        materialChips.addEventListener('click', (e) => {
+          if(e.target.classList.contains('chip')){
+            materialChips.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
+            e.target.classList.add('chip-active');
+            selectedMaterial = e.target.dataset.material || 'Tous';
+            updateFilters();
+          }
+        });
+      }
+
+    })();
+  </script>
 </body>
 
 </html>
