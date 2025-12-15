@@ -15,27 +15,28 @@
             <h1>Connexion</h1>
             <p class="description">Accédez à votre espace personnel</p>
 
-            <form>
+            <form method="POST" action="/artisite/model/requests.signin.php">
                 <label>Adresse email</label>
                 <div class="input-group">
                     <span class="icon">📧</span>
-                    <input type="email" placeholder="Votre@email.fr">
+                    <input type="email" name="email" placeholder="Votre@email.fr" required>
                 </div>
 
                 <label>Mot de passe</label>
                 <div class="input-group">
                     <span class="icon">🔒</span>
-                    <input type="password" value="">
+                    <input type="password" name="password" required>
                     <span class="icon eye">👁️</span>
                 </div>
 
                 <div class="options">
-                    <label><input type="checkbox"> Se souvenir de moi</label>
+                    <label><input type="checkbox" name="remember_me" value="1"> Se souvenir de moi</label>
                     <a href="#" class="forgot">Mot de passe oublié ?</a>
                 </div>
 
-                <button class="login-btn">Se connecter</button>
+                <button type="submit" class="login-btn">Se connecter</button>
             </form>
+
 
             <p class="signup-text">
                 Vous n'avez pas de compte ? <a href="index.php?page=signup" class="signup">S’inscrire</a>
