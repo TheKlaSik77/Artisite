@@ -69,9 +69,9 @@
                 </div>
             </div>
         </div>
-    <div class="results-count">
-      9 artisans trouvés
-    </div>
+<div class="results-count" id="resultsCount"></div>
+<p id="noResults" class="no-results" style="display:none;">Aucun artisan ne correspond à vos filtres.</p>
+
 
     <div class="craftmen-grid">
       <div class="craftman-card">
@@ -336,4 +336,3 @@
   </script>
 </body>
 
-</html>

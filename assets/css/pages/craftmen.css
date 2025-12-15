@@ -443,3 +443,124 @@
         padding-right: 0;
     }
 }
+/* ====== FILTER CARD ====== */
+.filter-card {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  background-color: #fff;
+  border-radius: 24px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  text-align: left;
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.filter-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: var(--accent-beige-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--accent-gold);
+}
+
+.filter-title {
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  margin: 0 0 2px;
+}
+
+.filter-subtitle {
+  font-size: 0.9rem;
+  color: #8f857a;
+  margin: 0;
+}
+
+.filter-row {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ====== SEARCH INPUT ====== */
+.filter-input-wrapper{
+  position: relative;
+  width: 100%;
+}
+
+.filter-input-icon{
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.65;
+}
+
+.filter-input{
+  width: 100%;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #faf6f1;
+  padding: 0 14px 0 42px;
+  outline: none;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.filter-input:focus{
+  border-color: rgba(0,0,0,0.18);
+  background: #fff;
+}
+
+/* ====== CHIPS ====== */
+.chip-group{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip{
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.chip:hover{
+  border-color: rgba(0,0,0,0.22);
+}
+
+.chip-active{
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: #fff;
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 768px){
+  .filter-card{
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artisan – Modifier un produit</title>
+
+  <!-- Ta feuille de style globale add-product si tu veux garder le même style -->
+  <link rel="stylesheet" href="../../assets/css/pages/add-product-craftman.css">
+
+  <!-- ✅ CSS spécifique à CETTE page -->
+  <link rel="stylesheet" href="../../assets/css/pages/edit-product-craftman.css">
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header header-split">
+    <div>
+      <h1>Modifier le produit</h1>
+      <p class="muted">Mettez à jour le titre, prix, stock, catégorie, description et images (3 à 6).</p>
+    </div>
+
+    <div class="header-actions">
+      <a class="btn-outline" href="./artisan-products.html">← Retour à mes produits</a>
+    </div>
+  </header>
+
+  <form class="form" id="editForm" enctype="multipart/form-data">
+    <input type="hidden" id="productId" name="product_id" value="">
+
+    <div class="field">
+      <label for="title">Nom du produit</label>
+      <input id="title" name="title" type="text" required placeholder="Ex : Bol en céramique">
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="price">Prix (€)</label>
+        <input id="price" name="price" type="number" step="0.01" min="0.01" required placeholder="29.00">
+      </div>
+
+      <div class="field">
+        <label for="stock">Stock</label>
+        <input id="stock" name="stock" type="number" min="0" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="category">Catégorie</label>
+      <select id="category" name="category" required>
+        <option value="" disabled>— Choisissez une catégorie —</option>
+        <option value="Poterie">Poterie</option>
+        <option value="Décoration">Décoration</option>
+        <option value="Vêtements">Vêtements</option>
+        <option value="Accessoires">Accessoires</option>
+        <option value="Autre">Autre</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="5" required placeholder="Décris ton produit..."></textarea>
+    </div>
+
+    <!-- Images -->
+    <div class="field">
+      <label>Images (3 à 6)</label>
+
+      <div class="help">
+        Tu peux garder/supprimer les images existantes et en ajouter d’autres.
+      </div>
+
+      <!-- Galerie des images existantes -->
+      <div class="existing-wrap">
+        <p class="mini-title">Images actuelles</p>
+        <div id="existingPreview" class="preview-grid"></div>
+      </div>
+
+      <!-- Ajout de nouvelles images -->
+      <div class="upload-wrap">
+        <label class="upload-btn" for="images">
+          + Ajouter des images
+        </label>
+        <input
+          id="images"
+          name="images[]"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          multiple
+        >
+        <p class="mini-hint" id="imgCountText">0 / 6 images</p>
+      </div>
+
+      <!-- Preview nouvelles images -->
+      <div class="new-wrap">
+        <p class="mini-title">Nouvelles images</p>
+        <div id="newPreview" class="preview-grid"></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-outline" id="resetBtn">Réinitialiser</button>
+      <button type="submit" class="btn-primary">Enregistrer les modifications</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- POPUP -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="modalTitle">Info</h3>
+    <p id="modalText"></p>
+    <button class="btn-primary" type="button" id="modalOk">OK</button>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const MIN_IMAGES = 3;
+  const MAX_IMAGES = 6;
+
+  const form = document.getElementById("editForm");
+
+  const productIdInput = document.getElementById("productId");
+  const titleInput = document.getElementById("title");
+  const priceInput = document.getElementById("price");
+  const stockInput = document.getElementById("stock");
+  const categorySelect = document.getElementById("category");
+  const descInput = document.getElementById("description");
+
+  const imagesInput = document.getElementById("images");
+
+  const existingPreview = document.getElementById("existingPreview");
+  const newPreview = document.getElementById("newPreview");
+  const imgCountText = document.getElementById("imgCountText");
+
+  const resetBtn = document.getElementById("resetBtn");
+
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalText = document.getElementById("modalText");
+  const modalOk = document.getElementById("modalOk");
+
+  function openModal(title, message) {
+    modalTitle.textContent = title;
+    modalText.textContent = message;
+    modal.style.display = "flex";
+  }
+  function closeModal() {
+    modal.style.display = "none";
+  }
+  modalOk.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+  // --- Demo data (à remplacer plus tard par PHP/DB) ---
+  const DEMO = {
+    1: {
+      id: 1,
+      title: "Bol en céramique",
+      price: 29.00,
+      stock: 12,
+      category: "Poterie",
+      description: "Bol tourné à la main, finition émaillée.",
+      images: [
+        "../../assets/img/products/2.jpg",
+        "../../assets/img/products/4.jpg",
+        "../../assets/img/products/7.jpg",
+      ]
+    },
+    2: {
+      id: 2,
+      title: "Porte-cartes en cuir",
+      price: 39.00,
+      stock: 3,
+      category: "Accessoires",
+      description: "Cuir pleine fleur, couture main.",
+      images: [
+        "../../assets/img/products/3.jpg",
+        "../../assets/img/products/6.jpg",
+        "../../assets/img/products/9.jpg",
+      ]
+    },
+    3: {
+      id: 3,
+      title: "Vase en grès",
+      price: 42.00,
+      stock: 0,
+      category: "Poterie",
+      description: "Brouillon non publié.",
+      images: [
+        "../../assets/img/products/7.jpg",
+        "../../assets/img/products/10.jpg",
+        "../../assets/img/products/2.jpg",
+      ]
+    }
+  };
+
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id") || "1";
+  const product = DEMO[id] || DEMO["1"];
+
+  // --- État images ---
+  // images existantes (urls) + nouvelles images (File)
+  let existingImages = [...product.images];
+  let newFiles = []; // File[]
+
+  function renderExisting() {
+    existingPreview.innerHTML = "";
+    existingImages.forEach((src, idx) => {
+      const card = document.createElement("div");
+      card.className = "img-card";
+      card.innerHTML = `
+        <img src="${src}" alt="Image existante ${idx+1}">
+        <button type="button" class="img-remove" title="Supprimer">×</button>
+      `;
+      card.querySelector(".img-remove").addEventListener("click", () => {
+        existingImages.splice(idx, 1);
+        renderExisting();
+        updateCount();
+      });
+      existingPreview.appendChild(card);
+    });
+  }
+
+  function renderNew() {
+    newPreview.innerHTML = "";
+    newFiles.forEach((file, idx) => {
+      const url = URL.createObjectURL(file);
+      const card = document.createElement("div");
+      card.className = "img-card";
+      card.innerHTML = `
+        <img src="${url}" alt="${file.name}">
+        <button type="button" class="img-remove" title="Retirer">×</button>
+      `;
+      card.querySelector(".img-remove").addEventListener("click", () => {
+        newFiles.splice(idx, 1);
+        renderNew();
+        updateCount();
+      });
+      newPreview.appendChild(card);
+    });
+  }
+
+  function updateCount() {
+    const total = existingImages.length + newFiles.length;
+    imgCountText.textContent = `${total} / ${MAX_IMAGES} images`;
+    imgCountText.classList.toggle("danger", total < MIN_IMAGES || total > MAX_IMAGES);
+  }
+
+  imagesInput.addEventListener("change", () => {
+    const picked = Array.from(imagesInput.files || []);
+
+    // On ajoute à la liste (sans écraser)
+    newFiles = newFiles.concat(picked);
+
+    // Reset input pour pouvoir re-sélectionner les mêmes fichiers
+    imagesInput.value = "";
+
+    renderNew();
+    updateCount();
+  });
+
+  // --- Prefill form ---
+  function fillForm(p) {
+    productIdInput.value = p.id;
+    titleInput.value = p.title;
+    priceInput.value = p.price;
+    stockInput.value = p.stock;
+    categorySelect.value = p.category;
+    descInput.value = p.description;
+  }
+
+  // reset
+  resetBtn.addEventListener("click", () => {
+    fillForm(product);
+    existingImages = [...product.images];
+    newFiles = [];
+    renderExisting();
+    renderNew();
+    updateCount();
+  });
+
+  // init
+  fillForm(product);
+  renderExisting();
+  renderNew();
+  updateCount();
+
+  // --- Submit validate ---
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const title = titleInput.value.trim();
+    const price = priceInput.value.trim();
+    const stock = stockInput.value.trim();
+    const category = categorySelect.value;
+    const description = descInput.value.trim();
+
+    if (!title || !price || stock === "" || !category || !description) {
+      openModal("Champs manquants", "Veuillez compléter tous les champs obligatoires.");
+      return;
+    }
+
+    const totalImages = existingImages.length + newFiles.length;
+    if (totalImages < MIN_IMAGES || totalImages > MAX_IMAGES) {
+      openModal("Images invalides", `Veuillez avoir entre ${MIN_IMAGES} et ${MAX_IMAGES} images (actuellement : ${totalImages}).`);
+      return;
+    }
+
+    //  Ici tu brancheras ton PHP (POST/PUT) + upload images
+    openModal(" Modifications enregistrées", "Ceci est une démo front. Branche ensuite sur ton PHP pour enregistrer en base.");
+  });
+});
+</script>
+
+</body>
+</html>
