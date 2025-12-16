@@ -15,7 +15,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === "") {
   exit("Invalid email or password.");
 }
 
-// DB config
 $host = "127.0.0.1";
 $db   = "artisite";
 $user = "root";
@@ -29,24 +28,20 @@ try {
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
   ]);
 
-  // Find user by email
   $stmt = $pdo->prepare("SELECT user_id, username, email, hashed_password FROM `user` WHERE email = :email LIMIT 1");
   $stmt->execute(["email" => $email]);
   $u = $stmt->fetch();
 
-  // message d'erreur
   if (!$u || !password_verify($password, $u["hashed_password"])) {
     http_response_code(401);
     exit("Email or password incorrect.");
   }
 
-  // pour login ok
   $_SESSION["user_id"] = (int)$u["user_id"];
   $_SESSION["username"] = $u["username"];
   $_SESSION["email"] = $u["email"];
   $_SESSION["logged_in"] = true;
 
-  // redirection apres login
   header("Location: /artisite/index.php?page=homepage");
   exit;
 
