@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accueil – Arti'Site</title>
+    <title>Accueil – Arti'site</title>
     <link rel="stylesheet" href="./assets/css/layout/footer.css" />
 </head>
 
@@ -14,7 +14,7 @@
 
         <div class="footer-col">
             <div class="footer-logo">
-                <span class="footer-icon">*</span>
+                <img src=".\assets\img\logo_artisite.jpeg" alt="Logo Arti'Site" class="logo" />
                 <h2>Arti’site</h2>
             </div>
 

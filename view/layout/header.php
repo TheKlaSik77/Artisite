@@ -11,7 +11,7 @@
 <body>
     <header class="navbar">
         <div class="nav-left">
-            <img src="./assets/img/logo_artisite.jpeg" alt="Logo Arti'Site" class="logo" />
+            <img src=".\assets\img\logo_artisite_vf.jpg" alt="Logo Arti'Site" class="logo" />
         </div>
 
         <nav class="nav-center">
