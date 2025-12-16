@@ -121,7 +121,6 @@ label {
     outline: none;
     resize: vertical;    /* On peut agrandir seulement vers le bas */
     font-size: 15px;
-    font-family: inherit;
     padding: 0;          /* Pas de padding interne supplémentaire */
 }
 

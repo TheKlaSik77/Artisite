@@ -36,7 +36,6 @@ main {
 }
 
 .search h1 {
-    font-family: "Playfair Display", serif;
     font-size: 3rem;
     font-weight: 100;
     color: var(--body-text);
