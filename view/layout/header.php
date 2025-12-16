@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accueil – Arti'Site</title>
+    <title>Accueil – Arti'site</title>
     <link rel="stylesheet" href="./assets/css/layout/header.css" />
 </head>
 
