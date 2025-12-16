@@ -17,7 +17,7 @@
 $page = $_GET['page'] ?? 'homepage';
 
 // Par sécurité, on précise une "white-list" de page dont l'accès est autorisé.
-$pages_autorisees = ['homepage', 'craftman', 'craftmen', 'products', 'events', 'cart', 'profil', 'signin', 'signup', 'cgu', 'contact', 'mentions-legales', 'faq', 'admin-dashboard'];
+$pages_autorisees = ['homepage', 'craftman', 'craftmen', 'products', 'events', 'cart', 'profil', 'signin', 'signup', 'cgu', 'contact', 'mentions-legales', 'faq', 'product1'];
 
 $pages_autorisees_admin = ['admin-dashboard', 'admin-craftmen', 'admin-customers', 'admin-products', 'admin-orders', 'admin-reviews', 'admin-support'];
 
