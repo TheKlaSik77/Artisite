@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Bol en céramique - Artisite</title>
     <link rel="stylesheet" href="./assets/css/pages/product1.css">
 </head>
+
 <body>
 
     <!-- TODO : ta navbar ici (même que sur les autres pages) -->
@@ -42,41 +44,33 @@
             <!-- Colonne infos produit -->
             <div class="product-info">
 
-                <p class="product-category">Poterie · Céramique</p>
-                <h1 class="product-title">Bol en céramique</h1>
+                <p class="product-category">
+                    <?= htmlspecialchars($product['category_name']) ?>
+                </p>
+                <h1 class="product-title">
+                    <?= htmlspecialchars($product['name']) ?>
+                </h1>
 
-                <div class="product-artisan">
-                    Par <span>Sophie Martin</span>
-                </div>
+                <p class="product-artisan">
+                    <?= htmlspecialchars($product['company_name']) ?>
+                </p>
 
                 <div class="product-rating">
                     <span class="stars">★★★★★</span>
                     <span class="rating-text">4.8 · 24 avis</span>
                 </div>
 
-                <p class="product-price">29€</p>
-
-                <p class="product-short-desc">
-                    Bol en céramique façonné à la main, émaillé avec une finition satinée.
-                    Idéal pour vos petits-déjeuners, soupes ou desserts.
+                <p class="product-price">
+                    <?= number_format($product['unit_price'], 2, ',', ' ') ?> €
                 </p>
-
-                <ul class="product-details">
-                    <li><span>Matière</span><span>Céramique émaillée</span></li>
-                    <li><span>Diamètre</span><span>14 cm</span></li>
-                    <li><span>Hauteur</span><span>7 cm</span></li>
-                    <li><span>Couleur</span><span>Blanc cassé / Beige</span></li>
-                    <li><span>Stock</span><span>En stock (7 pièces)</span></li>
-                    <li><span>Fabrication</span><span>Pièce faite main, légère variation possible</span></li>
-                </ul>
 
                 <div class="product-actions">
                     <div class="quantity">
                         <label for="qty">Quantité</label>
                         <div class="quantity-input">
-                            <button type="button">-</button>
+                            <!-- <button type="button">-</button> -->
                             <input id="qty" type="number" min="1" value="1">
-                            <button type="button">+</button>
+                            <!-- <button type="button">+</button> -->
                         </div>
                     </div>
 
@@ -93,22 +87,13 @@
 
         <!-- ================== DESCRIPTION DÉTAILLÉE ================== -->
         <section class="product-description">
-            <h2>Description détaillée</h2>
-            <p>
-                Chaque bol est tourné à la main dans l’atelier de Sophie, puis émaillé et cuit à haute
-                température. Cette méthode permet d’obtenir une pièce résistante, adaptée au contact alimentaire
-                et au quotidien.
-            </p>
-            <p>
-                Les légères différences de forme ou de couleur font partie du charme de l’artisanat :
-                vous recevez un objet réellement unique.
-            </p>
+            <div>
+                <h2>Description détaillée</h2>
+                <p>
+                    <?= htmlspecialchars($product['description']) ?>
+                </p>
+            </div>
 
-            <ul>
-                <li>Passe au lave-vaisselle (programme délicat recommandé).</li>
-                <li>Compatible micro-ondes.</li>
-                <li>Éviter les chocs thermiques trop brutaux.</li>
-            </ul>
         </section>
 
         <!-- ================== AVIS CLIENTS ================== -->
@@ -180,8 +165,7 @@
                     <div class="form-field">
                         <label for="reviewText">Votre avis</label>
                         <textarea id="reviewText" name="message" rows="4"
-                                  placeholder="Parlez de la qualité, de l’emballage, de la livraison…"
-                                  required></textarea>
+                            placeholder="Parlez de la qualité, de l’emballage, de la livraison…" required></textarea>
                     </div>
 
                     <button type="submit" class="btn-primary">
@@ -208,4 +192,5 @@
     </script>
 
 </body>
+
 </html>

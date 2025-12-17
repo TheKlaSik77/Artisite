@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Nos Produits – Marketplace Artisans</title>
     <link rel="stylesheet" href="./assets/css/pages/products.css">
 </head>
-<body>
-    <?php 
-        include './model/requests.products.php';
 
-        $products = getAllProducts($pdo);   
-    ?>
+<body>
     <main class="products-section">
         <h1 class="products-title">Nos Produits Artisanaux</h1>
         <p class="products-subtitle">
@@ -32,12 +29,8 @@
             <div class="filter-row">
                 <div class="filter-input-wrapper">
                     <span class="filter-input-icon">🔍</span>
-                    <input
-                        type="text"
-                        id="productSearch"
-                        class="filter-input"
-                        placeholder="Rechercher par produit ou artisan..."
-                    />
+                    <input type="text" id="productSearch" class="filter-input"
+                        placeholder="Rechercher par produit ou artisan..." />
                 </div>
             </div>
 
@@ -70,29 +63,59 @@
                 </div>
             </div>
         </div>
-        
-        
-        <!-- ================== GRILLE PRODUITS ================== -->
-        <div id="productsGrid" class="products-grid"></div>
 
         <!-- Message aucun résultat -->
         <?php
         if (empty($products)): ?>
-        <p id="noResults" class="no-results">
-            Aucun produit ne correspond à vos filtres.
-        </p>
+            <p id="noResults" class="no-results">
+                Aucun produit ne correspond à vos filtres.
+            </p>
         <?php else: ?>
-            
-        <!-- Pagination -->
-        <div class="pagination">
-            <button id="prevPage" class="pagination-btn" disabled>‹ Précédent</button>
-            <span id="pageIndicator"></span>
-            <button id="nextPage" class="pagination-btn">Suivant ›</button>
-        </div>
-        <?php endif ?>
-</main>
 
-    <!-- ================== JS PRODUITS + FILTRES ================== -->
+        <!-- ================== GRILLE PRODUITS ================== -->
+        <div class="products-grid">
+
+            <?php foreach ($products as $product): ?>
+                <div class="product-card product-appear">
+
+                    <img src="https://picsum.photos/500/300" style="width: 400px; height: 300px;">
+
+                    <div class="product-info">
+                        <h3 class="product-name">
+                            <?= htmlspecialchars($product['name']) ?>
+                        </h3>
+
+                        <p class="product-artisan">
+                            <?= htmlspecialchars($product['company_name']) ?>
+                        </p>
+
+                        <p class="product-price">
+                            <?= number_format($product['unit_price'], 2, ',', ' ') ?> €
+                        </p>
+
+                        <a href="index.php?page=product&id=<?= $product['product_id'] ?>" class="product-btn">
+                            Acheter
+                        </a>
+                    </div>
+
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+
+        
+
+            <!-- Pagination -->
+        <!-- 
+            <div class="pagination">
+                <button id="prevPage" class="pagination-btn" disabled>‹ Précédent</button>
+                <span id="pageIndicator"></span>
+                <button id="nextPage" class="pagination-btn">Suivant ›</button>
+            </div>
+        <?php endif ?> -->
+    </main>
+
+    <!-- ================== JS PRODUITS + FILTRES ================== 
     <script>
         // ----------- DONNÉES PRODUITS (exemple) -----------
         const produits = [
@@ -337,6 +360,7 @@
 
         // Premier affichage
         afficherProduits();
-    </script>
+    </script> -->
 </body>
+
 </html>

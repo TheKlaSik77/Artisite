@@ -303,6 +303,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 800px;
 }
 
 .product-description h2 {
@@ -477,6 +478,7 @@ body {
     color: var(--subtitles-marron);
     margin-top: 4px;
 }
+
 
 /* ================== RESPONSIVE ================== */
 

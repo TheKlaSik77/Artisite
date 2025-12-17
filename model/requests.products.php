@@ -1,19 +1,26 @@
 <?php
 
-require "./model/utils/connexion.php";
+
 
 /* --------------------------------------
             READ FONCTIONS
 ----------------------------------------*/
 function getAllProducts(PDO $pdo) {
-    $stmt = $pdo->prepare("Select * From product");
+    $stmt = $pdo->prepare("Select product.*, craftman.company_name From product INNER JOIN craftman ON product.craftman_id = craftman.craftman_id");
     $stmt -> execute();
+    return $stmt->fetchAll();
+}
+
+function getProductById(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("
+    Select product.*, craftman.company_name, category.category_name From category INNER JOIN product ON category.category_id = product.category_id INNER JOIN craftman ON product.craftman_id = craftman.craftman_id Where product.product_id = ?");
+    $stmt -> execute([$id]);
     return $stmt->fetchAll();
 }
 
 function getProductsByCategory(PDO $pdo, string $category_name){
     $stmt = $pdo->prepare("
-    Select * 
+    Select product.*, craftman.company_name  
     From product INNER JOIN category ON product.category_id = category.category_id
     Where category_name = ?");
     $stmt -> execute([$category_name]);
@@ -22,8 +29,8 @@ function getProductsByCategory(PDO $pdo, string $category_name){
 
 function getProductsBySearch(PDO $pdo, string $search){
     $stmt = $pdo->prepare("
-    SELECT * 
-    FROM product 
+    Select product.*, craftman.company_name 
+    FROM product INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
     WHERE description LIKE '%?%' OR product_name LIKE '%?%'
     ");
     $stmt -> execute([$search]);
