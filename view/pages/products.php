@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="./assets/css/pages/products.css">
 </head>
 <body>
+    <?php 
+        include './model/requests.products.php';
+
+        $products = getAllProducts($pdo);   
+    ?>
     <main class="products-section">
         <h1 class="products-title">Nos Produits Artisanaux</h1>
         <p class="products-subtitle">
@@ -65,21 +70,26 @@
                 </div>
             </div>
         </div>
-
+        
+        
         <!-- ================== GRILLE PRODUITS ================== -->
         <div id="productsGrid" class="products-grid"></div>
 
         <!-- Message aucun résultat -->
-        <p id="noResults" class="no-results" style="display:none;">
+        <?php
+        if (empty($products)): ?>
+        <p id="noResults" class="no-results">
             Aucun produit ne correspond à vos filtres.
         </p>
-
+        <?php else: ?>
+            
         <!-- Pagination -->
         <div class="pagination">
             <button id="prevPage" class="pagination-btn" disabled>‹ Précédent</button>
             <span id="pageIndicator"></span>
             <button id="nextPage" class="pagination-btn">Suivant ›</button>
         </div>
+        <?php endif ?>
 </main>
 
     <!-- ================== JS PRODUITS + FILTRES ================== -->

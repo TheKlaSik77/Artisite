@@ -13,6 +13,8 @@
 
 <?php
 
+require "./model/utils/connexion.php";
+
 // On récupère la valeur de page dans l'url (ex d'url http://localhost/artisite/index.php?page=cart). Si pas de page précisée, on fixe l'attribut à homepage pour renvoyer automatiquement sur la page d'accueil.
 $page = $_GET['page'] ?? 'homepage';
 
@@ -48,6 +50,4 @@ if (in_array($page, $pages_autorisees_admin)) {
     <?php include "./view/layout/header.php"; ?>
     <?php include "./view/pages/{$page}.php"; ?>
     <?php include "./view/layout/footer.php"; ?>
-
 <?php endif; ?>
-
