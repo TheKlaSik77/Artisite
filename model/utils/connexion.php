@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'db_artisite';
+$dbname = 'artisite';
 $username = 'root';
 $password = '';
 

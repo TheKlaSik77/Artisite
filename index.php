@@ -14,7 +14,7 @@
 <?php
 
 require_once "./model/utils/connexion.php";
-require_once "./controller/controller.php";
+# Ajouter liste de page autorisées pour sécurité
 
 $page = $_GET['page'] ?? 'home';
 
@@ -26,12 +26,42 @@ switch ($page) {
         break;
 
     case "products":
+        require_once "./controller/productController.php";
         productsController($pdo);
         break;
 
     case "product":
+        require_once "./controller/productController.php";
         $id = $_GET['id'];
-        productController($pdo,$id);
+        productController($pdo, $id);
+        break;
+
+    case "cart":
+        require_once "./controller/cartController.php";
+        $action = $_GET['action'] ?? "read";
+        $user_id = 1;
+        switch ($action) {
+            case "add":
+                cartAddController($pdo, $user_id);
+                break;
+            
+            case "delete":
+                cartDeleteController($pdo, $user_id);
+                break;
+
+            case "update":
+                cartUpdateQuantityController($pdo,$user_id);
+                break;
+
+            case "read":
+                cartReadController($pdo, $user_id);
+                break;
+        }
+
+    default:
+        require "./view/layout/header.php";
+        require "./view/pages/{$page}.php";
+        require "./view/layout/footer.php";
         break;
 
 

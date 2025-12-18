@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bol en céramique - Artisite</title>
-    <link rel="stylesheet" href="./assets/css/pages/product1.css">
+    <link rel="stylesheet" href="./assets/css/pages/product.css">
 </head>
 
 <body>
@@ -65,17 +65,27 @@
                 </p>
 
                 <div class="product-actions">
-                    <div class="quantity">
-                        <label for="qty">Quantité</label>
-                        <div class="quantity-input">
-                            <!-- <button type="button">-</button> -->
-                            <input id="qty" type="number" min="1" value="1">
-                            <!-- <button type="button">+</button> -->
-                        </div>
-                    </div>
 
-                    <button class="btn-primary">Ajouter au panier</button>
-                    <button class="btn-secondary">♡ Ajouter aux favoris</button>
+                    <form method="POST" action="index.php?page=cart&action=add">
+
+                        <div class="quantity">
+                            <label for="qty">Quantité</label>
+                            <div class="quantity-input">
+                                <input id="qty" name="quantity" type="number" min="1" value="1">
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+
+                        <button type="submit" class="btn-primary">
+                            Ajouter au panier
+                        </button>
+
+                        <button type="button" class="btn-secondary">
+                            ♡ Ajouter aux favoris
+                        </button>
+
+                    </form>
                 </div>
 
                 <div class="product-extra">
