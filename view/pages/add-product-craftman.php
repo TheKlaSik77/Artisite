@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Artisan – Ajouter un produit</title>
-  <link rel="stylesheet" href="../../assets/css/pages/add-product-craftman.css">
+  <link rel="stylesheet" href="./assets/css/pages/add-product-craftman.css">
 </head>
 <body>
 
