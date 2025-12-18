@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Artisan – Mes produits</title>
 
-  <link rel="stylesheet" href="../../assets/css/pages/add-product-craftmans.css">
+  <link rel="stylesheet" href="./assets/css/pages/add-product-craftmans.css">
 </head>
 <body>
 
@@ -63,7 +63,7 @@
     >
       <div class="prod-left">
         <div class="prod-thumb">
-          <img src="../../assets/img/products/2.jpg" alt="Bol en céramique">
+          <img src="https://picsum.photos/200/300" alt="Bol en céramique">
         </div>
 
         <div class="prod-meta">
@@ -106,7 +106,7 @@
     >
       <div class="prod-left">
         <div class="prod-thumb">
-          <img src="../../assets/img/products/3.jpg" alt="Porte-cartes en cuir">
+          <img src="https://picsum.photos/200/300" alt="Porte-cartes en cuir">
         </div>
 
         <div class="prod-meta">
@@ -148,7 +148,7 @@
     >
       <div class="prod-left">
         <div class="prod-thumb">
-          <img src="../../assets/img/products/7.jpg" alt="Vase en grès">
+          <img src="https://picsum.photos/200/300" alt="Vase en grès">
         </div>
 
         <div class="prod-meta">
