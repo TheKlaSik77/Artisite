@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./assets/css/pages/products.css">
 </head>
 <body>
-    <section class="products-section">
+    <main class="products-section">
         <h1 class="products-title">Nos Produits Artisanaux</h1>
         <p class="products-subtitle">
             Découvrez des pièces uniques créées par nos artisans.
@@ -80,7 +80,7 @@
             <span id="pageIndicator"></span>
             <button id="nextPage" class="pagination-btn">Suivant ›</button>
         </div>
-    </section>
+</main>
 
     <!-- ================== JS PRODUITS + FILTRES ================== -->
     <script>

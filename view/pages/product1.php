@@ -24,17 +24,17 @@
             <!-- Colonne image(s) -->
             <div class="product-gallery">
                 <div class="product-main-image">
-                    <img src="img/2.jpg" alt="Bol en céramique">
+                    <img src="https://picsum.photos/200/300" alt="Bol en céramique">
                 </div>
                 <div class="product-thumbs">
                     <button class="thumb thumb-active">
-                        <img src="img/2.jpg" alt="Vue 1 bol en céramique">
+                        <img src="https://picsum.photos/200/300" alt="Vue 1 bol en céramique">
                     </button>
                     <button class="thumb">
-                        <img src="img/3.jpg" alt="Vue 2 bol en céramique">
+                        <img src="https://picsum.photos/200/300" alt="Vue 2 bol en céramique">
                     </button>
                     <button class="thumb">
-                        <img src="img/3.jpg" alt="Vue 3 bol en céramique">
+                        <img src="https://picsum.photos/200/300" alt="Vue 3 bol en céramique">
                     </button>
                 </div>
             </div>

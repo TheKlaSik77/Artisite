@@ -1,22 +1,3 @@
-:root {
-    --primary: #b08d57;
-    --secondary: #e2c275;
-    --accent: #f6e7c1;
-    --bg: #f8f8fa;
-    --card-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
-    --card-border: #f3f3f6;
-    --input-bg: #fafbfc;
-    --input-border: #e5e7eb;
-    --gray-50: #f9fafb;
-    --gray-100: #f3f3f6;
-    --gray-200: #e5e7eb;
-    --gray-600: #666;
-    --gray-700: #444;
-    --gray-800: #222;
-    --gold-light: #e2c275;
-    --gold-dark: #b08d57;
-}
-
 .products-section {
     padding: 60px 40px;
     background-color: white;
@@ -32,16 +13,6 @@
 .products-subtitle {
     color: var(--subtitles-marron);
     margin-bottom: 40px;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', Arial, sans-serif;
-    background: var(--bg);
-    color: var(--gray-800);
-    min-height: 100vh;
 }
 
 .container {
@@ -144,7 +115,6 @@ body {
     background: none;
     border: none;
     color: #fff;
-    font-family: 'Inter', Arial, sans-serif;
     font-size: 1rem;
     cursor: pointer;
     border-radius: 1rem;
@@ -167,14 +137,12 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--secondary);
-    font-family: 'Inter', Arial, sans-serif;
     margin-bottom: 0.5rem;
     display: inline-block;
     font-weight: 500;
 }
 
 .header-content h1 {
-    font-family: 'Cormorant Garamond', serif;
     font-size: 3rem;
     color: var(--secondary);
     margin: 0 0 1.5rem 0;
@@ -189,7 +157,6 @@ body {
     opacity: 0.92;
     margin: 0;
     max-width: 600px;
-    font-family: 'Inter', Arial, sans-serif;
     font-weight: 400;
 }
 
@@ -229,7 +196,6 @@ body {
 
 .filters-header span {
     color: var(--gray-700);
-    font-family: 'Inter', Arial, sans-serif;
     font-size: 1.08rem;
     font-weight: 500;
 }
@@ -260,7 +226,6 @@ body {
     border-radius: 1rem;
     border: 1px solid var(--input-border);
     font-size: 1.08rem;
-    font-family: 'Inter', Arial, sans-serif;
     outline: none;
     transition: border 0.2s;
     background: var(--input-bg);
@@ -292,7 +257,6 @@ body {
     font-size: 1rem;
     color: #888;
     margin-bottom: 0.7rem;
-    font-family: 'Inter', Arial, sans-serif;
     font-weight: 500;
 }
 
@@ -306,7 +270,6 @@ body {
     padding: 0.7rem 2rem;
     border-radius: 1rem;
     font-size: 1rem;
-    font-family: 'Inter', Arial, sans-serif;
     border: 1px solid var(--input-border);
     background: #fff;
     color: var(--gray-700);
@@ -326,7 +289,6 @@ body {
 
 .results-count {
     color: #888;
-    font-family: 'Inter', Arial, sans-serif;
     margin-bottom: 2.5rem;
     font-size: 1.08rem;
     font-weight: 500;
@@ -336,7 +298,7 @@ body {
     margin-right: auto;
 }
 
-.artisans-grid {
+.craftmen-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
@@ -346,18 +308,18 @@ body {
 }
 
 @media (max-width: 1000px) {
-    .artisans-grid {
+    .craftmen-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 700px) {
-    .artisans-grid {
+    .craftmen-grid {
         grid-template-columns: 1fr;
     }
 }
 
-.artisan-card {
+.craftman-card {
     background: #fff;
     border-radius: 1.5rem;
     overflow: hidden;
@@ -368,19 +330,19 @@ body {
     flex-direction: column;
 }
 
-.artisan-card:hover {
+.craftman-card:hover {
     box-shadow: 0 12px 36px 0 rgba(176, 141, 87, 0.18), 0 2px 16px 0 rgba(176, 141, 87, 0.10);
     z-index: 2;
 }
 
-.artisan-card-img-wrap {
+.craftman-card-img-wrap {
     position: relative;
     aspect-ratio: 1/1;
     background: var(--gray-100);
     overflow: hidden;
 }
 
-.artisan-card-img-wrap img {
+.craftman-card-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -388,11 +350,11 @@ body {
     display: block;
 }
 
-.artisan-card:hover .artisan-card-img-wrap img {
+.craftman-card:hover .craftman-card-img-wrap img {
     transform: scale(1.10);
 }
 
-.artisan-card-img-wrap .img-gradient {
+.craftman-card-img-wrap .img-gradient {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.40), transparent 70%);
@@ -400,11 +362,11 @@ body {
     transition: opacity 0.3s;
 }
 
-.artisan-card:hover .artisan-card-img-wrap .img-gradient {
+.craftman-card:hover .craftman-card-img-wrap .img-gradient {
     opacity: 1;
 }
 
-.artisan-card-content {
+.craftman-card-content {
     padding: 2rem 1.75rem 1.75rem 1.75rem;
     flex: 1;
     display: flex;
@@ -412,8 +374,7 @@ body {
     justify-content: flex-end;
 }
 
-.artisan-card-content h3 {
-    font-family: 'Cormorant Garamond', serif;
+.craftman-card-content h3 {
     font-size: 1.45rem;
     color: var(--primary);
     margin: 0 0 0.5rem 0;
@@ -422,10 +383,9 @@ body {
     letter-spacing: -0.5px;
 }
 
-.artisan-card-content p {
+.craftman-card-content p {
     color: var(--gray-600);
     margin: 0 0 1.5rem 0;
-    font-family: 'Inter', Arial, sans-serif;
     font-size: 1.05rem;
     font-weight: 400;
 }
@@ -435,7 +395,6 @@ body {
     border: none;
     background: none;
     color: #111;
-    font-family: 'Inter', Arial, sans-serif;
     font-size: 1rem;
     border-radius: 1rem;
     padding: 0.85rem 0;
@@ -468,7 +427,6 @@ body {
     padding: 4rem 0;
     color: #888;
     font-size: 1.15rem;
-    font-family: 'Inter', Arial, sans-serif;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
@@ -478,7 +436,7 @@ body {
 
     .search-filters,
     .results-count,
-    .artisans-grid,
+    .craftmen-grid,
     .no-results {
         max-width: 100%;
         padding-left: 0;

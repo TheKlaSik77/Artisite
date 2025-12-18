@@ -14,7 +14,7 @@
       <img
         src="https://picsum.photos/1600/300"
         alt="atelier cover">
-      <button type="button" class="back-btn" aria-label="Retour" onclick="location.href='artisan.html'">
+      <button type="button" class="back-btn" aria-label="Retour" onclick="location.href='index.php?page=craftmen'">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round" style="color:#000000">
           <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -153,7 +153,7 @@
               alt="atelier"></div>
           <div>
             <h4
-              style="font-family:'Cormorant Garamond',serif;color:var(--primary);padding:0 1rem 0 1rem;margin-top:.6rem">
+              style="padding:0 1rem 0 1rem;margin-top:.6rem">
               Atelier poterie traditionnelle</h4>
             <div class="muted" style="padding:0 1rem 0 1rem">15 novembre 2025 — Paris 11ème</div>
             <div style="padding:1rem 1rem 1.2rem 1rem"><a class="btn-gold" href="#">En savoir plus</a></div>
@@ -166,7 +166,7 @@
               alt="stage"></div>
           <div>
             <h4
-              style="font-family:'Cormorant Garamond',serif;color:var(--primary);padding:0 1rem 0 1rem;margin-top:.6rem">
+              style="padding:0 1rem 0 1rem;margin-top:.6rem">
               Stage de tournage - Niveau avancé</h4>
             <div class="muted" style="padding:0 1rem 0 1rem">22 novembre 2025 — Paris 11ème</div>
             <div style="padding:1rem 1rem 1.2rem 1rem"><a class="btn-gold" href="#">En savoir plus</a></div>
@@ -185,7 +185,7 @@
         <div class="review">
           <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:.6rem">
             <div>
-              <div style="font-family:'Cormorant Garamond',serif;color:var(--primary);font-size:1.05rem">Marie L.</div>
+              <div style="font-size:1.05rem">Marie L.</div>
               <div style="display:flex;gap:.25rem;margin-top:.35rem">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
                   <path
@@ -218,7 +218,7 @@
         <div class="review">
           <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:.6rem">
             <div>
-              <div style="font-family:'Cormorant Garamond',serif;color:var(--primary);font-size:1.05rem">Thomas D.</div>
+              <div style="font-size:1.05rem">Thomas D.</div>
               <div style="display:flex;gap:.25rem;margin-top:.35rem">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
                   <path
@@ -251,7 +251,7 @@
         <div class="review">
           <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:.6rem">
             <div>
-              <div style="font-family:'Cormorant Garamond',serif;color:var(--primary);font-size:1.05rem">Claire B.</div>
+              <div style="font-size:1.05rem">Claire B.</div>
               <div style="display:flex;gap:.25rem;margin-top:.35rem">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
                   <path
