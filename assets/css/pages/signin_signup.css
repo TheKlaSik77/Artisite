@@ -203,3 +203,15 @@ label {
     background: #d49a6c;
     border-color: #d49a6c;
 }
+
+/* ---------------------------------------------------
+   FORM VISIBILITY (Needed for exclusive forms)
+---------------------------------------------------- */
+
+.form-hidden {
+    display: none !important;
+}
+
+.form-visible {
+    display: block;
+}

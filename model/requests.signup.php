@@ -1,86 +1,148 @@
 <?php
 declare(strict_types=1);
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-  http_response_code(405);
-  exit("Method not allowed");
-}
+session_start();
+require_once __DIR__ . '/utils/connection.php';
 
-$username    = trim($_POST["username"] ?? "");
-$firstName   = trim($_POST["first_name"] ?? "");
-$lastName    = trim($_POST["last_name"] ?? "");
-$email       = trim($_POST["email"] ?? "");
-$phoneNumber = trim($_POST["phone_number"] ?? "");
+require_method("POST");
+
+$accountType = require_account_type((string)($_POST["account_type"] ?? "customer"));
 
 $password     = (string)($_POST["password"] ?? "");
 $passwordConf = (string)($_POST["password_confirm"] ?? "");
 
-$acceptedTerms = ($_POST["accepted_terms"] ?? "") === "1";
+$acceptedTerms = ((string)($_POST["accepted_terms"] ?? "")) === "1";
 
 $errors = [];
-if ($username === "") $errors[] = "Username required";
-if ($firstName === "") $errors[] = "First name required";
-if ($lastName === "") $errors[] = "Last name required";
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email";
-if ($phoneNumber === "") $errors[] = "Phone number required";
 if (!$acceptedTerms) $errors[] = "You must accept the terms";
 if ($password === "" || $passwordConf === "") $errors[] = "Password required";
 if ($password !== $passwordConf) $errors[] = "Passwords do not match";
 
 if (!empty($errors)) {
-  http_response_code(400);
-  exit("Errors:\n- " . implode("\n- ", $errors));
+    fail(400, "Errors:\n- " . implode("\n- ", $errors));
 }
 
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-
-$host = "127.0.0.1";
-$db   = "artisite";
-$user = "root";
-$pass = "";
-$charset = "utf8mb4";
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
 try {
-  $pdo = new PDO($dsn, $user, $pass, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-  ]);
+    $pdo = pdo();
 
+    $termsId = latest_terms_id($pdo);
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-  $termsId = (int)$pdo->query("SELECT MAX(terms_of_use_id) AS id FROM terms_of_use")->fetch()["id"];
-  if ($termsId <= 0) $termsId = 1;
+    // -----------------------------
+    // CUSTOMER SIGNUP -> `user`
+    // -----------------------------
+    if ($accountType === "customer") {
+        $username    = trim((string)($_POST["username"] ?? ""));
+        $firstName   = trim((string)($_POST["first_name"] ?? ""));
+        $lastName    = trim((string)($_POST["last_name"] ?? ""));
+        $email       = trim((string)($_POST["email"] ?? ""));
+        $phoneNumber = trim((string)($_POST["phone_number"] ?? ""));
 
+        $errors = [];
+        if ($username === "") $errors[] = "Username required";
+        if ($firstName === "") $errors[] = "First name required";
+        if ($lastName === "") $errors[] = "Last name required";
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email";
+        if ($phoneNumber === "") $errors[] = "Phone number required";
 
-  $check = $pdo->prepare("SELECT COUNT(*) FROM user WHERE email = :email OR username = :username");
-  $check->execute(["email" => $email, "username" => $username]);
-  if ((int)$check->fetchColumn() > 0) {
-    http_response_code(409);
-    exit("Email or username already exists.");
-  }
+        if (!empty($errors)) {
+            fail(400, "Errors:\n- " . implode("\n- ", $errors));
+        }
 
-  $stmt = $pdo->prepare("
-    INSERT INTO user
-      (username, last_name, first_name, email, phone_number, hashed_password, description, accepted_terms_of_use_id)
-    VALUES
-      (:username, :last_name, :first_name, :email, :phone_number, :hashed_password, :description, :accepted_terms_of_use_id)
-  ");
+        // uniqueness (email or username)
+        $exists = (int) fetch_value(
+            $pdo,
+            "SELECT COUNT(*) FROM `user` WHERE email = :email OR username = :username",
+            ["email" => $email, "username" => $username]
+        );
 
-  $stmt->execute([
-    "username" => $username,
-    "last_name" => $lastName,
-    "first_name" => $firstName,
-    "email" => $email,
-    "phone_number" => $phoneNumber,
-    "hashed_password" => $hashedPassword,
-    "description" => null,
-    "accepted_terms_of_use_id" => $termsId,
-  ]);
+        if ($exists > 0) {
+            fail(409, "Email or username already exists.");
+        }
 
-  echo "OK: user created (user_id = " . htmlspecialchars((string)$pdo->lastInsertId()) . ")";
+        $stmt = $pdo->prepare("
+            INSERT INTO `user`
+                (username, last_name, first_name, email, phone_number, hashed_password, description, accepted_terms_of_use_id)
+            VALUES
+                (:username, :last_name, :first_name, :email, :phone_number, :hashed_password, :description, :accepted_terms_of_use_id)
+        ");
+
+        $stmt->execute([
+            "username" => $username,
+            "last_name" => $lastName,
+            "first_name" => $firstName,
+            "email" => $email,
+            "phone_number" => $phoneNumber,
+            "hashed_password" => $hashedPassword,
+            "description" => null,
+            "accepted_terms_of_use_id" => $termsId,
+        ]);
+
+        $_SESSION["logged_in"]    = true;
+        $_SESSION["account_type"] = "customer";
+        $_SESSION["user_id"]      = (int)$pdo->lastInsertId();
+        $_SESSION["username"]     = $username;
+        $_SESSION["email"]        = $email;
+
+        redirect("/artisite/index.php?page=homepage");
+    }
+
+    // -----------------------------
+    // CRAFTMAN SIGNUP -> `craftman`
+    // -----------------------------
+    if ($accountType === "craftman") {
+        $siretRaw    = trim((string)($_POST["siret"] ?? ""));
+        $siret       = normalize_siret($siretRaw);
+        $companyName = trim((string)($_POST["company_name"] ?? ""));
+        $description = trim((string)($_POST["description"] ?? ""));
+
+        $errors = [];
+        if ($siret === "") $errors[] = "SIRET required";
+        if ($companyName === "") $errors[] = "Company name required";
+        if ($description === "") $errors[] = "Description required";
+
+        if (!empty($errors)) {
+            fail(400, "Errors:\n- " . implode("\n- ", $errors));
+        }
+
+        require_valid_siret($siret);
+
+        // SIRET unique
+        $exists = (int) fetch_value(
+            $pdo,
+            "SELECT COUNT(*) FROM craftman WHERE siret = :siret",
+            ["siret" => $siret]
+        );
+
+        if ($exists > 0) {
+            fail(409, "SIRET already exists.");
+        }
+
+        $stmt = $pdo->prepare("
+            INSERT INTO craftman
+                (siret, company_name, description, hashed_password, validator_id)
+            VALUES
+                (:siret, :company_name, :description, :hashed_password, NULL)
+        ");
+
+        $stmt->execute([
+            "siret" => $siret,
+            "company_name" => $companyName,
+            "description" => $description,
+            "hashed_password" => $hashedPassword,
+        ]);
+
+        $_SESSION["logged_in"]    = true;
+        $_SESSION["account_type"] = "craftman";
+        $_SESSION["craftman_id"]  = (int)$pdo->lastInsertId();
+        $_SESSION["company_name"] = $companyName;
+        $_SESSION["siret"]        = $siret;
+
+        redirect("/artisite/index.php?page=homepage");
+    }
+
+    fail(400, "Unknown account_type");
 
 } catch (PDOException $e) {
-  http_response_code(500);
-  echo "DB error: " . htmlspecialchars($e->getMessage());
+    fail(500, "Internal server error.");
 }

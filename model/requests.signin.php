@@ -1,51 +1,83 @@
 <?php
 declare(strict_types=1);
+
 session_start();
+require_once __DIR__ . '/utils/connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-  http_response_code(405);
-  exit("Method not allowed");
+require_method("POST");
+
+$accountType = require_account_type((string)($_POST["account_type"] ?? "customer"));
+$password    = (string)($_POST["password"] ?? "");
+
+if ($password === "") {
+    fail(400, "Invalid password.");
 }
-
-$email = trim($_POST["email"] ?? "");
-$password = (string)($_POST["password"] ?? "");
-
-if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $password === "") {
-  http_response_code(400);
-  exit("Invalid email or password.");
-}
-
-$host = "127.0.0.1";
-$db   = "artisite";
-$user = "root";
-$pass = "";
-$charset = "utf8mb4";
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 try {
-  $pdo = new PDO($dsn, $user, $pass, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-  ]);
+    $pdo = pdo();
 
-  $stmt = $pdo->prepare("SELECT user_id, username, email, hashed_password FROM `user` WHERE email = :email LIMIT 1");
-  $stmt->execute(["email" => $email]);
-  $u = $stmt->fetch();
+    if ($accountType === "customer") {
+        $email = trim((string)($_POST["email"] ?? ""));
+        require_valid_email($email);
 
-  if (!$u || !password_verify($password, $u["hashed_password"])) {
-    http_response_code(401);
-    exit("Email or password incorrect.");
-  }
+        $u = fetch_one(
+            $pdo,
+            "
+            SELECT user_id, username, email, hashed_password
+            FROM `user`
+            WHERE email = :email
+            LIMIT 1
+            ",
+            ["email" => $email]
+        );
 
-  $_SESSION["user_id"] = (int)$u["user_id"];
-  $_SESSION["username"] = $u["username"];
-  $_SESSION["email"] = $u["email"];
-  $_SESSION["logged_in"] = true;
+        if (!$u || !password_verify($password, (string)$u["hashed_password"])) {
+            fail(401, "Email or password incorrect.");
+        }
 
-  header("Location: /artisite/index.php?page=homepage");
-  exit;
+        $_SESSION["logged_in"]    = true;
+        $_SESSION["account_type"] = "customer";
+        $_SESSION["user_id"]      = (int)$u["user_id"];
+        $_SESSION["username"]     = (string)$u["username"];
+        $_SESSION["email"]        = (string)$u["email"];
+
+        redirect("/artisite/index.php?page=homepage");
+    }
+
+    // craftman
+    $siretRaw = trim((string)($_POST["siret"] ?? ""));
+    $siret    = normalize_siret($siretRaw);
+    require_valid_siret($siret);
+
+    $c = fetch_one(
+        $pdo,
+        "
+        SELECT craftman_id, siret, company_name, hashed_password, validator_id
+        FROM craftman
+        WHERE siret = :siret
+        LIMIT 1
+        ",
+        ["siret" => $siret]
+    );
+
+    if (!$c || !password_verify($password, (string)$c["hashed_password"])) {
+        fail(401, "SIRET or password incorrect.");
+    }
+
+    // Optional validation gate (keep commented if you don't want it yet)
+    // if ($c["validator_id"] === null) {
+    //     fail(403, "Compte artisan en attente de validation.");
+    // }
+
+    $_SESSION["logged_in"]    = true;
+    $_SESSION["account_type"] = "craftman";
+    $_SESSION["craftman_id"]  = (int)$c["craftman_id"];
+    $_SESSION["company_name"] = (string)($c["company_name"] ?? "");
+    $_SESSION["siret"]        = (string)$c["siret"];
+
+    redirect("/artisite/index.php?page=homepage");
 
 } catch (PDOException $e) {
-  http_response_code(500);
-  exit("DB error: " . htmlspecialchars($e->getMessage()));
+    // Don't expose internal DB details to users
+    fail(500, "Internal server error.");
 }
