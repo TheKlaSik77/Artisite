@@ -13,6 +13,7 @@
 </head>
 
 <?php
+
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
@@ -67,6 +68,10 @@ switch ($page) {
         addProductCraftmanController($pdo);
         break;
 
+    case "craftmen":
+        require_once "./controller/craftmenController.php";
+        craftmenController($pdo);
+        break;
 
     default:
         require "./view/layout/header.php";
