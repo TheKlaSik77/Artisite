@@ -1,6 +1,6 @@
 <?php
 
-require_once './model/requests.products.php';
+require_once './model/requests.craftmen.php';
 
 
 function craftmenController($pdo)
