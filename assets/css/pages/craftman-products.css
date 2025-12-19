@@ -43,7 +43,7 @@
 
 .btn-primary,
 .btn-outline {
-  padding: 12px 18px;
+  padding: 10px 14px;
   border-radius: 12px;
   font-weight: 600;
   text-decoration: none;
@@ -129,10 +129,12 @@
 
 /* ================= GRID PRODUITS ================= */
 
-.products-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* ================= CARD ================= */
@@ -268,6 +270,7 @@
 .row-actions {
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
 .small {
@@ -361,11 +364,72 @@
     font-size: 14px;
 }
 
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+/* ================= HEADER ================= */
+
+.products-header {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
 }
 
+/* ================= ZONE ADMIN PRODUIT ================= */
+
+.product-admin {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ================= STOCK ================= */
+
+.stock-box {
+    background-color: var(--accent-beige-pill);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.stock-box strong {
+    font-weight: 600;
+}
+
+/* ================= ACTIONS ================= */
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.small {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .products-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-admin {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-actions {
+        justify-content: space-between;
+    }
+}

@@ -18,7 +18,7 @@
             <a href="index.php?page=homepage" class="nav-link">Accueil</a>
             <a href="index.php?page=craftmen" class="nav-link">Artisans</a>
             <a href="index.php?page=products" class="nav-link">Produits</a>
-            <?php if (!isset($_SESSION['craftman'])): ?>
+            <?php if (isCraftman()): ?>
                 <a href="index.php?page=craftman-products" class="nav-link">Mes Produits</a>
             <?php endif; ?>
             <a href="index.php?page=events" class="nav-link">Événements</a>

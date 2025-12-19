@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <main>
+    <main class="products-section craftman-products">
         <div class="container">
 
             <header class="header header-split">
@@ -21,7 +21,7 @@
 
                 <div class="header-actions">
                     <a class="btn-outline" href="javascript:history.back()">← Retour</a>
-                    <a class="btn-primary" href="./add-product-craftman.html">+ Ajouter un produit</a>
+                    <a class="btn-primary" href="index.php?page=add-product-craftman">+ Ajouter un produit</a>
                 </div>
             </header>
 
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="toolbar-right">
-                    <div id="count" class="count-pill">0 produit</div>
+                    <div id="count" class="count-pill"><span><?= htmlspecialchars(count($craftman_products)) ?> Produit(s)</span></div>
                 </div>
             </div>
 
@@ -76,53 +76,52 @@
                                     </div>
                                 </div>
 
-                                <div class="product-info">
-                                    <h3 class="product-name">
-                                        <?= htmlspecialchars($product['name']) ?>
-                                    </h3>
 
-                                    <p class="product-artisan">
-                                        <?= htmlspecialchars($product['company_name']) ?>
-                                    </p>
+                                <div class="prod-right">
+                                    <div class="qty-box">
+                                        <form method="POST" action="index.php?page=craftman-products&action=update">
+                                            <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+                                            <input type="hidden" name="quantity" value="<?= $product['quantity'] - 1 ?>">
+                                            <button type="submit" <?= $product['quantity'] <= 1 ? 'disabled' : '' ?>>−</button>
+                                        </form>
 
-                                    <p class="product-price">
-                                        <?= number_format($product['unit_price'], 2, ',', ' ') ?> €
-                                    </p>
+                                        <input type="text" value="<?= $product['quantity'] ?>" readonly>
 
-                                    <a href="index.php?page=product&id=<?= $product['product_id'] ?>" class="product-btn">
-                                        Acheter
-                                    </a>
+                                        <form method="POST" action="index.php?page=craftman-products&action=update">
+                                            <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+                                            <input type="hidden" name="quantity" value="<?= $product['quantity'] + 1 ?>">
+                                            <button type="submit">+</button>
+                                        </form>
+                                    </div>
+
+                                    <div class="row-actions">
+
+                                        <a class="btn-outline small"
+                                            href="index.php?page=edit-product&id=<?= $product['product_id'] ?>">
+                                            Modifier
+                                        </a>
+
+                                        <form method="POST" action="index.php?page=craftman-products&action=delete">
+
+                                            <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+
+                                            <button class="btn-danger small" type="submit">
+                                                Supprimer
+                                            </button>
+                                        </form>
+
+                                    </div>
                                 </div>
                         </div>
 
-                        <div class="prod-right">
-                            <div class="qty-box">
-                                <form method="POST" action="index.php?page=craftman-products&action=update">
-                                    <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
-                                    <input type="hidden" name="quantity" value="<?= $product['quantity'] - 1 ?>">
-                                    <button type="submit" <?= $product['quantity'] <= 1 ? 'disabled' : '' ?>>−</button>
-                                </form>
 
-                                <input type="text" value="<?= $product['quantity'] ?>" readonly>
-
-                                <form method="POST" action="index.php?page=craftman-products&action=update">
-                                    <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
-                                    <input type="hidden" name="quantity" value="<?= $product['quantity'] + 1 ?>">
-                                    <button type="submit">+</button>
-                                </form>
-                            </div>
-
-                            <div class="row-actions">
-                                <a class="btn-outline small">Modifier</a>
-                                <button class="btn-danger small" type="button">Supprimer</button>
-                            </div>
-                        </div>
                     <?php endforeach; ?>
                 </div>
 
 
 
+
+    </main>
 </body>
-</main>
 
 </html>

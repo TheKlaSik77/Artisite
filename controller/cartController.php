@@ -32,7 +32,6 @@ function cartController(PDO $pdo)
             break;
     }
 }
-
 function cartReadController(PDO $pdo, int $user_id)
 {
 

@@ -13,9 +13,6 @@
 </head>
 
 <?php
-echo '<pre>';
-var_dump($_SESSION);
-echo '</pre>';
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
@@ -64,6 +61,12 @@ switch ($page) {
         require_once "./controller/craftmanProductsController.php";
         craftmanProductsController($pdo);
         break;
+
+    case "add-product-craftman":
+        require_once "./controller/addProductCraftmanController.php";
+        addProductCraftmanController($pdo);
+        break;
+
 
     default:
         require "./view/layout/header.php";
