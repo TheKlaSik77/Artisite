@@ -1,8 +1,37 @@
 <?php
 
-require_once './model/utils/connexion.php';
 require_once './model/requests.cart.php';
 
+
+function cartController(PDO $pdo)
+{
+    // Sécurité
+    if (!isset($_SESSION['user'])) {
+        header('Location: index.php?page=login');
+        exit;
+    }
+
+    $user_id = $_SESSION['user']['id'];
+    $action = $_GET['action'] ?? 'read';
+
+    switch ($action) {
+        case 'add':
+            cartAddController($pdo, $user_id);
+            break;
+
+        case 'delete':
+            cartDeleteController($pdo, $user_id);
+            break;
+
+        case 'update':
+            cartUpdateQuantityController($pdo, $user_id);
+            break;
+
+        default:
+            cartReadController($pdo, $user_id);
+            break;
+    }
+}
 
 function cartReadController(PDO $pdo, int $user_id)
 {
@@ -41,7 +70,7 @@ function cartUpdateQuantityController(PDO $pdo, int $user_id){
     $product_id = $_POST["product_id"];
     $new_quantity = $_POST["quantity"];
     $shopping_cart_id = getCartIdByUser($pdo, $user_id);
-    
+
     if ($shopping_cart_id != null) {
         updateProductQuantityOnCart($pdo, $shopping_cart_id, $product_id, $new_quantity);
     }

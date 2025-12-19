@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,8 +13,11 @@
 </head>
 
 <?php
-
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
 require_once "./model/utils/connexion.php";
+require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
 
 $page = $_GET['page'] ?? 'home';
@@ -38,25 +42,28 @@ switch ($page) {
 
     case "cart":
         require_once "./controller/cartController.php";
-        $action = $_GET['action'] ?? "read";
-        $user_id = 1;
-        switch ($action) {
-            case "add":
-                cartAddController($pdo, $user_id);
-                break;
-            
-            case "delete":
-                cartDeleteController($pdo, $user_id);
-                break;
+        cartController($pdo);
+        break;
 
-            case "update":
-                cartUpdateQuantityController($pdo,$user_id);
-                break;
+    case "signup":
+        require_once "./controller/signupController.php";
+        signupController($pdo);
+        break;
 
-            case "read":
-                cartReadController($pdo, $user_id);
-                break;
-        }
+    case "signin":
+        require_once "./controller/signinController.php";
+        signinController( $pdo);
+        break;
+
+    case "logout":
+        require_once "./controller/logoutController.php";
+        logoutController();
+        break;
+
+    case "craftman-products":
+        require_once "./controller/craftmanProductsController.php";
+        craftmanProductsController($pdo);
+        break;
 
     default:
         require "./view/layout/header.php";
