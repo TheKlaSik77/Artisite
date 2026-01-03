@@ -4,7 +4,7 @@ require_once './model/requests.signin.php';
 function signinController(PDO $pdo)
 {
     $action = $_GET['action'] ?? 'read';
-    
+
     switch ($action) {
 
         case 'read':
@@ -23,29 +23,42 @@ function signinController(PDO $pdo)
     }
 }
 
-function signinProcessController($pdo){
+function signinProcessController($pdo)
+{
     $email = trim($_POST['email'] ?? '');
     $siret = trim($_POST['siret'] ?? '');
     $password = $_POST['password'] ?? '';
     if ($email !== '' && $siret !== '') {
         die("Veuillez renseigner soit l’email soit le SIRET, pas les deux.");
     }
-    if ($email === '' && $siret === ''){
+    if ($email === '' && $siret === '') {
         die("Veuillez renseigner soit l’email soit le SIRET");
     }
 
     if ($email !== '') {
         $user = getUser($pdo, $email);
-        
+
         if (!$user || !password_verify($password, $user['hashed_password'])) {
-            die("Identifiants incorrects");
+            $admin = getAdmin($pdo, $email);
+            if (!$admin || !password_verify($password, $admin['hashed_password'])) {
+                die("Identifiants incorrects");
+            } else {
+                $_SESSION['user'] = [
+                    'id' => $user['user_id'],
+                    'role' => 'admin',
+                    'email' => $user['email']
+                ];
+                
+            }
+        } else {
+            $_SESSION['user'] = [
+                'id' => $user['user_id'],
+                'role' => 'user',
+                'email' => $user['email']
+            ];
         }
-        
-        $_SESSION['user'] = [
-            'id'    => $user['user_id'],
-            'role'  => 'user',
-            'email' => $user['email']
-        ];
+
+
     } elseif ($siret !== '') {
         $craftman = getCraftman($pdo, $siret);
 
@@ -54,8 +67,8 @@ function signinProcessController($pdo){
         }
 
         $_SESSION['user'] = [
-            'id'    => $craftman['craftman_id'],
-            'role'  => 'craftman',
+            'id' => $craftman['craftman_id'],
+            'role' => 'craftman',
             'siret' => $craftman['siret']
         ];
     }

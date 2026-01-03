@@ -11,9 +11,10 @@ function craftmenController($pdo)
     require "./view/layout/footer.php";
 }
 
-function getCraftmanController($pdo, $id){
-    $product = getCraftmanById($pdo,$id)[0] ?? null;
+function getCraftmanController(PDO $pdo){
+    $id = $_GET["id"];
+    $craftman = getCraftmanById($pdo, $id)[0] ?? null;
     require "./view/layout/header.php";
-    require "./view/pages/product.php";
+    require "./view/pages/craftman.php";
     require "./view/layout/footer.php";
 }

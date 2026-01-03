@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="header-actions">
-                    <a class="btn-outline" href="javascript:history.back()">← Retour</a>
+                    <a class="btn-outline" href="index.php?page=home">← Retour</a>
                     <a class="btn-primary" href="index.php?page=add-product-craftman">+ Ajouter un produit</a>
                 </div>
             </header>
