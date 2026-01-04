@@ -15,6 +15,18 @@ function getUser(PDO $pdo, string $email)
 
 }
 
+function getAdmin($pdo, $email){
+    $stmt = $pdo->prepare("
+        SELECT admin_id, hashed_password FROM administrator WHERE email = ? LIMIT 1
+    ");
+
+    $stmt->execute([$email]);
+
+    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $admin ?: null;
+}
+
 function getCraftman(PDO $pdo, string $siret)
 {
     $stmt = $pdo->prepare("

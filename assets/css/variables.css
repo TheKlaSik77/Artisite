@@ -3,7 +3,7 @@
     --accent-gold: #e8b77a;
     --accent-gold-soft: #e8c08f;
     --accent-beige-pill: #f9eee0;
-    --subtitles-marron: #b98878;
+    --subtitles-marron: hsl(15, 32%, 60%);
     --body-text: #f5e7c2;
     --bg: #f5f3ef;
     --bg-panel: #ffffff;
@@ -17,7 +17,6 @@
     --primary: #b08d57;
     --secondary: #e2c275;
     --accent: #f6e7c1;
-    --bg: #f8f8fa;
     --card-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
     --card-border: #f3f3f6;
     --input-bg: #fafbfc;
@@ -39,6 +38,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: "Playfair Display", "Comic Sans MS";
     font-weight: 200;
@@ -53,23 +53,5 @@ main {
     padding: 40px 0px;
 }
 
-.admin-container {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-}
 
 
-/* Layout admin */
-.admin-layout {
-    display: flex;
-    min-height: 100vh;
-    justify-self: center;
-    border: 1px solid black;
-    width: 100%;
-}
-.main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}

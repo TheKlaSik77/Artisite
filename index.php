@@ -13,12 +13,13 @@
 </head>
 
 <?php
+
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
 
-$page = $_GET['page'] ?? 'home';
 
+$page = $_GET['page'] ?? 'home';
 switch ($page) {
     case "home":
         require "./view/layout/header.php";
@@ -49,7 +50,7 @@ switch ($page) {
 
     case "signin":
         require_once "./controller/signinController.php";
-        signinController( $pdo);
+        signinController($pdo);
         break;
 
     case "logout":
@@ -67,12 +68,90 @@ switch ($page) {
         addProductCraftmanController($pdo);
         break;
 
+    case "craftmen":
+        require_once "./controller/craftmenController.php";
+        craftmenController($pdo);
+        break;
+
+    case "craftman":
+        require_once "./controller/craftmenController.php";
+        getCraftmanController($pdo);
+        break;
+
+    case "admin-dashboard":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminDashboardController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-craftmen":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminCraftmenController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-customers":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminCustomersController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-products":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminProductsController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-orders":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminOrdersController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-reviews":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminReviewsController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-support":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminSupportController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
 
     default:
         require "./view/layout/header.php";
         require "./view/pages/{$page}.php";
         require "./view/layout/footer.php";
         break;
-
-
 }
+

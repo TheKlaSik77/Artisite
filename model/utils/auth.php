@@ -20,6 +20,12 @@ function isUser(): bool
     return hasRole('user');
 }
 
+function isAdmin(): bool
+{
+    return hasRole('admin');
+}
+
+
 function isCraftman(): bool
 {
     return hasRole('craftman');
