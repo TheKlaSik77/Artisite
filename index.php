@@ -29,7 +29,7 @@ switch ($page) {
 
     case "products":
         require_once "./controller/productController.php";
-        productsController($pdo);
+        productsController($pdo, $id);
         break;
 
     case "product":
@@ -147,7 +147,19 @@ switch ($page) {
             $page = "home";
             break;
         }
+    
+    case "order":
+        require_once "./controller/orderController.php";
+        orderController($pdo);
+        break;
+    
+    case "checkout":
+    require_once "./controller/checkoutController.php";
+    checkoutController($pdo);
+    break;
 
+
+    
     default:
         require "./view/layout/header.php";
         require "./view/pages/{$page}.php";

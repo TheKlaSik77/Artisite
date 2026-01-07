@@ -9,32 +9,38 @@
 </head>
 
 <body>
-    <main>
-        <div class="container">
-            <div class="cart-card">
 
-                <p class="subtitle">VOTRE SÉLECTION</p>
-                <h1>Panier</h1>
-                <p class="description">Retrouvez ici les articles que vous souhaitez acheter</p>
+<main>
+    <div class="container">
+        <div class="cart-card">
 
+            <p class="subtitle">VOTRE SÉLECTION</p>
+            <h1>Panier</h1>
+            <p class="description">
+                Retrouvez ici les articles que vous souhaitez acheter.
+            </p>
 
+            <?php if (!empty($productsOnCart)): ?>
 
                 <?php foreach ($productsOnCart as $_product): ?>
-                    <!-- PRODUIT 1 -->
                     <div class="cart-item">
+
                         <img src="https://picsum.photos/200/300" class="cart-img">
 
                         <div class="cart-info">
                             <h3>
                                 <?= htmlspecialchars($_product['name']) ?>
                             </h3>
+
                             <p class="craftsman">
                                 <?= htmlspecialchars($_product['company_name']) ?>
                             </p>
 
                             <div class="cart-bottom">
-                                <?= number_format($_product['total'], 2, ',', ' ') ?> €
 
+                                <span class="price">
+                                    <?= number_format($_product['total'], 2, ',', ' ') ?> €
+                                </span>
 
                                 <div class="qty-box">
                                     <form method="POST" action="index.php?page=cart&action=update">
@@ -52,11 +58,11 @@
                                     </form>
                                 </div>
 
-
                             </div>
                         </div>
+
                         <form method="POST" action="index.php?page=cart&action=delete">
-                            <input type="hidden" name="product_id" value="<?= $_product["product_id"] ?>">
+                            <input type="hidden" name="product_id" value="<?= $_product['product_id'] ?>">
                             <button type="submit" class="remove-btn">×</button>
                         </form>
 
@@ -65,34 +71,41 @@
 
                 <!-- RÉSUMÉ -->
                 <div class="summary">
+
                     <div class="row-s">
                         <span>Sous-total :</span>
-                        <span id="subtotal"><?= number_format($totalPrice, 2, ',', ' ') ?> €</span>
+                        <span><?= number_format($totalPrice, 2, ',', ' ') ?> €</span>
                     </div>
 
                     <div class="row-s">
                         <span>Livraison :</span>
-                        <span id="shipping">5,90 €</span>
+                        <span>5,90 €</span>
                     </div>
 
                     <div class="divider"></div>
 
                     <div class="row-s total">
                         <span>Total :</span>
-                        <span id="total"><?= number_format($totalPrice + 5.90, 2, ',', ' ') ?> €</span>
+                        <span><?= number_format($totalPrice + 5.90, 2, ',', ' ') ?> €</span>
                     </div>
 
-                    <a class="order-btn" href="index.php?page=order-success">
+                    <a class="order-btn" href="index.php?page=checkout">
                         Passer la commande
                     </a>
-                    <!-- Ajouter un Vider le panier ici -->
-
 
                 </div>
 
-            </div>
-        </div>
-    </main>
-</body>
+            <?php else: ?>
 
+                <p class="empty-cart-message">
+                    Votre panier est vide.
+                </p>
+
+            <?php endif; ?>
+
+        </div>
+    </div>
+</main>
+
+</body>
 </html>

@@ -2,95 +2,88 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finaliser la commande – Arti'Site</title>
-  <link rel="stylesheet" href="./assets/css/pages/checkout.css" />
+    <meta charset="UTF-8">
+    <title>Finalisation de la commande – Arti’Site</title>
+
+    <!-- CSS spécifique à la page checkout -->
+    <link rel="stylesheet" href="./assets/css/pages/checkout.css">
 </head>
 
 <body>
-  <!-- ================= CHECKOUT ================= -->
-  <main class="checkout-page">
-    <div class="checkout-container">
 
-      <!-- FORMULAIRE -->
-      <div class="checkout-card">
-        <h1>Finaliser la commande</h1>
-        <p class="muted">Renseignez vos informations pour valider votre commande.</p>
+<main class="checkout-section">
 
-        <form class="checkout-form">
+    <div class="container">
 
-          <div class="grid">
-            <div class="field">
-              <label>Prénom</label>
-              <input type="text" placeholder="Ex : Ahmed" required>
-            </div>
+        <div class="checkout-card">
 
-            <div class="field">
-              <label>Nom</label>
-              <input type="text" placeholder="Ex : Ali" required>
-            </div>
-          </div>
+            <p class="subtitle">FINALISATION</p>
 
-          <div class="field">
-            <label>Email</label>
-            <input type="email" placeholder="exemple@mail.com" required>
-          </div>
+            <h1>Adresse de livraison</h1>
 
-          <div class="field">
-            <label>Adresse</label>
-            <input type="text" placeholder="Rue, numéro..." required>
-          </div>
+            <p class="description">
+                Veuillez renseigner votre adresse pour finaliser votre commande.
+            </p>
 
-          <div class="grid">
-            <div class="field">
-              <label>Code postal</label>
-              <input type="text" placeholder="75000" required>
-            </div>
+            <form method="POST" action="index.php?page=checkout" class="checkout-form">
 
-            <div class="field">
-              <label>Ville</label>
-              <input type="text" placeholder="Paris" required>
-            </div>
-          </div>
+                <div class="form-row">
+                    <label for="street">Adresse</label>
+                    <input
+                        type="text"
+                        id="street"
+                        name="street"
+                        placeholder="12 rue de la Paix"
+                        required
+                    >
+                </div>
 
-          <div class="actions">
-            <a href="cart.html" class="btn-outline">← Retour au panier</a>
-            <button type="submit" class="btn-primary">Payer et confirmer</button>
-          </div>
+                <div class="form-row">
+                    <label for="city">Ville</label>
+                    <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        placeholder="Paris"
+                        required
+                    >
+                </div>
 
-        </form>
-      </div>
+                <div class="form-row">
+                    <label for="zip_code">Code postal</label>
+                    <input
+                        type="text"
+                        id="zip_code"
+                        name="zip_code"
+                        placeholder="75002"
+                        required
+                    >
+                </div>
 
-      <!-- RÉSUMÉ -->
-      <aside class="checkout-summary">
-        <h2>Résumé</h2>
+                <div class="form-row">
+                    <label for="country">Pays</label>
+                    <input
+                        type="text"
+                        id="country"
+                        name="country"
+                        value="France"
+                        required
+                    >
+                </div>
 
-        <div class="sum-row"><span>Sous-total</span><span>77,00 €</span></div>
-        <div class="sum-row"><span>Livraison</span><span>5,90 €</span></div>
-        <div class="sum-divider"></div>
-        <div class="sum-row total"><span>Total</span><span>82,90 €</span></div>
+                <div class="checkout-actions">
+                    <button type="submit" class="btn-primary">
+                        Valider la commande
+                    </button>
+                </div>
 
-        <p class="small-note">
-          En cliquant sur “Payer et confirmer”, vous acceptez nos conditions.
-        </p>
-      </aside>
+            </form>
+
+        </div>
 
     </div>
-  </main>
 
-  <!-- ================= JS REDIRECTION ================= -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.querySelector(".checkout-form");
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault(); // empêche rechargement
-        window.location.href = "./order-success.html";
-      });
-    });
-  </script>
+</main>
 
 </body>
-
 </html>

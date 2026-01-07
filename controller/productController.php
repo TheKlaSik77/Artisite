@@ -1,19 +1,39 @@
 <?php
 
-require_once './model/requests.products.php';
+require_once './model/requests.product.php';
 
-
-function productsController($pdo)
+/**
+ * Affiche la liste des produits
+ */
+function productsController(PDO $pdo)
 {
-    $products = getAllProducts($pdo); // Modèle
-    require "./view/layout/header.php";     // Vue
-    require "./view/pages/products.php";
-    require "./view/layout/footer.php";
+    $products = getAllProducts($pdo);
+
+    require './view/layout/header.php';
+    require './view/pages/products.php';
+    require './view/layout/footer.php';
 }
 
-function productController($pdo, $id){
-    $product = getProductById($pdo,$id)[0] ?? null;
-    require "./view/layout/header.php";
-    require "./view/pages/product.php";
-    require "./view/layout/footer.php";
+/**
+ * Affiche la page d’un produit
+ */
+function productController(PDO $pdo, int $id)
+{
+    // Sécurité ID
+    if ($id <= 0) {
+        require './view/pages/404.php';
+        return;
+    }
+
+    // Récupération du produit
+    $product = getProductById($pdo, $id);
+
+    if (!$product) {
+        require './view/pages/404.php';
+        return;
+    }
+
+    require './view/layout/header.php';
+    require './view/pages/product.php';
+    require './view/layout/footer.php';
 }
