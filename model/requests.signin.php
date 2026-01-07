@@ -27,13 +27,13 @@ function getAdmin($pdo, $email){
     return $admin ?: null;
 }
 
-function getCraftman(PDO $pdo, string $siret)
+function getCraftman(PDO $pdo, string $email)
 {
     $stmt = $pdo->prepare("
-        SELECT craftman_id, siret, hashed_password FROM craftman WHERE siret = ? LIMIT 1
+        SELECT craftman_id, email, siret, hashed_password FROM craftman WHERE email = ? LIMIT 1
     ");
 
-    $stmt->execute([$siret]);
+    $stmt->execute([$email]);
 
     $craftman = $stmt->fetch(PDO::FETCH_ASSOC);
 

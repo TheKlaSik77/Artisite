@@ -19,14 +19,12 @@
                 <label>Adresse email</label>
                 <div class="input-group">
                     <span class="icon">📧</span>
-                    <input type="email" name="email" placeholder="Votre@email.fr">
+                    <input type="email" name="email" placeholder="Votre@email.fr" required>
                 </div>
-                <div class="divider"></div>
-                
-                <label>Ou SIRET (Si vous êtes un artisan)</label>
-                <div class="input-group">
-                    <span class="icon"></span>
-                    <input type="text" name="siret" placeholder="SIRET">
+
+                <div class="checkbox">
+                    <input type="checkbox" id="is_craftman" name="is_craftman" value="1">
+                    <label for="is_craftman">Je suis un artisan</label>
                 </div>
 
                 <label>Mot de passe</label>
@@ -36,8 +34,11 @@
                     <span class="icon eye">👁️</span>
                 </div>
 
+
                 <div class="options">
-                    <label><input type="checkbox"> Se souvenir de moi</label>
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Se souvenir de moi</label>
+                    </div>
                     <a href="#" class="forgot">Mot de passe oublié ?</a>
                 </div>
 

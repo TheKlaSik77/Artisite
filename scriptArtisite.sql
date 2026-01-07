@@ -10,8 +10,9 @@ CREATE TABLE
 CREATE TABLE
     craftman (
         craftman_id INT AUTO_INCREMENT PRIMARY KEY,
-        company_name VARCHAR(100),
-        siret VARCHAR(14) NOT NULL UNIQUE,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        company_name VARCHAR(100) NOT NULL,
+        siret VARCHAR(14),
         description VARCHAR(255),
         hashed_password VARCHAR(255) NOT NULL,
         validator_id INT,

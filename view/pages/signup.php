@@ -34,9 +34,10 @@
             </div>
 
             <!-- FORMULAIRE Customer -->
-            <form method="POST" action="index.php?page=signup&action=add&type=user" class="form-visible" id="customerForm">
+            <form method="POST" action="index.php?page=signup&action=add&type=user" class="form-visible"
+                id="customerForm">
 
-                <label>Pseudo</label>
+                <label>Nom d'utilisateur</label>
                 <div class="input-group">
                     <span class="icon">📧</span>
                     <input type="text" name="username" placeholder="" required>
@@ -79,24 +80,31 @@
                 </div>
 
                 <!-- CONDITIONS -->
-                <div class="checkbox-row">
-                    <input type="checkbox" required>
-                    <p>
+                <div class="checkbox">
+                    <input type="checkbox" id="cgu_user" name="cgu" required>
+                    <label for="cgu_user" >
                         J'accepte les
                         <a href="#">conditions générales d'utilisation</a>
                         et la
                         <a href="#">politique de confidentialité</a>
-                    </p>
+                    </label>
                 </div>
 
                 <button type="submit" class="login-btn">Créer mon compte</button>
 
             </form>
-            
+
 
             <!-- Formulaire Craftman -->
-            <form method="POST" action="index.php?page=signup&action=add&type=craftman" class="form-hidden" id="craftmanForm">
-                <label>Numéro SIRET (Celui-ci vous servira à vous connecter)</label>
+            <form method="POST" action="index.php?page=signup&action=add&type=craftman" class="form-hidden"
+                id="craftmanForm">
+
+                <label>Adresse email</label>
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Votre@email.fr">
+                </div>
+
+                <label>Numéro SIRET (Facultatif)</label>
                 <div class="input-group">
                     <input type="text" name="siret" placeholder="">
                 </div>
@@ -124,16 +132,17 @@
                 <div class="textarea-group">
                     <textarea type="text" class="textarea-simple" name="description"> </textarea>
                 </div>
-                <label class="description-warning">(Cette description sera utilisée pour votre profil, soyez donc le plus clair possible sur votre activité)</label>
-                <!-- CONDITIONS -->
-                <div class="checkbox-row">
-                    <input type="checkbox" required>
-                    <p>
+                <label class="description-warning">(Cette description sera utilisée pour votre profil, soyez donc le
+                    plus clair possible sur votre activité)</label>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="cgu_craftman" name="cgu" required>
+                    <label for="cgu_craftman" >
                         J'accepte les
                         <a href="#">conditions générales d'utilisation</a>
                         et la
                         <a href="#">politique de confidentialité</a>
-                    </p>
+                    </label>
                 </div>
 
                 <button type="submit" class="login-btn">Créer mon compte</button>

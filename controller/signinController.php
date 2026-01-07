@@ -26,18 +26,13 @@ function signinController(PDO $pdo)
 function signinProcessController($pdo)
 {
     $email = trim($_POST['email'] ?? '');
-    $siret = trim($_POST['siret'] ?? '');
+    $is_craftman = $_POST['is_craftman'] ?? 0;
     $password = $_POST['password'] ?? '';
-    if ($email !== '' && $siret !== '') {
-        die("Veuillez renseigner soit l’email soit le SIRET, pas les deux.");
-    }
-    if ($email === '' && $siret === '') {
-        die("Veuillez renseigner soit l’email soit le SIRET");
-    }
 
-    if ($email !== '') {
+    echo ($is_craftman);
+    if ($is_craftman === "0") {
         $user = getUser($pdo, $email);
-
+        
         if (!$user || !password_verify($password, $user['hashed_password'])) {
             $admin = getAdmin($pdo, $email);
             if (!$admin || !password_verify($password, $admin['hashed_password'])) {
@@ -48,7 +43,7 @@ function signinProcessController($pdo)
                     'role' => 'admin',
                     'email' => $user['email']
                 ];
-                
+
             }
         } else {
             $_SESSION['user'] = [
@@ -58,10 +53,9 @@ function signinProcessController($pdo)
             ];
         }
 
-
-    } elseif ($siret !== '') {
-        $craftman = getCraftman($pdo, $siret);
-
+    } else {
+        $craftman = getCraftman($pdo, $email);
+        echo "coucou";
         if (!$craftman || !password_verify($password, $craftman['hashed_password'])) {
             die("Identifiants incorrects");
         }
@@ -69,7 +63,7 @@ function signinProcessController($pdo)
         $_SESSION['user'] = [
             'id' => $craftman['craftman_id'],
             'role' => 'craftman',
-            'siret' => $craftman['siret']
+            'email' => $craftman['email']
         ];
     }
 

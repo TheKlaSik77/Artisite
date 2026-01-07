@@ -66,14 +66,15 @@ function insertUser(PDO $pdo, string $username, string $last_name, string $first
     ]);
 }
 
-function insertCraftman(PDO $pdo, string $company_name, string $siret, string $description, string $hashed_password)
+function insertCraftman(PDO $pdo, string $email, string $company_name, string $siret, string $description, string $hashed_password)
 {
     $stmt = $pdo->prepare("
-        INSERT INTO craftman (company_name, siret, description, hashed_password)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO craftman (email, company_name, siret, description, hashed_password)
+        VALUES (?, ?, ?, ?, ?)
     ");
 
     return $stmt->execute([
+        $email,
         $company_name,
         $siret,
         $description,

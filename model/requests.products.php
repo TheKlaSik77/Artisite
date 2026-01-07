@@ -37,6 +37,14 @@ function getProductsBySearch(PDO $pdo, string $search){
     return $stmt -> fetchAll();
 }
 
+function getNbProductsOfCraftman(PDO $pdo, int $craftman_id){
+    $stmt = $pdo->prepare("
+    Select COUNT(*) FROM Products WHERE craftman_id = ?
+    ");
+    $stmt -> execute([$craftman_id]);
+    return (int) $stmt->fetchColumn();
+}
+
 /* --------------------------------------
             CREATE FONCTIONS
 ----------------------------------------*/

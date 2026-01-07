@@ -235,10 +235,28 @@ label {
     border-color: #d49a6c;
 }
 
-/* ---------------------------------------------------
-   Erreur sur input
----------------------------------------------------- */
 
 .input-error {
     border: 1px solid red;
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 800px;
+    height: 30px;
+    gap: 5px;
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+.checkbox input, .checkbox label {
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox a {
+    color: #d49a6c;
+    text-decoration: none;
 }
