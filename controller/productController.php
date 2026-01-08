@@ -7,12 +7,17 @@ require_once './model/requests.product.php';
  */
 function productsController(PDO $pdo)
 {
-    $products = getAllProducts($pdo);
+    $search   = trim($_GET['search'] ?? '');
+    $category = $_GET['category'] ?? 'Tous';
+    $material = $_GET['material'] ?? 'Tous';
+
+    $products = filterProducts($pdo, $search, $category, $material);
 
     require './view/layout/header.php';
     require './view/pages/products.php';
     require './view/layout/footer.php';
 }
+
 
 /**
  * Affiche la page d’un produit

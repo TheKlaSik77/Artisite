@@ -29,14 +29,20 @@ switch ($page) {
 
     case "products":
         require_once "./controller/productController.php";
-        productsController($pdo, $id);
+        productsController($pdo);
         break;
 
     case "product":
-        require_once "./controller/productController.php";
-        $id = $_GET['id'];
-        productController($pdo, $id);
+    require_once "./controller/productController.php";
+
+    if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        require "./view/pages/404.php";
         break;
+    }
+
+    productController($pdo, (int) $_GET['id']);
+    break;
+
 
     case "cart":
         require_once "./controller/cartController.php";
@@ -157,8 +163,6 @@ switch ($page) {
     require_once "./controller/checkoutController.php";
     checkoutController($pdo);
     break;
-
-
     
     default:
         require "./view/layout/header.php";
