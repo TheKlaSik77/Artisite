@@ -26,13 +26,12 @@ function signinController(PDO $pdo)
 function signinProcessController($pdo)
 {
     $email = trim($_POST['email'] ?? '');
-    $is_craftman = $_POST['is_craftman'] ?? 0;
+    $is_craftman = $_POST['is_craftman'] ?? "0";
     $password = $_POST['password'] ?? '';
 
-    echo ($is_craftman);
     if ($is_craftman === "0") {
         $user = getUser($pdo, $email);
-        
+        echo "coucou";
         if (!$user || !password_verify($password, $user['hashed_password'])) {
             $admin = getAdmin($pdo, $email);
             if (!$admin || !password_verify($password, $admin['hashed_password'])) {
@@ -43,7 +42,6 @@ function signinProcessController($pdo)
                     'role' => 'admin',
                     'email' => $user['email']
                 ];
-
             }
         } else {
             $_SESSION['user'] = [
@@ -55,7 +53,6 @@ function signinProcessController($pdo)
 
     } else {
         $craftman = getCraftman($pdo, $email);
-        echo "coucou";
         if (!$craftman || !password_verify($password, $craftman['hashed_password'])) {
             die("Identifiants incorrects");
         }

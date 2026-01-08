@@ -18,6 +18,8 @@ require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
 
+# Décommenter pour ajouter un admin
+# require_once "create_admin.php";
 
 $page = $_GET['page'] ?? 'home';
 switch ($page) {
@@ -76,6 +78,16 @@ switch ($page) {
     case "craftman":
         require_once "./controller/craftmenController.php";
         getCraftmanController($pdo);
+        break;
+
+    case "order":
+        require_once "./controller/orderController.php";
+        orderController($pdo);
+        break;
+
+    case "checkout":
+        require_once "./controller/checkoutController.php";
+        checkoutController($pdo);
         break;
 
     case "admin-dashboard":
