@@ -67,7 +67,9 @@ main {
 }
 
 .profile-wrap {
-    padding: 0 2.5rem;
+    padding: 10px 2.5rem;
+    width: 900px;
+
 }
 
 .avatar {

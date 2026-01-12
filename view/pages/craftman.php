@@ -33,15 +33,14 @@
         <div class="profile-main">
           <div class="profile-top">
             <div>
-              <h2 class="name">Sophie Martin</h2>
-              <p class="occupation">Céramiste</p>
+              <h2 class="name" name="craftman_name"><?= htmlspecialchars($craftman['company_name']) ?></h2>
+              <p class="occupation">Métier</p>
               <div class="meta" style="margin-top:.6rem;">
                 <div class="chip" title="Localisation">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                   </svg>
-                  <span>Paris 11ème</span>
                 </div>
                 <div class="chip" style="background:transparent;padding:0;color:var(--muted)">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
@@ -60,9 +59,7 @@
           </div>
 
           <p class="muted" style="margin-top:.4rem;max-width:75ch">
-            Passionnée par la terre et le feu, je crée des pièces uniques en céramique depuis plus de 15 ans. Mon
-            atelier parisien est un lieu de création où traditions ancestrales et design contemporain se rencontrent
-            pour donner vie à des objets du quotidien empreints de poésie.
+            <?= htmlspecialchars($craftman['description']) ?>
           </p>
         </div>
       </div>

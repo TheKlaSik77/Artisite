@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,41 +14,156 @@
 
 <?php
 
-// On récupère la valeur de page dans l'url (ex d'url http://localhost/artisite/index.php?page=cart). Si pas de page précisée, on fixe l'attribut à homepage pour renvoyer automatiquement sur la page d'accueil.
-$page = $_GET['page'] ?? 'homepage';
+require_once "./model/utils/connexion.php";
+require_once "./model/utils/auth.php";
+# Ajouter liste de page autorisées pour sécurité
 
-// Par sécurité, on précise une "white-list" de page dont l'accès est autorisé.
-$pages_autorisees = ['homepage', 'craftman', 'craftmen', 'products', 'events', 'event', 'cart', 'profil', 'signin', 'signup', 'cgu', 'contact', 'mentions-legales', 'faq', 'product1'];
+# Décommenter pour ajouter un admin
+# require_once "create_admin.php";
 
-$pages_autorisees_admin = ['admin-dashboard', 'admin-craftmen', 'admin-customers', 'admin-products', 'admin-orders', 'admin-reviews', 'admin-support'];
+$page = $_GET['page'] ?? 'home';
+switch ($page) {
+    case "home":
+        require "./view/layout/header.php";
+        require "./view/pages/homepage.php";
+        require "./view/layout/footer.php";
+        break;
 
-$admin = false;
+    case "products":
+        require_once "./controller/productController.php";
+        productsController($pdo);
+        break;
 
-// Si page non autorisée, on renvoie vers homepage en fixant l'attribut page à homepage
-if (!in_array($page, $pages_autorisees)) {
-    $page = 'homepage';
-    
+    case "product":
+        require_once "./controller/productController.php";
+        $id = $_GET['id'];
+        productController($pdo, $id);
+        break;
+
+    case "cart":
+        require_once "./controller/cartController.php";
+        cartController($pdo);
+        break;
+
+    case "signup":
+        require_once "./controller/signupController.php";
+        signupController($pdo);
+        break;
+
+    case "signin":
+        require_once "./controller/signinController.php";
+        signinController($pdo);
+        break;
+
+    case "logout":
+        require_once "./controller/logoutController.php";
+        logoutController();
+        break;
+
+    case "craftman-products":
+        require_once "./controller/craftmanProductsController.php";
+        craftmanProductsController($pdo);
+        break;
+
+    case "add-product-craftman":
+        require_once "./controller/addProductCraftmanController.php";
+        addProductCraftmanController($pdo);
+        break;
+
+    case "craftmen":
+        require_once "./controller/craftmenController.php";
+        craftmenController($pdo);
+        break;
+
+    case "craftman":
+        require_once "./controller/craftmenController.php";
+        getCraftmanController($pdo);
+        break;
+
+    case "order":
+        require_once "./controller/orderController.php";
+        orderController($pdo);
+        break;
+
+    case "checkout":
+        require_once "./controller/checkoutController.php";
+        checkoutController($pdo);
+        break;
+
+    case "admin-dashboard":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminDashboardController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-craftmen":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminCraftmenController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-customers":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminCustomersController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-products":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminProductsController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-orders":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminOrdersController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-reviews":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminReviewsController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    case "admin-support":
+        if (isAdmin()) {
+            require "./controller/adminController.php";
+            adminSupportController();
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
+
+    default:
+        require "./view/layout/header.php";
+        require "./view/pages/{$page}.php";
+        require "./view/layout/footer.php";
+        break;
 }
-if (in_array($page, $pages_autorisees_admin)) {
-    $admin = true;
-    $page = "admin/{$page}";
-}
-?>
-
-
-
-<?php if ($admin == true): ?>
-
-    <div class="admin-container">  
-        <?php include "./view/pages/admin/admin-header.php"; ?>
-        <?php include "./view/pages/{$page}.php"; ?>
-    </div>
-
-<?php else: ?>
-
-    <?php include "./view/layout/header.php"; ?>
-    <?php include "./view/pages/{$page}.php"; ?>
-    <?php include "./view/layout/footer.php"; ?>
-
-<?php endif; ?>
 
