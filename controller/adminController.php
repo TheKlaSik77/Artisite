@@ -1,43 +1,47 @@
 <?php
 
 require "./view/layout/admin-layout-start.php";
-require "./view/layout/admin-header.php";
-function adminDashboardController()
+
+function adminDashboardController(PDO $pdo)
 {
     require "./view/pages/admin/admin-dashboard.php";
 }
 
-function adminCraftmenController()
+function adminCraftmenController(PDO $pdo)
 {
-    require "./view/pages/admin/admin-craftmen.php";
+    require_once "./model/requests.craftmen.php";
+    $craftmen = getAllCraftmen($pdo);
+    require "./view/pages/admin/admin-craftmen.php"; 
 }
 
-function adminCustomersController()
+function adminCustomersController(PDO $pdo)
 {
+    
+    
     require "./view/pages/admin/admin-customers.php";
 }
 
-function adminProductsController()
+function adminProductsController(PDO $pdo)
 {
     require "./view/pages/admin/admin-products.php";
 }
 
-function adminOrdersController()
+function adminOrdersController(PDO $pdo)
 {
     require "./view/pages/admin/admin-orders.php";
 
 }
 
-function adminReviewsController()
+function adminReviewsController(PDO $pdo)
 {
     require "./view/pages/admin/admin-reviews.php";
 
 }
 
-function adminSupportController()
+function adminSupportController(PDO $pdo)
 {
     require "./view/pages/admin/admin-support.php";
 
 }
 
-require "./view/layout/admin-layout-end.php";
+    require "./view/layout/admin-layout-end.php";

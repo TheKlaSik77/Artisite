@@ -93,7 +93,7 @@ switch ($page) {
     case "admin-dashboard":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminDashboardController();
+            adminDashboardController($pdo);
             break;
         } else {
             $page = "home";
@@ -103,17 +103,21 @@ switch ($page) {
     case "admin-craftmen":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminCraftmenController();
+            adminCraftmenController($pdo);
             break;
         } else {
             $page = "home";
             break;
         }
+        
+    case "admin-craftmen-ajax":
+        adminCraftmenAjaxController($pdo);
+        break;
 
     case "admin-customers":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminCustomersController();
+            adminCustomersController($pdo);
             break;
         } else {
             $page = "home";
@@ -123,7 +127,7 @@ switch ($page) {
     case "admin-products":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminProductsController();
+            adminProductsController($pdo);
             break;
         } else {
             $page = "home";
@@ -133,7 +137,7 @@ switch ($page) {
     case "admin-orders":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminOrdersController();
+            adminOrdersController($pdo);
             break;
         } else {
             $page = "home";
@@ -143,7 +147,7 @@ switch ($page) {
     case "admin-reviews":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminReviewsController();
+            adminReviewsController($pdo);
             break;
         } else {
             $page = "home";
@@ -153,7 +157,7 @@ switch ($page) {
     case "admin-support":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminSupportController();
+            adminSupportController($pdo);
             break;
         } else {
             $page = "home";

@@ -14,7 +14,7 @@
                 <button id="toggleSidebar" class="btn-icon">☰</button>
                 <div class="header-right">
                     <span class="admin-name">Admin</span>
-                    <button class="btn-small-outline">Se déconnecter</button>
+                    <button class="btn-small">Se déconnecter</button>
                 </div>
             </header>
 
