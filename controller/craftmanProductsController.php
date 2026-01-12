@@ -8,10 +8,10 @@ function craftmanProductsController($pdo){
 
     switch ($action) {
             
-        case 'update':
+        case 'updateQuantity':
             updateCraftmanProductsQuantityController($pdo);
             break;
-
+            
         case 'delete':
             deleteCraftmanProductsController($pdo);
             break;
