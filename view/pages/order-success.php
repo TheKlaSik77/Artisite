@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Commande confirmée – Arti'Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/pages/order-success.css">
+</head>
+
+<body>
+  <main class="success-page">
+    <div class="success-card">
+
+      <div class="success-icon">✅</div>
+
+      <h1>Votre commande est finalisée</h1>
+
+      <p class="success-text">
+        Merci pour votre achat sur <strong>Arti'Site</strong>.<br>
+        Votre commande a bien été enregistrée et sera préparée par l’artisan.
+      </p>
+
+      <!-- ✅ Numéro de commande -->
+      <div class="order-number">
+        <span>Numéro de commande</span>
+        <strong id="orderNumber">—</strong>
+      </div>
+
+      <p class="success-subtext">
+        📦 Vous recevrez votre commande très prochainement.<br>
+        📧 Un email de confirmation vous sera envoyé.
+      </p>
+
+      <div class="success-actions">
+        <a href="index.php?page=homepage" class="btn-primary">
+          Retour à l’accueil
+        </a>
+        <a href="index.php?page=products" class="btn-outline">
+          Continuer mes achats
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    /* =============================
+       Génération numéro commande
+       ============================= */
+    function generateOrderNumber(length = 8) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return "AS-" + result;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const orderEl = document.getElementById("orderNumber");
+      orderEl.textContent = generateOrderNumber();
+    });
+  </script>
+
+</body>
+
+</html>

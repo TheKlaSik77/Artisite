@@ -52,6 +52,7 @@
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 10px;
+    margin-left: 20px;
 }
 
 .qty-box button {
@@ -103,8 +104,12 @@
 }
 
 .order-btn {
+    display: block;
+    text-decoration: none;
+    line-height: normal;
     margin-top: 25px;
     width: 100%;
+    text-align: center;
     padding: 13px;
     background: linear-gradient(to right, #d9a066, #b77d42);
     color: white;

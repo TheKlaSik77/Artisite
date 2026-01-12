@@ -9,83 +9,103 @@
 </head>
 
 <body>
-    <main>
-        <div class="container">
-            <div class="cart-card">
 
-                <p class="subtitle">VOTRE SÉLECTION</p>
-                <h1>Panier</h1>
-                <p class="description">Retrouvez ici les articles que vous souhaitez acheter</p>
+<main>
+    <div class="container">
+        <div class="cart-card">
 
-                <!-- PRODUIT 1 -->
-                <div class="cart-item">
-                    <img src="https://picsum.photos/200/300" class="cart-img">
+            <p class="subtitle">VOTRE SÉLECTION</p>
+            <h1>Panier</h1>
+            <p class="description">
+                Retrouvez ici les articles que vous souhaitez acheter.
+            </p>
 
-                    <div class="cart-info">
-                        <h3>Bol artisanal en céramique</h3>
-                        <p class="craftsman">par Élodie – Céramiste</p>
+            <?php if (!empty($productsOnCart)): ?>
 
-                        <div class="cart-bottom">
-                            <span class="price">32,00 €</span>
+                <?php foreach ($productsOnCart as $_product): ?>
+                    <div class="cart-item">
 
-                            <div class="qty-box">
-                                <button onclick="changeQty(this, -1)">-</button>
-                                <input type="text" value="1" readonly>
-                                <button onclick="changeQty(this, 1)">+</button>
+                        <img src="https://picsum.photos/200/300" class="cart-img">
+
+                        <div class="cart-info">
+                            <h3>
+                                <?= htmlspecialchars($_product['name']) ?>
+                            </h3>
+
+                            <p class="craftsman">
+                                <?= htmlspecialchars($_product['company_name']) ?>
+                            </p>
+
+                            <div class="cart-bottom">
+
+                                <span class="price">
+                                    <?= number_format($_product['total'], 2, ',', ' ') ?> €
+                                </span>
+
+                                <div class="qty-box">
+                                    <form method="POST" action="index.php?page=cart&action=update">
+                                        <input type="hidden" name="product_id" value="<?= $_product['product_id'] ?>">
+                                        <input type="hidden" name="quantity" value="<?= $_product['quantity'] - 1 ?>">
+                                        <button type="submit" <?= $_product['quantity'] <= 1 ? 'disabled' : '' ?>>−</button>
+                                    </form>
+
+                                    <input type="text" value="<?= $_product['quantity'] ?>" readonly>
+
+                                    <form method="POST" action="index.php?page=cart&action=update">
+                                        <input type="hidden" name="product_id" value="<?= $_product['product_id'] ?>">
+                                        <input type="hidden" name="quantity" value="<?= $_product['quantity'] + 1 ?>">
+                                        <button type="submit">+</button>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
+
+                        <form method="POST" action="index.php?page=cart&action=delete">
+                            <input type="hidden" name="product_id" value="<?= $_product['product_id'] ?>">
+                            <button type="submit" class="remove-btn">×</button>
+                        </form>
+
                     </div>
-
-                    <button class="remove-btn" onclick="removeItem(this)">×</button>
-                </div>
-
-                <!-- PRODUIT 2 -->
-                <div class="cart-item">
-                    <img src="https://picsum.photos/200/300" class="cart-img">
-
-                    <div class="cart-info">
-                        <h3>Planche en bois sculptée</h3>
-                        <p class="craftsman">par Lucas – Ébéniste</p>
-
-                        <div class="cart-bottom">
-                            <span class="price">45,00 €</span>
-
-                            <div class="qty-box">
-                                <button onclick="changeQty(this, -1)">-</button>
-                                <input type="text" value="1" readonly>
-                                <button onclick="changeQty(this, 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="remove-btn" onclick="removeItem(this)">×</button>
-                </div>
+                <?php endforeach; ?>
 
                 <!-- RÉSUMÉ -->
                 <div class="summary">
+
                     <div class="row-s">
                         <span>Sous-total :</span>
-                        <span id="subtotal">77,00 €</span>
+                        <span><?= number_format($totalPrice, 2, ',', ' ') ?> €</span>
                     </div>
 
                     <div class="row-s">
                         <span>Livraison :</span>
-                        <span id="shipping">5,90 €</span>
+                        <span>5,90 €</span>
                     </div>
 
                     <div class="divider"></div>
 
                     <div class="row-s total">
                         <span>Total :</span>
-                        <span id="total">82,90 €</span>
+                        <span><?= number_format($totalPrice + 5.90, 2, ',', ' ') ?> €</span>
                     </div>
 
-                    <button class="order-btn">Passer la commande</button>
+                    <a class="order-btn" href="index.php?page=checkout">
+                        Passer la commande
+                    </a>
+
                 </div>
 
-            </div>
-        </div>
-    </main>
-</body>
+            <?php else: ?>
 
+                <p class="empty-cart-message">
+                    Votre panier est vide.
+                </p>
+
+            <?php endif; ?>
+
+        </div>
+    </div>
+</main>
+
+</body>
 </html>
