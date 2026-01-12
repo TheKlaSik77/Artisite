@@ -1,4 +1,22 @@
-<?php session_start(); ?>
+<?php
+session_start();
+
+$isAjax = ($_GET['page'] ?? '') === 'signup' && ($_GET['action'] ?? '') === 'checkDuplicate';
+
+require_once "./model/utils/connexion.php";
+require_once "./model/utils/auth.php";
+
+if ($isAjax) {
+    $page = $_GET['page'] ?? '';
+    if ($page === "signup") {
+        require_once "./controller/signupController.php";
+        signupController($pdo);
+        exit;
+    }
+    http_response_code(404);
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -8,17 +26,10 @@
     <title>Arti'Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- Intègre toutes les variables css nécéssaires aux autres fichiers css -->
     <link rel="stylesheet" href="./assets/css/variables.css">
 </head>
 
 <?php
-
-require_once "./model/utils/connexion.php";
-require_once "./model/utils/auth.php";
-# Ajouter liste de page autorisées pour sécurité
-
-
 $page = $_GET['page'] ?? 'home';
 switch ($page) {
     case "home":
@@ -154,4 +165,3 @@ switch ($page) {
         require "./view/layout/footer.php";
         break;
 }
-
