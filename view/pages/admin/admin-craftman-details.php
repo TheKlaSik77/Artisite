@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin – Détail Artisan</title>
-    <link rel="stylesheet" href="./assets/css/pages/admin/admin-craftman-details.css">
+    <link rel="stylesheet" href="../../assets/css/pages/admin/admin-craftman-details.css">
 </head>
 
 <body>

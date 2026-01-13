@@ -111,6 +111,11 @@ function adminSupportController(PDO $pdo)
     require "./view/pages/admin/admin-support.php";
 
 }
+function adminFaqController()
+{
+    require "./view/pages/admin/admin-faq.php";
+
+}
 
 if (!$isAjax) {
     require "./view/layout/admin-layout-end.php";

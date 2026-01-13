@@ -21,6 +21,8 @@
         <link rel="stylesheet" href="./assets/css/pages/admin/admin-reviews.css">
     <?php elseif (($_GET['page'] ?? '') === 'admin-support'): ?>
         <link rel="stylesheet" href="./assets/css/pages/admin/admin-support.css">
+    <?php elseif (($_GET['page'] ?? '') === 'admin-support'): ?>
+        <link rel="stylesheet" href="./assets/css/pages/admin-faq.css">
     <?php endif; ?>
 
 </head>
@@ -34,4 +36,5 @@
         <a href="index.php?page=admin-orders" class="nav-item">Commandes</a>
         <a href="index.php?page=admin-reviews" class="nav-item">Avis</a>
         <a href="index.php?page=admin-support" class="nav-item">Support</a>
+        <a href="index.php?page=admin-faq" class="nav-item">FAQ</a>
     </nav>
