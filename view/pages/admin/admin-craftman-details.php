@@ -19,6 +19,7 @@
             <a href="index.php?page=admin-orders" class="nav-item">Commandes</a>
             <a href="index.php?page=admin-reviews" class="nav-item">Avis</a>
             <a href="index.php?page=admin-support" class="nav-item">Support</a>
+            <a href="index.php?page=admin-faq" class="nav-item">faq</a>
         </nav>
     </aside>
 

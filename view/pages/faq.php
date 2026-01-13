@@ -1,155 +1,44 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>FAQ</title>
-    <link rel="stylesheet" href="./assets/css/pages/faq.css">
-</head>
+<link rel="stylesheet" href="./assets/css/pages/faq.css">
 
-<body>
+<section class="faq" id="faq">
+  <div class="faq-inner">
 
-    <!-- SECTION FAQ -->
-    <section class="faq" id="faq">
-        <div class="faq-inner">
-            <div class="faq-header">
-                <p class="part-title">FAQ</p>
-                <h2 class="part-subtitle">Questions fréquentes</h2>
-                <p class="faq-intro">
-                    Retrouvez ici les réponses aux questions les plus fréquentes.
-                </p>
+    <div class="faq-header">
+      <p class="part-title">FAQ</p>
+      <h2 class="part-subtitle">Questions fréquentes</h2>
+      <p class="faq-intro">Retrouvez ici les réponses aux questions les plus fréquentes.</p>
+    </div>
+
+    <div class="faq-search">
+      <span class="faq-search-icon">🔍</span>
+      <input type="text" id="faqSearch" placeholder="Rechercher une question..." />
+    </div>
+
+    <div class="faq-list" id="faqList">
+      <?php if (!empty($faqs)): ?>
+        <?php foreach ($faqs as $f): ?>
+          <article class="faq-item" data-tags="">
+            <button class="faq-question" type="button">
+              <span class="faq-question-text"><?= htmlspecialchars($f['question']) ?></span>
+              <span class="faq-icon">+</span>
+            </button>
+
+            <div class="faq-answer">
+              <p><?= nl2br(htmlspecialchars($f['answer'])) ?></p>
             </div>
+          </article>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <p>Aucune question pour le moment.</p>
+      <?php endif; ?>
+    </div>
 
-            <!-- Barre de recherche -->
-            <div class="faq-search">
-                <span class="faq-search-icon">🔍</span>
-                <input
-                    type="text"
-                    id="faqSearch"
-                    placeholder="Rechercher une question..."
-                />
-            </div>
+    <div class="faq-empty" id="faqEmpty" style="display:none;">
+      <span>🤎</span>
+      <p>Aucune question ne correspond à votre recherche.</p>
+    </div>
 
-            <!-- Liste des questions -->
-            <div class="faq-list" id="faqList">
+  </div>
+</section>
 
-                <!-- FAQ 1 -->
-                <article class="faq-item" data-tags="compte inscription profil">
-                    <button class="faq-question" type="button">
-                        <span class="faq-question-text">Comment créer un compte ?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            Cliquez sur « S’inscrire » dans la barre de navigation puis remplissez vos informations.
-                        </p>
-                        <p>
-                            Un email de confirmation vous sera envoyé.
-                        </p>
-                    </div>
-                </article>
-
-                <!-- FAQ 2 -->
-                <article class="faq-item" data-tags="paiement carte facturation">
-                    <button class="faq-question" type="button">
-                        <span class="faq-question-text">Quels moyens de paiement acceptez-vous ?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            Nous acceptons les cartes bancaires principales ainsi que des moyens de paiement locaux.
-                        </p>
-                    </div>
-                </article>
-
-                <!-- FAQ 3 -->
-                <article class="faq-item" data-tags="commande livraison délai">
-                    <button class="faq-question" type="button">
-                        <span class="faq-question-text">Quels sont vos délais de traitement ?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            Les demandes sont traitées sous 24 à 48h en moyenne.
-                        </p>
-                    </div>
-                </article>
-
-                <!-- FAQ 4 -->
-                <article class="faq-item" data-tags="support aide contact">
-                    <button class="faq-question" type="button">
-                        <span class="faq-question-text">Comment contacter le support ?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>
-                            Vous pouvez nous écrire à : 
-                            <a href="mailto:support@example.com">support@example.com</a>
-                        </p>
-                    </div>
-                </article>
-
-            </div>
-
-            <!-- Message quand aucune question ne correspond -->
-            <div class="faq-empty" id="faqEmpty">
-                <span>🤎</span>
-                <p>Aucune question ne correspond à votre recherche.</p>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- ========================= -->
-    <!--      SCRIPT FAQ JS       -->
-    <!-- ========================= -->
-    <script>
-        // Accordéon
-        const faqItems = document.querySelectorAll(".faq-item");
-
-        faqItems.forEach((item) => {
-            const btn = item.querySelector(".faq-question");
-
-            btn.addEventListener("click", () => {
-                // Ferme les autres
-                faqItems.forEach((other) => {
-                    if (other !== item) {
-                        other.classList.remove("open");
-                    }
-                });
-
-                // Ouvre / ferme celui cliqué
-                item.classList.toggle("open");
-            });
-        });
-
-        // Recherche FAQ
-        const faqSearchInput = document.getElementById("faqSearch");
-        const faqEmpty = document.getElementById("faqEmpty");
-
-        faqSearchInput.addEventListener("input", () => {
-            const query = faqSearchInput.value.toLowerCase().trim();
-            let visibleCount = 0;
-
-            faqItems.forEach((item) => {
-                const questionText = item
-                    .querySelector(".faq-question-text")
-                    .textContent.toLowerCase();
-
-                const tags = (item.dataset.tags || "").toLowerCase();
-                const matches = questionText.includes(query) || tags.includes(query);
-
-                if (!query || matches) {
-                    item.style.display = "";
-                    visibleCount++;
-                } else {
-                    item.style.display = "none";
-                    item.classList.remove("open");
-                }
-            });
-
-            faqEmpty.style.display = visibleCount === 0 ? "block" : "none";
-        });
-    </script>
-
-</body>
-</html>
+<script src="./assets/js/faq.js"></script>

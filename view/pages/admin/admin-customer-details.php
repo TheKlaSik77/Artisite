@@ -19,6 +19,7 @@
             <a href="admin-orders.html" class="nav-item">Commandes</a>
             <a href="admin-reviews.html" class="nav-item">Avis</a>
             <a href="admin-support.html" class="nav-item">Support</a>
+            <a href="admin-faq.php" class="nav-item">faq</a>
         </nav>
     </aside>
 

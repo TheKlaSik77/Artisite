@@ -17,7 +17,6 @@
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
-
 # Décommenter pour ajouter un admin
 # require_once "create_admin.php";
 
@@ -159,6 +158,21 @@ switch ($page) {
             $page = "home";
             break;
         }
+    case "faq":
+    require_once "./controller/faqController.php";
+    faqController($pdo);
+    break;
+
+    case "admin-faq":
+    if (isAdmin()) {
+        require_once "./controller/adminFaqController.php";
+        adminFaqController($pdo);
+        break;
+    } else {
+        $page = "home";
+        break;
+    }
+
 
     default:
         require "./view/layout/header.php";

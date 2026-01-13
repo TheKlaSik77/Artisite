@@ -39,5 +39,10 @@ function adminSupportController()
     require "./view/pages/admin/admin-support.php";
 
 }
+function adminFaqController()
+{
+    require "./view/pages/admin/admin-faq.php";
+
+}
 
 require "./view/layout/admin-layout-end.php";
