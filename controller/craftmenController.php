@@ -5,7 +5,7 @@ require_once './model/requests.craftmen.php';
 
 function craftmenController($pdo)
 {
-    $craftmen = getAllCraftmen($pdo); // Modèle
+    $craftmen = getAllValidatedCraftmen($pdo); // Modèle
     require "./view/layout/header.php";     // Vue
     require "./view/pages/craftmen.php";
     require "./view/layout/footer.php";

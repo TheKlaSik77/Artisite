@@ -1,4 +1,33 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+require_once "./model/utils/connexion.php";
+require_once "./model/utils/auth.php";
+
+$page = $_GET['page'] ?? 'home';
+$ajaxPages = ['admin-delete-craftman', 'admin-validate-craftman'];
+
+if (in_array($page, $ajaxPages, true)) {
+    if (!isAdmin()) {
+        http_response_code(403);
+        header("Content-Type: application/json; charset=utf-8");
+        echo json_encode(["success" => false, "error" => "forbidden"]);
+        exit;
+    }
+
+    require "./controller/adminController.php";
+
+    if ($page === 'admin-delete-craftman') {
+        adminDeleteCraftmanController($pdo);
+        exit;
+    }
+
+    if ($page === 'admin-validate-craftman') {
+        adminValidateCraftmanController($pdo);
+        exit;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,14 +43,11 @@
 
 <?php
 
-require_once "./model/utils/connexion.php";
-require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
-
 # Décommenter pour ajouter un admin
 # require_once "create_admin.php";
 
-$page = $_GET['page'] ?? 'home';
+
 switch ($page) {
     case "home":
         require "./view/layout/header.php";
@@ -93,7 +119,7 @@ switch ($page) {
     case "admin-dashboard":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminDashboardController();
+            adminDashboardController($pdo);
             break;
         } else {
             $page = "home";
@@ -103,17 +129,17 @@ switch ($page) {
     case "admin-craftmen":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminCraftmenController();
+            adminCraftmenController($pdo);
             break;
         } else {
             $page = "home";
             break;
         }
-
+    
     case "admin-customers":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminCustomersController();
+            adminCustomersController($pdo);
             break;
         } else {
             $page = "home";
@@ -123,7 +149,7 @@ switch ($page) {
     case "admin-products":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminProductsController();
+            adminProductsController($pdo);
             break;
         } else {
             $page = "home";
@@ -133,7 +159,7 @@ switch ($page) {
     case "admin-orders":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminOrdersController();
+            adminOrdersController($pdo);
             break;
         } else {
             $page = "home";
@@ -143,7 +169,7 @@ switch ($page) {
     case "admin-reviews":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminReviewsController();
+            adminReviewsController($pdo);
             break;
         } else {
             $page = "home";
@@ -153,12 +179,31 @@ switch ($page) {
     case "admin-support":
         if (isAdmin()) {
             require "./controller/adminController.php";
-            adminSupportController();
+            adminSupportController($pdo);
             break;
         } else {
             $page = "home";
             break;
         }
+    case "faq":
+    require_once "./controller/faqController.php";
+    faqController($pdo);
+    break;
+
+    case "admin-faq":
+    if (isAdmin()) {
+        require_once "./controller/adminFaqController.php";
+        adminFaqController($pdo);
+        break;
+    } else {
+        $page = "home";
+        break;
+    }
+
+    case "admin-validate-craftman":
+        require "./controller/adminController.php";
+        adminValidateCraftmanController($pdo);
+        break;
 
     default:
         require "./view/layout/header.php";

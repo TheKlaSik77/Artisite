@@ -79,7 +79,7 @@
 
                                 <div class="prod-right">
                                     <div class="qty-box">
-                                        <form method="POST" action="index.php?page=craftman-products&action=update">
+                                        <form method="POST" action="index.php?page=craftman-products&action=updateQuantity">
                                             <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
                                             <input type="hidden" name="quantity" value="<?= $product['quantity'] - 1 ?>">
                                             <button type="submit" <?= $product['quantity'] <= 1 ? 'disabled' : '' ?>>−</button>

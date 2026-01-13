@@ -34,13 +34,14 @@ function signinProcessController($pdo)
         echo "coucou";
         if (!$user || !password_verify($password, $user['hashed_password'])) {
             $admin = getAdmin($pdo, $email);
+            echo $admin;
             if (!$admin || !password_verify($password, $admin['hashed_password'])) {
                 die("Identifiants incorrects");
             } else {
                 $_SESSION['user'] = [
-                    'id' => $user['user_id'],
+                    'id' => $admin['admin_id'],
                     'role' => 'admin',
-                    'email' => $user['email']
+                    'email' => $admin['email']
                 ];
             }
         } else {
@@ -55,6 +56,8 @@ function signinProcessController($pdo)
         $craftman = getCraftman($pdo, $email);
         if (!$craftman || !password_verify($password, $craftman['hashed_password'])) {
             die("Identifiants incorrects");
+        } elseif ($craftman['validator_id'] == null){
+            die("Votre compte est en cours de validation");
         }
 
         $_SESSION['user'] = [

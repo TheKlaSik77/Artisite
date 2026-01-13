@@ -15,7 +15,7 @@
                 <h1 class="legal-title">Conditions Générales d’Utilisation</h1>
                 <p class="legal-intro">
                     Les présentes Conditions Générales d’Utilisation (CGU) ont pour objet de définir les modalités
-                    d’accès et d’utilisation du site [Nom du site], plateforme en ligne mettant en relation des artisans
+                    d’accès et d’utilisation du site Artisite, plateforme en ligne mettant en relation des artisans
                     et des acheteurs pour la vente de produits artisanaux.
                 </p>
 
@@ -23,9 +23,9 @@
                 <article class="legal-block">
                     <h2>1. Objet</h2>
                     <p>
-                        [Nom du site] permet à des artisans indépendants (ci-après les « Artisans ») de proposer à la
+                        Artisite permet à des artisans indépendants (ci-après les « Artisans ») de proposer à la
                         vente
-                        leurs produits à des utilisateurs acheteurs (ci-après les « Acheteurs »). [Nom du site] agit en
+                        leurs produits à des utilisateurs acheteurs (ci-après les « Acheteurs »). Artisite agit en
                         tant
                         qu’intermédiaire technique et n’est pas partie aux contrats de vente conclus entre Artisans et
                         Acheteurs.
@@ -79,7 +79,7 @@
                 <article class="legal-block">
                     <h2>5. Rôle de la Plateforme</h2>
                     <p>
-                        [Nom du site] met à disposition des outils permettant :
+                        Artisite met à disposition des outils permettant :
                     </p>
                     <ul>
                         <li>aux Artisans de présenter leurs produits (photos, descriptions, prix, etc.) ;</li>
@@ -87,7 +87,7 @@
                         <li>de faciliter la mise en relation entre Artisans et Acheteurs.</li>
                     </ul>
                     <p>
-                        [Nom du site] n’est pas vendeuse des produits référencés, ne garantit pas la disponibilité des
+                        Artisite n’est pas vendeuse des produits référencés, ne garantit pas la disponibilité des
                         produits,
                         ni la bonne exécution des contrats de vente par les Artisans. Ceux-ci sont seuls responsables de
                         leurs offres.
@@ -132,7 +132,7 @@
                         sont indiqués au moment de la commande.
                     </p>
                     <p>
-                        [Nom du site] peut percevoir une commission sur les ventes réalisées via la Plateforme,
+                        Artisite peut percevoir une commission sur les ventes réalisées via la Plateforme,
                         conformément
                         aux conditions spécifiques communiquées aux Artisans lors de leur inscription.
                     </p>
@@ -142,7 +142,7 @@
                 <article class="legal-block">
                     <h2>9. Responsabilité</h2>
                     <p>
-                        [Nom du site] ne garantit pas l’absence d’erreurs techniques, d’interruptions ou de bugs sur la
+                        Artisite ne garantit pas l’absence d’erreurs techniques, d’interruptions ou de bugs sur la
                         Plateforme,
                         mais met tout en œuvre pour en assurer l’accès et le fonctionnement dans les meilleures
                         conditions.
@@ -162,7 +162,7 @@
                         par le droit
                         de la propriété intellectuelle. Les contenus publiés par les Artisans restent leur propriété,
                         mais ceux-ci
-                        accordent à [Nom du site] une licence non exclusive pour les afficher sur la Plateforme.
+                        accordent à Artisite une licence non exclusive pour les afficher sur la Plateforme.
                     </p>
                 </article>
 
@@ -182,7 +182,7 @@
                     <p>
                         Les présentes CGU sont conclues pour une durée indéterminée à compter de l’utilisation du site
                         par l’Utilisateur.
-                        [Nom du site] se réserve le droit de suspendre ou supprimer le compte de tout Utilisateur en cas
+                        Artisite se réserve le droit de suspendre ou supprimer le compte de tout Utilisateur en cas
                         de non-respect
                         des présentes CGU.
                     </p>
@@ -192,7 +192,7 @@
                 <article class="legal-block">
                     <h2>13. Modification des CGU</h2>
                     <p>
-                        [Nom du site] se réserve le droit de modifier les présentes CGU à tout moment. Les nouvelles
+                        Artisite se réserve le droit de modifier les présentes CGU à tout moment. Les nouvelles
                         versions
                         sont applicables dès leur mise en ligne sur la Plateforme.
                     </p>
@@ -204,7 +204,7 @@
                     <p>
                         Les présentes CGU sont soumises au droit français. En cas de litige, et à défaut de solution
                         amiable,
-                        les tribunaux compétents seront ceux du ressort de [Ville du tribunal compétent].
+                        les tribunaux compétents seront ceux du ressort de tribunal de la ville de paris.
                     </p>
                 </article>
             </div>

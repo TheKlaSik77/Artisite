@@ -17,7 +17,7 @@ function getUser(PDO $pdo, string $email)
 
 function getAdmin($pdo, $email){
     $stmt = $pdo->prepare("
-        SELECT admin_id, hashed_password FROM administrator WHERE email = ? LIMIT 1
+        SELECT admin_id, email, hashed_password FROM administrator WHERE email = ? LIMIT 1
     ");
 
     $stmt->execute([$email]);
@@ -30,7 +30,7 @@ function getAdmin($pdo, $email){
 function getCraftman(PDO $pdo, string $email)
 {
     $stmt = $pdo->prepare("
-        SELECT craftman_id, email, siret, hashed_password FROM craftman WHERE email = ? LIMIT 1
+        SELECT craftman_id, email, siret, validator_id, hashed_password FROM craftman WHERE email = ? LIMIT 1
     ");
 
     $stmt->execute([$email]);

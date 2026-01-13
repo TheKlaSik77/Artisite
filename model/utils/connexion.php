@@ -3,7 +3,7 @@
 $host = 'localhost';
 $dbname = 'artisite';
 $username = 'root';
-$password = '';
+$password = 'root';
 
 try {
     $pdo = new PDO(
