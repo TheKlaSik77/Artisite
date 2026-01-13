@@ -1,162 +1,323 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Événements</title>
-    <link rel="stylesheet" href="/Artisite/react/style/globals.css">
-    <link rel="stylesheet" href="/Artisite/assets/css/pages/products.css">
-    <link rel="stylesheet" href="/Artisite/assets/css/pages/craftmen.css">
-    <style>
-        .container{max-width:1200px;margin:0 auto}
-        .grid{display:grid;gap:1.5rem}
-        .grid-cols-1{grid-template-columns:1fr}
-        @media(min-width:768px){.md\:grid-cols-2{grid-template-columns:repeat(2,1fr)}}
-        @media(min-width:1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3,1fr)}}
-        .rounded-2xl{border-radius:1rem}
-        .aspect-4-3{aspect-ratio:4/3}
-        .overflow-hidden{overflow:hidden}
-        .object-cover{object-fit:cover}
-        .btn-ghost{background:transparent;border:none;color:var(--primary)}
-        .filter-chip{display:inline-block;padding:.6rem 1rem;border-radius:12px;border:1px solid rgba(0,0,0,.06);cursor:pointer}
-        .filter-chip.active{background:linear-gradient(90deg,var(--secondary),var(--accent));color:#000}
-        .search-input{padding:.9rem 1rem;border-radius:12px;border:1px solid rgba(0,0,0,.08);width:100%}
-    </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tous nos Evènements</title>
+  <link rel="stylesheet" href="./assets/css/pages/craftmen.css" />
+  <link rel="stylesheet" href="./assets/css/pages/products.css" />
 </head>
 
 <body>
-    <main>
-        <?php
-        $events = [
-            [
-                'id'=>1,'title'=>'Atelier poterie traditionnelle','date'=>'15 novembre 2025','location'=>'Paris 11ème','type'=>'atelier','image'=>'https://images.unsplash.com/photo-1758402633659-0aa5bdea7b89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg'
-            ],
-            [
-                'id'=>2,'title'=>'Salon des Métiers d\'Art','date'=>'22 novembre 2025','location'=>'Lyon','type'=>'salon','image'=>'https://images.unsplash.com/photo-1719934113502-d2968bc999d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg'
-            ],
-            [
-                'id'=>3,'title'=>'Exposition de maroquinerie artisanale','date'=>'5 décembre 2025','location'=>'Bordeaux','type'=>'exposition','image'=>'https://images.unsplash.com/photo-1638410644502-e622c5c11e61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg'
-            ],
-            [
-                'id'=>4,'title'=>'Atelier menuiserie créative','date'=>'12 décembre 2025','location'=>'Marseille','type'=>'atelier','image'=>'https://images.unsplash.com/photo-1675721128213-a9052641488e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg'
-            ],
-            [
-                'id'=>5,'title'=>'Marché des créateurs','date'=>'18 décembre 2025','location'=>'Toulouse','type'=>'salon','image'=>'https://images.unsplash.com/photo-1719934113502-d2968bc999d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg'
-            ],
-        ];
-        ?>
+  <main>
+    <section class="products-section">
+        <h1 class="products-title">Nos Evènements</h1>
+        <p class="products-subtitle">
+            Découvrez les évenements organisés par nos atisans.
+        </p>
 
-        <header class="bg-black text-white relative overflow-hidden" style="padding:6rem 0 2rem">
-            <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1739664664067-310787d23cff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg');background-size:cover;background-position:center;filter:brightness(0.35);opacity:1"></div>
-            <div style="position:absolute;inset:0;background:#000;opacity:0.25"></div>
-            <div class="container" style="position:relative;z-index:10;padding:0 1rem;margin-top:calc(-2.5rem - 30px)">
-                <button class="btn-ghost" onclick="location.href='/Artisite/index.php?page=homepage'">← Retour</button>
-                <h1 style="font-family:'Cormorant Garamond';font-size:48px;color:var(--secondary);margin:.5rem 0">Événements</h1>
-                <p style="max-width:800px;color:rgba(255,255,255,.9)">Découvrez tous nos ateliers, salons et expositions pour rencontrer les artisans, apprendre de nouvelles techniques et célébrer le savoir-faire artisanal français.</p>
+        <!-- ================== FILTRES ================== -->
+        <div class="filter-card">
 
-                <div class="filter-card" style="margin-top:1.5rem">
-                    <div class="filter-header">
-                        <div class="filter-icon">⚙️</div>
-                        <div>
-                            <h2 class="filter-title">Rechercher et filtrer</h2>
-                            <p class="filter-subtitle">Affinez par nom d'évènement ou catégorie.</p>
-                        </div>
-                    </div>
-
-                    <div class="filter-row">
-                        <div class="filter-input-wrapper">
-                            <span class="filter-input-icon">🔍</span>
-                            <input id="searchInput" class="filter-input" placeholder="Rechercher un évènement ou un lieu..." />
-                        </div>
-                    </div>
-
-                    <div class="filter-row">
-                        <p class="filter-label">Catégorie :</p>
-                        <div class="chip-group" id="categoryChips">
-                            <button class="chip chip-active" data-filter="all">Tous</button>
-                            <button class="chip" data-filter="atelier">Atelier</button>
-                            <button class="chip" data-filter="salon">Salon</button>
-                            <button class="chip" data-filter="exposition">Exposition</button>
-                        </div>
-                    </div>
+            <div class="filter-header">
+                <div>
+                    <h2 class="filter-title">Rechercher et filtrer</h2>
+                    <p class="filter-subtitle">Affinez par nom d'évènement ou catégorie.</p>
                 </div>
             </div>
-        </header>
 
-        <section class="container" style="padding:3rem 1rem">
-
-            <div id="resultsCount" style="margin-bottom:1rem;color:#6b6b6b;"></div>
-
-            <div id="eventsGrid" class="craftmen-grid">
-                <?php foreach($events as $e): ?>
-                    <article class="craftman-card" data-type="<?= htmlspecialchars($e['type']) ?>" data-title="<?= htmlspecialchars(strtolower($e['title'])) ?>" data-location="<?= htmlspecialchars(strtolower($e['location'])) ?>">
-                        <div class="craftman-card-img-wrap">
-                            <img src="<?= $e['image'] ?>" alt="<?= htmlspecialchars($e['title']) ?>">
-                            <div class="img-gradient"></div>
-                        </div>
-                        <div class="craftman-card-content">
-                            <h3><?= htmlspecialchars($e['title']) ?></h3>
-                            <p><?= htmlspecialchars($e['location']) ?> — <?= htmlspecialchars($e['date']) ?></p>
-                            <a href="/Artisite/index.php?page=event&id=<?= $e['id'] ?>" class="btn-discover">
-                                <span>Voir</span>
-                                <span class="icon-arrow-right">
-                                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                        <polyline points="12 5 19 12 12 19" />
-                                    </svg>
-                                </span>
-                            </a>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
+            <!-- Recherche texte -->
+            <div class="filter-row">
+                <div class="filter-input-wrapper">
+                    <span class="filter-input-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="productSearch"
+                        class="filter-input"
+                        placeholder="Rechercher par nom d'évènement..."
+                    />
+                </div>
             </div>
-        </section>
-    </main>
 
-    <script>
-        (function(){
-            const searchInput = document.getElementById('searchInput');
-            const chips = Array.from(document.querySelectorAll('.chip'));
-            const cards = Array.from(document.querySelectorAll('#eventsGrid article'));
-            function getActiveFilters(){
-                const active = chips.filter(c=>c.classList.contains('chip-active')).map(c=>c.dataset.filter);
-                return active.length?active:['all'];
-            }
-            function updateCount(){
-                const visible = cards.filter(c=>c.style.display!=='none').length;
-                document.getElementById('resultsCount').textContent = visible + ' événement' + (visible>1?'s':'') + ' trouvé' + (visible>1?'s':'');
-            }
-            function applyFilters(){
-                const q = (searchInput.value||'').toLowerCase().trim();
-                const filters = getActiveFilters();
-                cards.forEach(card=>{
-                    const title = card.dataset.title||'';
-                    const location = card.dataset.location||'';
-                    const type = card.dataset.type||'';
-                    const matchesSearch = q === '' || title.includes(q) || location.includes(q);
-                    const matchesType = filters.includes('all') || filters.includes(type);
-                    card.style.display = (matchesSearch && matchesType)?'':'none';
-                });
-                updateCount();
-            }
-            chips.forEach(chip=>{
-                chip.addEventListener('click', ()=>{
-                    if(chip.dataset.filter==='all'){
-                        chips.forEach(c=>c.classList.remove('chip-active'));
-                        chip.classList.add('chip-active');
-                    } else {
-                        chip.classList.toggle('chip-active');
-                        const anyNonAll = chips.some(c=>c.dataset.filter!=='all' && c.classList.contains('chip-active'));
-                        chips.forEach(c=>{ if(c.dataset.filter==='all') c.classList.toggle('chip-active', !anyNonAll); });
-                    }
-                    applyFilters();
-                });
-            });
-            searchInput.addEventListener('input', applyFilters);
-            applyFilters();
-        })();
-    </script>
+            <!-- Catégorie -->
+            <div class="filter-row">
+                <p class="filter-label">Catégorie :</p>
+                <div class="chip-group" id="categoryChips">
+                    <button class="chip chip-active" data-category="Tous">Tous</button>
+                    <button class="chip" data-category="Poterie">Poterie</button>
+                    <button class="chip" data-category="Vêtements">Vêtements</button>
+                    <button class="chip" data-category="Décoration">Décoration</button>
+                    <button class="chip" data-category="Accessoires">Accessoires</button>
+                    <button class="chip" data-category="Autre">Autre</button>
+                </div>
+            </div>
+        </div>
+    <div class="results-count">
+      9 évènements trouvés
+    </div>
+
+    <div class="craftmen-grid">
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1695740633675-d060b607f5c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3R0ZXJ5JTIwY2VyYW1pYyUyMGhhbmRtYWRlfGVufDF8fHx8MTc2MDk1NTMyMXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Cours de couture">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Crée ton propre bol</h3>
+          <p>Atelier poterie</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1675721128213-a9052641488e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b29kd29ya2luZyUyMGNhcnBlbnRlciUyMHRvb2xzfGVufDF8fHx8MTc2MTA1MTk1OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Thomas Dubois">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Confectionne ton sac</h3>
+          <p>Cours de couture</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1638410644502-e622c5c11e61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsZWF0aGVyJTIwY3JhZnQlMjBoYW5kbWFkZXxlbnwxfHx8fDE3NjEwNTE5NTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Marie Leroux">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Sculpture de glace</h3>
+          <p>Atelier de sculpture</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1562469162-c17fc5155156?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZXh0aWxlJTIwd2VhdmluZyUyMGZhYnJpY3xlbnwxfHx8fDE3NjEwNTE5NjB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Julien Rousseau">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Fabrique ton tissu</h3>
+          <p>Atelier de tissage</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1758974504445-65b1ee86e47e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kbWFkZSUyMGpld2VscnklMjBhcnRpc2FufGVufDF8fHx8MTc2MTAzODQzOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Claire Bernard">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Ponce ton bijou</h3>
+          <p>Atelier de joaillerie</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1602224307648-b5d5f28d9132?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpc2FuJTIwd29ya3Nob3AlMjBjcmFmdHNtYW58ZW58MXx8fHwxNzYxMDUxOTU4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Antoine Moreau">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>L'art de nos pinceaux</h3>
+          <p>Cours de peinture</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1695740633675-d060b607f5c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3R0ZXJ5JTIwY2VyYW1pYyUyMGhhbmRtYWRlfGVufDF8fHx8MTc2MDk1NTMyMXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Isabelle Fontaine">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Visite de notre soufflerie</h3>
+          <p>Soufflerie artisanale</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1602224307648-b5d5f28d9132?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpc2FuJTIwd29ya3Nob3AlMjBjcmFmdHNtYW58ZW58MXx8fHwxNzYxMDUxOTU4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Laurent Petit">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Bijoux</h3>
+          <p>Enchères</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="craftman-card">
+        <div class="craftman-card-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1638410644502-e622c5c11e61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsZWF0aGVyJTIwY3JhZnQlMjBoYW5kbWFkZXxlbnwxfHx8fDE3NjEwNTE5NTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            alt="Camille Durand">
+          <div class="img-gradient"></div>
+        </div>
+        <div class="craftman-card-content">
+          <h3>Goûtez les produits locaux</h3>
+          <p>Dégustation de vins</p>
+          <a href="index.php?page=event&id=1" class="btn-discover">
+            <span>Découvrir</span>
+            <span class="icon-arrow-right">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+  <!-- JS: recherche + filtres (réutilise le comportement de products.php adapté aux cartes artisans) -->
+  <script>
+    (function(){
+      const searchInput = document.getElementById('productSearch');
+      const categoryChips = document.getElementById('categoryChips');
+      const materialChips = document.getElementById('materialChips');
+      const artisanCards = Array.from(document.querySelectorAll('.craftman-card'));
+
+      let searchTerm = '';
+      let selectedCategory = 'Tous';
+      let selectedMaterial = 'Tous';
+
+      function cardText(card){
+        const name = (card.querySelector('h3') && card.querySelector('h3').textContent) || '';
+        const prof = (card.querySelector('.craftman-card-content p') && card.querySelector('.craftman-card-content p').textContent) || '';
+        return (name + ' ' + prof).toLowerCase();
+      }
+
+      function updateFilters(){
+        artisanCards.forEach(card => {
+          const text = cardText(card);
+          const matchText = text.includes(searchTerm.toLowerCase());
+          const matchCategory = selectedCategory === 'Tous' || text.includes(selectedCategory.toLowerCase());
+          const matchMaterial = selectedMaterial === 'Tous' || text.includes(selectedMaterial.toLowerCase());
+          card.style.display = (matchText && matchCategory && matchMaterial) ? '' : 'none';
+        });
+      }
+
+      if(searchInput){
+        searchInput.addEventListener('input', (e) => {
+          searchTerm = e.target.value.trim();
+          updateFilters();
+        });
+      }
+
+      if(categoryChips){
+        categoryChips.addEventListener('click', (e) => {
+          if(e.target.classList.contains('chip')){
+            categoryChips.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
+            e.target.classList.add('chip-active');
+            selectedCategory = e.target.dataset.category || 'Tous';
+            updateFilters();
+          }
+        });
+      }
+
+      if(materialChips){
+        materialChips.addEventListener('click', (e) => {
+          if(e.target.classList.contains('chip')){
+            materialChips.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
+            e.target.classList.add('chip-active');
+            selectedMaterial = e.target.dataset.material || 'Tous';
+            updateFilters();
+          }
+        });
+      }
+
+    })();
+  </script>
 </body>
 
 </html>

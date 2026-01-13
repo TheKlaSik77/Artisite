@@ -1,5 +1,4 @@
 <?php
-// event.php - Vue détail d'un événement (version PHP statique reprenant React)
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
 $events = [
@@ -20,7 +19,7 @@ $events = [
             ['id'=>'card','label'=>'Carte bancaire'],['id'=>'paypal','label'=>'PayPal'],['id'=>'transfer','label'=>'Virement bancaire']
         ]
     ],
-    // You can add more events indexed by id here
+
 ];
 
 $event = isset($events[$id]) ? $events[$id] : $events[1];
@@ -38,12 +37,12 @@ $event = isset($events[$id]) ? $events[$id] : $events[1];
         .gallery img{width:100%;height:100%;object-fit:cover}
         .sticky{position:sticky;top:24px}
         .radio-row{display:flex;flex-direction:column;gap:.5rem}
-        /* Event page two-column layout */
+        
         .event-grid{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start;max-width:1200px;margin:0 auto}
         @media(max-width:900px){.event-grid{grid-template-columns:1fr}}
         .event-main{min-width:0}
         .event-side{min-width:0}
-        /* Tweak booking block visuals */
+        
         .event-side .card{padding:1.5rem}
         .event-side label{display:block;margin-bottom:.4rem}
         .event-side input[type="radio"]{margin-right:.5rem}
