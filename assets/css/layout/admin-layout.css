@@ -46,6 +46,10 @@ a {
     font-size: 0.85rem;
 }
 
+.btn-small:hover {
+    background-color: var(--hover-admin);
+}
+
 .table-div {
     display: flex;
     flex-direction: column;
@@ -88,4 +92,7 @@ thead th{
 
 td {
     text-align: center;
+    padding: 10px 0px;
+    border-bottom: 1px black solid;
 }
+

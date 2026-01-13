@@ -8,3 +8,27 @@
     cursor: pointer;
     font-size: 0.85rem;
 }
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 25%; /* Artisan */
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 25%; /* Email */
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 20%; /* Validateur */
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 30%; /* Gérer */
+}
+
+.btn-div-table .btn-small {
+    margin: 0px 5px;
+}

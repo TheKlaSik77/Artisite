@@ -1,7 +1,7 @@
 <main class="content">
     <div class="deconnexion">
-        <button class="btn-small">Revenir à l'accueil</button>
-        <button class="btn-small">Se déconnecter</button>
+        <button class="btn-small" onclick="window.location.href='index.php?page=home'">Revenir à l'accueil</button>
+        <button class="btn-small" onclick="window.location.href='index.php?page=logout'">Se déconnecter</button>
     </div>
 
     <div class="table-div">
@@ -9,35 +9,32 @@
             <h1>
                 Liste des Artisans inscrits
             </h1>
-            <select id="statusFilter">
+
+            <select name="filter" id="statusFilter">
                 <option value="">Tous les statuts</option>
                 <option value="validated">Actif</option>
                 <option value="pending">En attente de validation</option>
             </select>
+
         </div>
         <table>
             <thead>
                 <tr>
                     <th>Artisan</th>
                     <th>Email</th>
-                    <th>Status</th>
+                    <th>Validateur</th>
                     <th>Gérer</th>
                 </tr>
             </thead>
-            <tbody id="craftmenBody">
+            <tbody id="table-content">
 
             </tbody>
         </table>
-        <script>
-            // Récupérer les éléments
-            const select = document.getElementById('statusFilter');
 
-            // Écouter le changement de valeur
-            select.addEventListener('change', function () {
-                // Mettre à jour le contenu
-                resultat.textContent = this.value || 'Aucune';
-            });
-
-        </script>
     </div>
 </main>
+<script>
+    let craftmen = <?= json_encode($craftmen, JSON_UNESCAPED_UNICODE) ?>;;
+</script>
+
+<script src="./assets/js/admin/admin_craftmen.js"></script>

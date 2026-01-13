@@ -7,7 +7,39 @@
 ----------------------------------------*/
 function getAllCraftmen(PDO $pdo)
 {
-    $stmt = $pdo->prepare("Select craftman_id, siret, email, description, validator_id, company_name From craftman");
+    $stmt = $pdo->prepare("
+        SELECT 
+            craftman.craftman_id,
+            craftman.siret,
+            craftman.email,
+            craftman.description,
+            craftman.validator_id,
+            administrator.email AS validator_email,
+            craftman.company_name
+        FROM craftman
+        LEFT JOIN administrator 
+            ON craftman.validator_id = administrator.admin_id
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getAllValidatedCraftmen(PDO $pdo)
+{
+    $stmt = $pdo->prepare("
+        SELECT 
+            craftman.craftman_id,
+            craftman.siret,
+            craftman.email,
+            craftman.description,
+            craftman.validator_id,
+            administrator.email AS validator_email,
+            craftman.company_name
+        FROM craftman
+        LEFT JOIN administrator 
+            ON craftman.validator_id = administrator.admin_id
+        where craftman.validator_id IS NOT NULL
+    ");
     $stmt->execute();
     return $stmt->fetchAll();
 }
@@ -20,20 +52,20 @@ function getCraftmanById(PDO $pdo, int $craftman_id)
     return $stmt->fetchAll();
 }
 
-function getCraftmanByStatus(PDO $pdo, bool $has_validator)
+/* --------------------------------------
+            UPDATE FONCTIONS
+----------------------------------------*/
+
+
+function validateCraftman(PDO $pdo, int $craftman_id, int $admin_id)
 {
-    if ($has_validator == true) {
-        $stmt = $pdo->prepare("
-    Select craftman_id, siret, email, description, validator_id, company_name from craftman where validator_id IS NOT NULL");
-    } else {
-        $stmt = $pdo->prepare("
-    Select craftman_id, siret, email, description, validator_id, company_name from craftman where validator_id IS NULL");
-    }
-
-    $stmt->execute();
-    return $stmt->fetchAll();
+    $stmt = $pdo->prepare("
+        UPDATE craftman
+        SET validator_id = ?
+        WHERE craftman_id = ?
+    ");
+    $stmt->execute([$admin_id, $craftman_id]);
 }
-
 /* --------------------------------------
             DELETE FONCTIONS
 ----------------------------------------*/

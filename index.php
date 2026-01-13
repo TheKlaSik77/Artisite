@@ -1,4 +1,33 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+require_once "./model/utils/connexion.php";
+require_once "./model/utils/auth.php";
+
+$page = $_GET['page'] ?? 'home';
+$ajaxPages = ['admin-delete-craftman', 'admin-validate-craftman'];
+
+if (in_array($page, $ajaxPages, true)) {
+    if (!isAdmin()) {
+        http_response_code(403);
+        header("Content-Type: application/json; charset=utf-8");
+        echo json_encode(["success" => false, "error" => "forbidden"]);
+        exit;
+    }
+
+    require "./controller/adminController.php";
+
+    if ($page === 'admin-delete-craftman') {
+        adminDeleteCraftmanController($pdo);
+        exit;
+    }
+
+    if ($page === 'admin-validate-craftman') {
+        adminValidateCraftmanController($pdo);
+        exit;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,14 +43,12 @@
 
 <?php
 
-require_once "./model/utils/connexion.php";
-require_once "./model/utils/auth.php";
 # Ajouter liste de page autorisées pour sécurité
 
 # Décommenter pour ajouter un admin
 # require_once "create_admin.php";
 
-$page = $_GET['page'] ?? 'home';
+
 switch ($page) {
     case "home":
         require "./view/layout/header.php";
@@ -109,11 +136,7 @@ switch ($page) {
             $page = "home";
             break;
         }
-        
-    case "admin-craftmen-ajax":
-        adminCraftmenAjaxController($pdo);
-        break;
-
+    
     case "admin-customers":
         if (isAdmin()) {
             require "./controller/adminController.php";
@@ -163,6 +186,11 @@ switch ($page) {
             $page = "home";
             break;
         }
+
+    case "admin-validate-craftman":
+        require "./controller/adminController.php";
+        adminValidateCraftmanController($pdo);
+        break;
 
     default:
         require "./view/layout/header.php";
