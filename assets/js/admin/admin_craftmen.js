@@ -19,9 +19,6 @@ tbody.addEventListener("click", (e) => {
     }
 });
 
-// Affichage initial
-renderTable(craftmen);
-
 select.addEventListener("change", () => {
     const status = select.value;
 
@@ -54,7 +51,17 @@ function renderTable(data) {
                 <td>${craftman.company_name}</td>
                 <td>${craftman.email}</td>
                 <td>${craftman.validator_email}</td>
-                <td class="btn-div-table"><button class="btn-small btn-validate" data-id="${craftman.craftman_id}">Valider la demande</button><button class="btn-small btn-delete" data-id="${craftman.craftman_id}">Supprimer le compte</button></td>
+                <td class="btn-div-table">
+                    <button 
+                    class="btn-small btn-validate" 
+                    data-id="${craftman.craftman_id}">
+                        Valider la demande
+                    </button>
+                    <button class="btn-small btn-delete" 
+                    data-id="${craftman.craftman_id}">
+                        Supprimer le compte
+                    </button>
+                </td>
             </tr>
         `;
         } else {
@@ -64,7 +71,8 @@ function renderTable(data) {
                 <td>${craftman.email}</td>
                 <td>${craftman.validator_email}</td>
                 <td>
-                    <button class="btn-small btn-delete" data-id="${craftman.craftman_id}">
+                    <button class="btn-small btn-delete" 
+                    data-id="${craftman.craftman_id}">
                         Supprimer le compte
                     </button>
                 </td>

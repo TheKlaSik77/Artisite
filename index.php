@@ -1,4 +1,4 @@
-<?php session_start(); 
+<?php session_start();
 
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
@@ -43,7 +43,7 @@ if (in_array($page, $ajaxPages, true)) {
 
 <?php
 
-# Ajouter liste de page autorisées pour sécurité
+
 # Décommenter pour ajouter un admin
 # require_once "create_admin.php";
 
@@ -87,9 +87,14 @@ switch ($page) {
         break;
 
     case "craftman-products":
-        require_once "./controller/craftmanProductsController.php";
-        craftmanProductsController($pdo);
-        break;
+        if (isCraftman()) {
+            require_once "./controller/craftmanProductsController.php";
+            craftmanProductsController($pdo);
+            break;
+        } else {
+            die ("Vous n'êtes pas artisan");
+        }
+
 
     case "add-product-craftman":
         require_once "./controller/addProductCraftmanController.php";
@@ -116,6 +121,11 @@ switch ($page) {
         checkoutController($pdo);
         break;
 
+    case "faq":
+        require_once "./controller/faqController.php";
+        faqController($pdo);
+        break;
+
     case "admin-dashboard":
         if (isAdmin()) {
             require "./controller/adminController.php";
@@ -135,7 +145,7 @@ switch ($page) {
             $page = "home";
             break;
         }
-    
+
     case "admin-customers":
         if (isAdmin()) {
             require "./controller/adminController.php";
@@ -185,20 +195,16 @@ switch ($page) {
             $page = "home";
             break;
         }
-    case "faq":
-    require_once "./controller/faqController.php";
-    faqController($pdo);
-    break;
 
     case "admin-faq":
-    if (isAdmin()) {
-        require_once "./controller/adminFaqController.php";
-        adminFaqController($pdo);
-        break;
-    } else {
-        $page = "home";
-        break;
-    }
+        if (isAdmin()) {
+            require_once "./controller/adminFaqController.php";
+            adminFaqController($pdo);
+            break;
+        } else {
+            $page = "home";
+            break;
+        }
 
     case "admin-validate-craftman":
         require "./controller/adminController.php";
