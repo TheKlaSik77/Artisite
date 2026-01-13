@@ -207,7 +207,7 @@ switch ($page) {
 
     default:
         require "./view/layout/header.php";
-        require "./view/pages/{$page}.php";
+        require "./view/pages/homepage.php";
         require "./view/layout/footer.php";
         break;
 }
