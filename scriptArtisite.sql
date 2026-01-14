@@ -6,8 +6,7 @@ CREATE TABLE administrator (
     hashed_password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE
-    craftman (
+CREATE TABLE craftman (
         craftman_id INT AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(100) NOT NULL UNIQUE,
         company_name VARCHAR(100) NOT NULL,
@@ -53,7 +52,6 @@ CREATE TABLE user (
     email VARCHAR(100) NOT NULL UNIQUE,
     phone_number VARCHAR(20) NOT NULL UNIQUE,
     hashed_password VARCHAR(255) NOT NULL,
-    description TEXT,
     accepted_terms_of_use_id INT,
     FOREIGN KEY (accepted_terms_of_use_id) REFERENCES terms_of_use (terms_of_use_id) ON UPDATE CASCADE
 );

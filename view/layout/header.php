@@ -17,7 +17,7 @@
         <nav class="nav-center">
             <a href="index.php?page=homepage" class="nav-link">Accueil</a>
             <?php if (isAdmin()): ?>
-                <a href="index.php?page=admin-dashboard" class="nav-link">Admin Dashboard</a>
+                <a href="index.php?page=admin-craftmen" class="nav-link">Admin Dashboard</a>
             <?php endif; ?>
             <a href="index.php?page=craftmen" class="nav-link">Artisans</a>
             <a href="index.php?page=products" class="nav-link">Produits</a>

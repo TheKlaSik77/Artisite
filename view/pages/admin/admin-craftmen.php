@@ -34,7 +34,11 @@
     </div>
 </main>
 <script>
-    let craftmen = <?= json_encode($craftmen, JSON_UNESCAPED_UNICODE) ?>;;
+    let craftmen = <?= json_encode($craftmen, JSON_UNESCAPED_UNICODE) ?>;
+    document.addEventListener("DOMContentLoaded", () => {
+        renderTable(craftmen);
+    });
+
 </script>
 
 <script src="./assets/js/admin/admin_craftmen.js"></script>

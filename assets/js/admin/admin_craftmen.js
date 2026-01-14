@@ -3,6 +3,7 @@ const select = document.getElementById("statusFilter");
 
 const tbody = document.getElementById("table-content");
 
+
 tbody.addEventListener("click", (e) => {
     const button = e.target.closest("button");
     if (!button) return;
@@ -119,3 +120,4 @@ function validateCraftman(id) {
         alert("Erreur serveur");
     });
 }
+

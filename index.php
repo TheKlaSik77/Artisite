@@ -4,7 +4,7 @@ require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 
 $page = $_GET['page'] ?? 'home';
-$ajaxPages = ['admin-delete-craftman', 'admin-validate-craftman'];
+$ajaxPages = ['admin-delete-craftman', 'admin-validate-craftman', 'admin-delete-customer'];
 
 if (in_array($page, $ajaxPages, true)) {
     if (!isAdmin()) {
@@ -15,16 +15,24 @@ if (in_array($page, $ajaxPages, true)) {
     }
 
     require "./controller/adminController.php";
+    switch ($page) {
+        case 'admin-delete-craftman':
+            adminDeleteCraftmanController($pdo);
+            break;
 
-    if ($page === 'admin-delete-craftman') {
-        adminDeleteCraftmanController($pdo);
-        exit;
-    }
 
-    if ($page === 'admin-validate-craftman') {
-        adminValidateCraftmanController($pdo);
-        exit;
+        case 'admin-validate-craftman':
+            adminValidateCraftmanController($pdo);
+            break;
+
+        case 'admin-delete-customer':
+            adminDeleteCustomerController($pdo);
+            break;
+        
+        case 'admin-delete-product':
+            adminDeleteProductController($pdo);
     }
+    exit;
 }
 
 ?>
@@ -92,7 +100,7 @@ switch ($page) {
             craftmanProductsController($pdo);
             break;
         } else {
-            die ("Vous n'êtes pas artisan");
+            die("Vous n'êtes pas artisan");
         }
 
 
@@ -125,16 +133,6 @@ switch ($page) {
         require_once "./controller/faqController.php";
         faqController($pdo);
         break;
-
-    case "admin-dashboard":
-        if (isAdmin()) {
-            require "./controller/adminController.php";
-            adminDashboardController($pdo);
-            break;
-        } else {
-            $page = "home";
-            break;
-        }
 
     case "admin-craftmen":
         if (isAdmin()) {
