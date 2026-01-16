@@ -59,6 +59,9 @@ if (in_array($page, $ajaxPages, true)) {
 </head>
 
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 # Décommenter pour ajouter un admin
@@ -149,6 +152,20 @@ switch ($page) {
         faqController($pdo);
         break;
 
+    case "support":
+        require_once "./controller/supportController.php";
+        supportController($pdo);
+        break;
+
+    case "craftman-support":
+        require_once "./controller/craftmanSupportController.php";
+        craftmanSupportController($pdo);
+        break;
+
+        /*------------------------------------ 
+                    PAGES ADMIN 
+        -------------------------------------*/
+    
     case "admin-craftmen":
         if (isAdmin()) {
             require "./controller/adminController.php";
@@ -199,9 +216,10 @@ switch ($page) {
             break;
         }
 
+
     case "admin-support":
         if (isAdmin()) {
-            require "./controller/adminController.php";
+            require_once "./controller/adminSupportController.php";
             adminSupportController($pdo);
             break;
         } else {
@@ -219,10 +237,6 @@ switch ($page) {
             break;
         }
 
-    case "admin-validate-craftman":
-        require "./controller/adminController.php";
-        adminValidateCraftmanController($pdo);
-        break;
 
     default:
         require "./view/layout/header.php";

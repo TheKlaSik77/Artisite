@@ -50,9 +50,9 @@ function getNbProductsOfCraftman(PDO $pdo, int $craftman_id){
 ----------------------------------------*/
 
 # Insère un produit et met à null description et craft
-function insertProduct(PDO $pdo, string $name, int $quantity, int $unit_price, ?string $description = null, int $category_id, int $craftman_id): bool{
+function insertProduct(PDO $pdo, string $name, int $quantity, int $unit_price, int $category_id, int $craftman_id): bool{
     $stmt = $pdo->prepare("
-        INSERT INTO product (name, quantity, unit_price, description, category_id, craftman_id)
+        INSERT INTO product (name, quantity, unit_price, category_id, craftman_id)
         VALUES (?, ?, ?, ?, ?)
     ");
 
@@ -60,7 +60,6 @@ function insertProduct(PDO $pdo, string $name, int $quantity, int $unit_price, ?
         $name,
         $quantity,
         $unit_price,
-        $description,
         $category_id,
         $craftman_id,  
     ]);
