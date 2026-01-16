@@ -48,7 +48,10 @@
               <?php if (!empty($faqs)): ?>
                 <?php foreach ($faqs as $f): ?>
                   <tr>
-                    <td><?= htmlspecialchars($f['question']) ?></td>
+                    <td>
+                      <div class="faq-question"><?= htmlspecialchars($f['question']) ?></div>
+                      <div class="faq-answer"><?= nl2br(htmlspecialchars($f['answer'])) ?></div>
+                    </td>
                     <td>
                       <a class="btn-danger" href="index.php?page=admin-faq&action=delete&id=<?= (int) $f['question_id'] ?>"
                         onclick="return confirm('Supprimer cette question ?')">

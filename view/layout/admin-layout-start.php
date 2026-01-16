@@ -18,7 +18,7 @@
     <?php elseif (($_GET['page'] ?? '') === 'admin-orders'): ?>
         <link rel="stylesheet" href="./assets/css/pages/admin/admin-orders.css">
     <?php elseif (($_GET['page'] ?? '') === 'admin-support'): ?>
-        <link rel="stylesheet" href="./assets/css/pages/admin-support.css">
+        <link rel="stylesheet" href="./assets/css/pages/admin/admin-support.css">
     <?php elseif (($_GET['page'] ?? '') === 'admin-faq'): ?>
         <link rel="stylesheet" href="./assets/css/pages/admin/admin-faq.css">
     <?php endif; ?>

@@ -12,7 +12,7 @@
 
 .admin-faq-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: minmax(0, 520px) 640px;
     gap: 20px;
     align-items: start;
 }
@@ -23,6 +23,12 @@
     border-radius: 14px;
     padding: 18px;
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+/* Fix the table card width so long questions don't stretch the layout */
+.admin-faq .admin-card:last-of-type {
+    width: 640px;
+    max-width: 640px;
 }
 
 .admin-card h2 {
@@ -88,7 +94,8 @@
 }
 
 .table-wrap {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
     border-radius: 12px;
     border: 1px solid #eee;
 }
@@ -96,7 +103,7 @@
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 520px;
+    table-layout: fixed;
 }
 
 .admin-table th,
@@ -105,6 +112,8 @@
     text-align: left;
     border-bottom: 1px solid #eee;
     font-size: 14px;
+    word-break: break-word;
+    white-space: normal;
 }
 
 .admin-table th:nth-child(2),
@@ -119,6 +128,17 @@
 
 .admin-table tbody tr:hover {
     background: #fcfbf9;
+}
+
+.faq-question {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.faq-answer {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.45;
 }
 
 .btn-danger {
