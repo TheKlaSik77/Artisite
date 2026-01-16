@@ -13,6 +13,9 @@
 </head>
 
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
@@ -149,19 +152,21 @@ switch ($page) {
             break;
         }
 
+  
     case "admin-support":
         if (isAdmin()) {
-            require "./controller/adminController.php";
-            adminSupportController();
+            require_once "./controller/adminSupportController.php";
+            adminSupportController($pdo);
             break;
         } else {
             $page = "home";
             break;
         }
+
     case "faq":
-    require_once "./controller/faqController.php";
-    faqController($pdo);
-    break;
+        require_once "./controller/faqController.php";
+        faqController($pdo);
+        break;
 
     case "admin-faq":
     if (isAdmin()) {
@@ -172,6 +177,17 @@ switch ($page) {
         $page = "home";
         break;
     }
+
+    case "support":
+    require_once "./controller/supportController.php";
+    supportController($pdo);
+    break;
+
+    case "craftman-support":
+    require_once "./controller/craftmanSupportController.php";
+    craftmanSupportController($pdo);
+    break;
+
 
 
     default:
