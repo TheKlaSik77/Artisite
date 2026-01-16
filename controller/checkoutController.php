@@ -73,8 +73,9 @@ function checkoutController(PDO $pdo)
                 $address_id,
                 $total
             );  
+
+            insertOrderProducts($pdo, $order_id, $products);
     
-            // 3️ Décrémenter le stock
             foreach ($products as $product) {
                 decreaseProductStock(
                     $pdo,

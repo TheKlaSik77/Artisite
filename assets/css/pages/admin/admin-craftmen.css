@@ -11,7 +11,7 @@
 
 th:nth-child(1),
 td:nth-child(1) {
-    width: 25%; /* Artisan */
+    width: 20%; /* Artisan */
 }
 
 th:nth-child(2),
@@ -26,7 +26,7 @@ td:nth-child(3) {
 
 th:nth-child(4),
 td:nth-child(4) {
-    width: 30%; /* Gérer */
+    width: 35%; /* Gérer */
 }
 
 .btn-div-table .btn-small {

@@ -1,112 +1,49 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Admin – Commandes</title>
-    <link rel="stylesheet" href="./assets/css/pages/admin/admin-orders.css">
-</head>
-
-<body>
-    <div class="admin-layout">
-        <main class="main">
-            <header class="main-header">
-                <button id="toggleSidebar" class="btn-icon">☰</button>
-                <div class="header-right">
-                    <span class="admin-name">Admin</span>
-                    <button class="btn-small">Se déconnecter</button>
-                </div>
-            </header>
-
-            <section class="main-content">
-                <h1 class="page-title">Commandes</h1>
-
-                <div class="table-wrapper">
-                    <div class="table-header">
-                        <h2>Liste des commandes</h2>
-                        <div style="display:flex; gap:8px;">
-                            <input type="text" id="searchCommande" placeholder="Rechercher...">
-                            <select id="filterCommandeStatut">
-                                <option value="all">Tous les statuts</option>
-                                <option value="en_cours">En cours</option>
-                                <option value="expediee">Expédiée</option>
-                                <option value="livree">Livrée</option>
-                                <option value="remboursee">Remboursée</option>
-                            </select>
-                        </div>
-                    </div>
-                    <table id="tableCommandes">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Client</th>
-                                <th>Date</th>
-                                <th>Total</th>
-                                <th>Statut</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-statut="en_cours">
-                                <td>1024</td>
-                                <td>Camille Dupont</td>
-                                <td>12/11/2025</td>
-                                <td>79 €</td>
-                                <td><span class="badge badge-warning">En cours</span></td>
-                                <td><button class="btn-table" onclick="openCommande(1024)">Détails</button></td>
-                            </tr>
-                            <tr data-statut="livree">
-                                <td>987</td>
-                                <td>Julien Martin</td>
-                                <td>02/11/2025</td>
-                                <td>45 €</td>
-                                <td><span class="badge badge-success">Livrée</span></td>
-                                <td><button class="btn-table" onclick="openCommande(987)">Détails</button></td>
-                            </tr>
-                            <tr data-statut="remboursee">
-                                <td>950</td>
-                                <td>Anna Rossi</td>
-                                <td>28/10/2025</td>
-                                <td>39 €</td>
-                                <td><span class="badge badge-danger">Remboursée</span></td>
-                                <td><button class="btn-table" onclick="openCommande(950)">Détails</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        </main>
+<main class="content">
+    <div class="deconnexion">
+        <button class="btn-small" onclick="window.location.href='index.php?page=home'">Revenir à l'accueil</button>
+        <button class="btn-small" onclick="window.location.href='index.php?page=logout'">Se déconnecter</button>
     </div>
 
-    <script>
-        document.getElementById("toggleSidebar").addEventListener("click", () => {
-            document.querySelector(".sidebar").classList.toggle("sidebar-open");
-        });
+    <div class="table-div">
+        <div class="table-header">
+            <h1>
+                Liste des Commandes
+            </h1>
 
-        const searchCommande = document.getElementById("searchCommande");
-        const filterCommandeStatut = document.getElementById("filterCommandeStatut");
-        const commandeRows = document.querySelectorAll("#tableCommandes tbody tr");
+            <select name="filter" id="statusFilter">
+                <option value="">Tous les statuts</option>
+                <option value="confirmed">Confirmée</option>
+                <option value="shipped">Expédiée</option>
+                <option value="delivered">Livrée</option>
+                <option value="cancelled">Annulée</option>
+            </select>
 
-        function applyCommandeFilters() {
-            const q = searchCommande.value.toLowerCase();
-            const statut = filterCommandeStatut.value;
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>N° Commande</th>
+                    <th>Client</th>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Statut</th>
+                    <th>Gérer</th>
+                </tr>
+            </thead>
+            <tbody id="table-content">
 
-            commandeRows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                const rowStatut = row.dataset.statut;
-                const matchText = text.includes(q);
-                const matchStatut = (statut === "all" || statut === rowStatut);
-                row.style.display = (matchText && matchStatut) ? "" : "none";
-            });
-        }
+            </tbody>
+        </table>
 
-        searchCommande.addEventListener("input", applyCommandeFilters);
-        filterCommandeStatut.addEventListener("change", applyCommandeFilters);
+    </div>
+</main>
 
-        function openCommande(id) {
-            window.location.href = `admin-commande-detail.html?id=${id}`;
-        }
-    </script>
-</body>
+<script>
+    let orders = <?= json_encode($orders, JSON_UNESCAPED_UNICODE) ?>;
+    document.addEventListener("DOMContentLoaded", () => {
+        renderTable(orders);
+    });
 
-</html>
+</script>
+
+<script src="./assets/js/admin/admin_orders.js"></script>

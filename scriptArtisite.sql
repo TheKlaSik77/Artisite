@@ -121,6 +121,16 @@ CREATE TABLE customer_order (
     FOREIGN KEY (delivery_address_id) REFERENCES address (address_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE order_product (
+    order_id INT,
+    product_id INT,
+    quantity INT UNSIGNED NOT NULL DEFAULT 1,
+    unit_price DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (order_id, product_id),
+    FOREIGN KEY (order_id) REFERENCES customer_order (order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE wishlist (
     user_id INT,
     product_id INT,

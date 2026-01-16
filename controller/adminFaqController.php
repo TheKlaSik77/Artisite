@@ -5,7 +5,6 @@ function adminFaqController(PDO $pdo)
 {
     $action = $_GET['action'] ?? 'read';
 
-    // Option B : l'ID admin peut être NULL
     $adminId = (int)($_SESSION['user']['id'] ?? 0);
 
     if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,13 +14,15 @@ function adminFaqController(PDO $pdo)
         if ($question !== '' && $answer !== '') {
             faqCreate($pdo, $question, $answer, $adminId);
         }
-
-        $action = 'read';
+        header('Location: index.php?page=admin-faq');
+        exit;
     }
 
     if ($action === 'delete') {
         faqDelete($pdo, (int)($_GET['id'] ?? 0));
-        $action = 'read';
+        
+        header('Location: index.php?page=admin-faq');
+        exit;
     }
 
     $faqs = faqGetAllAdmin($pdo);

@@ -4,7 +4,9 @@ $isAjax = in_array($_GET['page'] ?? '', [
     'admin-delete-craftman',
     'admin-validate-craftman',
     'admin-delete-customer',
-    'admin-delete-product'
+    'admin-delete-product',
+    'admin-delete-order',
+    'admin-order-details'
 ]);
 
 
@@ -22,6 +24,48 @@ function adminCraftmenController(PDO $pdo)
     $craftmen = getAllCraftmen($pdo);
     require "./view/pages/admin/admin-craftmen.php";
 }
+
+function adminCustomersController(PDO $pdo)
+{
+    require_once "./model/requests.users.php";
+    $customers = getAllUsers($pdo);
+    require "./view/pages/admin/admin-customers.php";
+}
+
+function adminProductsController(PDO $pdo)
+{
+    require_once "./model/requests.products.php";
+    $products = getAllProducts($pdo);
+    require "./view/pages/admin/admin-products.php";
+}
+
+function adminOrdersController(PDO $pdo)
+{
+    require_once "./model/requests.order.php";
+    $orders = getAllOrders($pdo);
+    require "./view/pages/admin/admin-orders.php";
+}
+
+function adminReviewsController(PDO $pdo)
+{
+    require "./view/pages/admin/admin-reviews.php";
+
+}
+
+function adminSupportController(PDO $pdo)
+{
+    require "./view/pages/admin/admin-support.php";
+
+}
+function adminFaqController()
+{
+    require "./view/pages/admin/admin-faq.php";
+
+}
+
+/*------------------------------------------------------
+                    FONCTIONS AJAX
+ ------------------------------------------------------*/
 
 function adminDeleteCraftmanController(PDO $pdo)
 {
@@ -82,7 +126,8 @@ function adminValidateCraftmanController(PDO $pdo)
     exit;
 }
 
-function adminDeleteProductController(PDO $pdo) {
+function adminDeleteProductController(PDO $pdo)
+{
     header("Content-Type: application/json; charset=utf-8");
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -105,7 +150,8 @@ function adminDeleteProductController(PDO $pdo) {
     exit;
 }
 
-function adminDeleteCustomerController(PDO $pdo) {
+function adminDeleteCustomerController(PDO $pdo)
+{
     header("Content-Type: application/json; charset=utf-8");
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -128,39 +174,62 @@ function adminDeleteCustomerController(PDO $pdo) {
     exit;
 }
 
-function adminCustomersController(PDO $pdo)
+function adminDeleteOrderController(PDO $pdo)
 {
-    require_once "./model/requests.users.php";
-    $customers = getAllUsers($pdo);
-    require "./view/pages/admin/admin-customers.php";
+    header("Content-Type: application/json; charset=utf-8");
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        exit;
+    }
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    $order_id = $data['order_id'] ?? null;
+
+    if (!$order_id) {
+        echo json_encode(["success" => false]);
+        exit;
+    }
+
+    require_once "./model/requests.order.php";
+    deleteOrder($pdo, $order_id);
+
+    echo json_encode(["success" => true]);
+    exit;
 }
 
-function adminProductsController(PDO $pdo)
+function adminOrderDetailsController(PDO $pdo)
 {
-    require "./view/pages/admin/admin-products.php";
-}
+    header("Content-Type: application/json; charset=utf-8");
 
-function adminOrdersController(PDO $pdo)
-{
-    require "./view/pages/admin/admin-orders.php";
+    if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        http_response_code(405);
+        exit;
+    }
 
-}
+    $order_id = $_GET['order_id'] ?? null;
 
-function adminReviewsController(PDO $pdo)
-{
-    require "./view/pages/admin/admin-reviews.php";
+    if (!$order_id) {
+        echo json_encode(["success" => false]);
+        exit;
+    }
 
-}
+    require_once "./model/requests.order.php";
 
-function adminSupportController(PDO $pdo)
-{
-    require "./view/pages/admin/admin-support.php";
+    $order = getOrderDetails($pdo, (int) $order_id);
+    $products = getOrderProducts($pdo, (int) $order_id);
+    
+    if (!$order) {
+        echo json_encode(["success" => false]);
+        exit;
+    }
 
-}
-function adminFaqController()
-{
-    require "./view/pages/admin/admin-faq.php";
-
+    echo json_encode([
+        "success" => true,
+        "order" => $order,
+        "products" => $products
+    ]);
+    exit;
 }
 
 if (!$isAjax) {

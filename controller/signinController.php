@@ -31,10 +31,8 @@ function signinProcessController($pdo)
 
     if ($is_craftman === "0") {
         $user = getUser($pdo, $email);
-        echo "coucou";
         if (!$user || !password_verify($password, $user['hashed_password'])) {
             $admin = getAdmin($pdo, $email);
-            echo $admin;
             if (!$admin || !password_verify($password, $admin['hashed_password'])) {
                 die("Identifiants incorrects");
             } else {

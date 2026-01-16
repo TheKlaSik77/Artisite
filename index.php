@@ -4,7 +4,7 @@ require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 
 $page = $_GET['page'] ?? 'home';
-$ajaxPages = ['admin-delete-craftman', 'admin-validate-craftman', 'admin-delete-customer'];
+$ajaxPages = ['admin-delete-craftman', 'admin-validate-craftman', 'admin-delete-customer', 'admin-delete-product', 'admin-delete-order', 'admin-order-details'];
 
 if (in_array($page, $ajaxPages, true)) {
     if (!isAdmin()) {
@@ -28,9 +28,18 @@ if (in_array($page, $ajaxPages, true)) {
         case 'admin-delete-customer':
             adminDeleteCustomerController($pdo);
             break;
-        
+
         case 'admin-delete-product':
             adminDeleteProductController($pdo);
+            break;
+
+        case 'admin-delete-order':
+            adminDeleteOrderController($pdo);
+            break;
+
+        case 'admin-order-details':
+            adminOrderDetailsController($pdo);
+            break;
     }
     exit;
 }
@@ -127,6 +136,12 @@ switch ($page) {
     case "checkout":
         require_once "./controller/checkoutController.php";
         checkoutController($pdo);
+        break;
+
+    case "order-success":
+        require "./view/layout/header.php";
+        require "./view/pages/order-success.php";
+        require "./view/layout/footer.php";
         break;
 
     case "faq":

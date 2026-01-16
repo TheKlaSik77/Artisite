@@ -1,26 +1,21 @@
 /* Colonnes du tableau */
 th:nth-child(1),
 td:nth-child(1) {
-    width: 25%; /* Produit */
+    width: 25%; /* Utilisateur */
 }
 
 th:nth-child(2),
 td:nth-child(2) {
-    width: 20%; /* Artisan */
+    width: 30%; /* Email */
 }
 
 th:nth-child(3),
 td:nth-child(3) {
-    width: 15%; /* Prix unitaire */
+    width: 20%; /* Téléphone */
 }
 
 th:nth-child(4),
 td:nth-child(4) {
-    width: 15%; /* Quantité */
-}
-
-th:nth-child(5),
-td:nth-child(5) {
     width: 25%; /* Gérer */
     padding-right: 20px;
 }

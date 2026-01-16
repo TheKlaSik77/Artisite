@@ -77,16 +77,17 @@ table {
     flex-direction: row;
 }
 
-.table-header h1{
+.table-header h1 {
     width: 85%;
     text-align: center;
     margin: 0 auto;
 }
 
-thead th{
+thead th {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     padding: 10px;
+    background-color: #faf7f3;
 }
 
 td {
@@ -95,7 +96,8 @@ td {
     border-bottom: 1px black solid;
 }
 
-.table-header #statusFilter {
+.table-header #statusFilter,
+.table-header #searchInput {
     width: auto;
     margin-right: 20px;
     border-radius: 999px;
@@ -106,24 +108,8 @@ td {
     font-size: 0.85rem;
 }
 
-th:nth-child(1),
-td:nth-child(1) {
-    width: 25%; /* Artisan */
-}
-
-th:nth-child(2),
-td:nth-child(2) {
-    width: 25%; /* Email */
-}
-
-th:nth-child(3),
-td:nth-child(3) {
-    width: 20%; /* Validateur */
-}
-
-th:nth-child(4),
-td:nth-child(4) {
-    width: 30%; /* Gérer */
+.table-header #searchInput {
+    min-width: 200px;
 }
 
 .btn-div-table .btn-small {

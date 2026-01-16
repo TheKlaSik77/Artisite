@@ -24,7 +24,7 @@
       <!-- ✅ Numéro de commande -->
       <div class="order-number">
         <span>Numéro de commande</span>
-        <strong id="orderNumber">—</strong>
+        <strong id="orderNumber">#<?= $_SESSION['last_order_id'] ?? '—' ?></strong>
       </div>
 
       <p class="success-subtext">
@@ -45,22 +45,8 @@
   </main>
 
   <script>
-    /* =============================
-       Génération numéro commande
-       ============================= */
-    function generateOrderNumber(length = 8) {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      let result = "";
-      for (let i = 0; i < length; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return "AS-" + result;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const orderEl = document.getElementById("orderNumber");
-      orderEl.textContent = generateOrderNumber();
-    });
+    // Nettoyer l'ID de commande de la session après affichage
+    <?php unset($_SESSION['last_order_id']); ?>
   </script>
 
 </body>

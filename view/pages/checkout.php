@@ -77,7 +77,7 @@
                         type="text"
                         id="additionnal-information"
                         name="additionnal-information"
-                        value="(Facultatif)"
+                        placeholder="(Facultatif)"
                     >
                 </div>
 

@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="./assets/css/pages/admin/admin-craftmen.css">
     <?php elseif (($_GET['page'] ?? '') === 'admin-customers'): ?>
         <link rel="stylesheet" href="./assets/css/pages/admin/admin-customers.css">
+    <?php elseif (($_GET['page'] ?? '') === 'admin-products'): ?>
+        <link rel="stylesheet" href="./assets/css/pages/admin/admin-products.css">
     <?php elseif (($_GET['page'] ?? '') === 'admin-orders'): ?>
         <link rel="stylesheet" href="./assets/css/pages/admin/admin-orders.css">
     <?php elseif (($_GET['page'] ?? '') === 'admin-reviews'): ?>
