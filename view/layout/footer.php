@@ -14,19 +14,7 @@
 
         <div class="footer-col">
             <div class="footer-logo">
-                <span class="footer-icon">*</span>
-                <h2>Arti’site</h2>
-            </div>
-
-            <p class="footer-desc">
-                Plateforme dédiée à la promotion et à la vente des créations d'artisans
-                et de créateurs français.
-            </p>
-
-            <div class="footer-socials">
-                <a href="#" class="social-btn">*</a>
-                <a href="#" class="social-btn">*</a>
-                <a href="#" class="social-btn">*</a>
+                <img src="./assets/img/logo_fond_sombre.png" alt="Logo Arti'Site" class="footer-logo-img" />
             </div>
         </div>
 
