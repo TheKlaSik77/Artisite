@@ -108,4 +108,43 @@
 
   if (customerBtn) customerBtn.addEventListener("click", recheck);
   if (craftmanBtn) craftmanBtn.addEventListener("click", recheck);
+
+
+  const pass = document.getElementById("password");
+  const pass2 = document.getElementById("password_confirm");
+
+  function checkPasswordsUser() {
+    if (!pass || !pass2) return;
+    if (!pass2.value) return setMsg(pass2, "", true);
+
+    const ok = pass.value === pass2.value;
+    setMsg(pass2, ok ? "" : "Les mots de passe ne correspondent pas.", ok);
+  }
+
+  if (pass) pass.addEventListener("input", checkPasswordsUser);
+  if (pass2) pass2.addEventListener("input", checkPasswordsUser);
+  if (pass2) pass2.addEventListener("blur", checkPasswordsUser);
+
+
+  const passC = document.getElementById("password_craft");
+  const passC2 = document.getElementById("password_confirm_craft");
+
+  function setMsgCustom(input, msg, ok) {
+    if (!input) return;
+    const msgEl = document.getElementById(`${input.id}-msg`);
+    input.setCustomValidity(ok ? "" : msg);
+    if (msgEl) msgEl.textContent = msg || "";
+  }
+
+  function checkPasswordsCraft() {
+    if (!passC || !passC2) return;
+    if (!passC2.value) return setMsgCustom(passC2, "", true);
+
+    const ok = passC.value === passC2.value;
+    setMsgCustom(passC2, ok ? "" : "Les mots de passe ne correspondent pas.", ok);
+  }
+
+  if (passC) passC.addEventListener("input", checkPasswordsCraft);
+  if (passC2) passC2.addEventListener("input", checkPasswordsCraft);
+  if (passC2) passC2.addEventListener("blur", checkPasswordsCraft);
 })();

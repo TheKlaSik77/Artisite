@@ -34,6 +34,14 @@
 
             <form method="POST" action="index.php?page=signup&action=add&type=user" class="form-visible" id="customerForm">
 
+                <!-- ✅ GLOBAL SERVER ERROR (inline, like others) -->
+                <?php if (!empty($_SESSION['signup_error'])): ?>
+                    <small class="field-msg" style="display:block; margin:8px 0;">
+                        <?= htmlspecialchars($_SESSION['signup_error'], ENT_QUOTES, 'UTF-8') ?>
+                    </small>
+                    <?php unset($_SESSION['signup_error']); ?>
+                <?php endif; ?>
+
                 <label>Pseudo</label>
                 <div class="input-group">
                     <span class="icon">📧</span>
@@ -70,16 +78,18 @@
                 <label>Mot de passe</label>
                 <div class="input-group">
                     <span class="icon">🔒</span>
-                    <input type="password" name="password" value="" required>
+                    <input type="password" id="password" name="password" value="" required>
                     <span class="icon eye">👁️</span>
                 </div>
 
                 <label>Confirmer le mot de passe</label>
                 <div class="input-group">
                     <span class="icon">🔒</span>
-                    <input type="password" name="password_confirm" value="" required>
+                    <input type="password" id="password_confirm" name="password_confirm" value="" required>
                     <span class="icon eye">👁️</span>
                 </div>
+                <!-- ✅ show password mismatch like other fields -->
+                <small id="password_confirm-msg" class="field-msg"></small>
 
                 <div class="checkbox-row">
                     <input type="checkbox" required>
@@ -96,6 +106,15 @@
             </form>
 
             <form method="POST" action="index.php?page=signup&action=add&type=craftman" class="form-hidden" id="craftmanForm">
+
+                <!-- ✅ GLOBAL SERVER ERROR (inline, like others) -->
+                <?php if (!empty($_SESSION['signup_error'])): ?>
+                    <small class="field-msg" style="display:block; margin:8px 0;">
+                        <?= htmlspecialchars($_SESSION['signup_error'], ENT_QUOTES, 'UTF-8') ?>
+                    </small>
+                    <?php unset($_SESSION['signup_error']); ?>
+                <?php endif; ?>
+
                 <label>Numéro SIRET (Celui-ci vous servira à vous connecter)</label>
                 <div class="input-group">
                     <input type="text" id="siret" name="siret" placeholder="">
@@ -110,16 +129,17 @@
                 <label>Mot de passe</label>
                 <div class="input-group">
                     <span class="icon">🔒</span>
-                    <input type="password" name="password" value="">
+                    <input type="password" id="password_craft" name="password" value="">
                     <span class="icon eye">👁️</span>
                 </div>
 
                 <label>Confirmer le mot de passe</label>
                 <div class="input-group">
                     <span class="icon">🔒</span>
-                    <input type="password" name="password_confirm" value="">
+                    <input type="password" id="password_confirm_craft" name="password_confirm" value="">
                     <span class="icon eye">👁️</span>
                 </div>
+                <small id="password_confirm_craft-msg" class="field-msg"></small>
 
                 <label>Description de votre activité</label>
                 <div class="textarea-group">

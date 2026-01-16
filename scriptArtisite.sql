@@ -78,7 +78,7 @@ CREATE TABLE
     image (
         image_id INT AUTO_INCREMENT PRIMARY KEY,
         image_link VARCHAR(255) NOT NULL,
-        placeholder VARCHAR(50) NOT NULL,
+        placeholder VARCHAR(50) NULL,
         product_id INT NOT NULL,
         FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE CASCADE ON UPDATE CASCADE
     );
@@ -178,5 +178,5 @@ CREATE TABLE
     image_gallery (
         image_gallery_id INT AUTO_INCREMENT PRIMARY KEY,
         image_link VARCHAR(255) NOT NULL,
-        placeholder VARCHAR(50) NOT NULL
-    )
+        placeholder VARCHAR(50) NULL
+    );

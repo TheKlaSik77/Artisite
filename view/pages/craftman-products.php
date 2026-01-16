@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="./assets/css/pages/craftman-products.css">
 </head>
+<script src="./assets/js/products/image_cycle.js"></script>
 
 <body>
     <main class="products-section craftman-products">
@@ -48,7 +49,9 @@
                 </div>
 
                 <div class="toolbar-right">
-                    <div id="count" class="count-pill"><span><?= htmlspecialchars(count($craftman_products)) ?> Produit(s)</span></div>
+                    <div id="count" class="count-pill">
+                        <span><?= htmlspecialchars(count($craftman_products)) ?> Produit(s)</span>
+                    </div>
                 </div>
             </div>
 
@@ -61,21 +64,20 @@
                                 data-status="published" data-stock="12">
                                 <div class="prod-left">
                                     <div class="prod-thumb">
-                                        <img src="https://picsum.photos/200/300" alt="Bol en céramique">
+                                        <img
+                                            src="<?= htmlspecialchars($product['image_link'] ?? 'https://picsum.photos/200/300') ?>"
+                                            alt="<?= htmlspecialchars($product['name']) ?>">
                                     </div>
 
                                     <div class="prod-meta">
                                         <h3 class="prod-title"><?= htmlspecialchars($product['name']) ?></h3>
                                         <div class="prod-sub">
-                                            <span
-                                                class="badge cat"><?= htmlspecialchars($product['category_name']) ?></span>
-                                            <span class="price"><?= number_format($product['unit_price'], 2, ',', ' ') ?>
-                                                €</span>
+                                            <span class="badge cat"><?= htmlspecialchars($product['category_name']) ?></span>
+                                            <span class="price"><?= number_format($product['unit_price'], 2, ',', ' ') ?> €</span>
                                         </div>
                                         <p class="prod-desc"><?= htmlspecialchars($product['description']) ?></p>
                                     </div>
                                 </div>
-
 
                                 <div class="prod-right">
                                     <div class="qty-box">
@@ -95,32 +97,25 @@
                                     </div>
 
                                     <div class="row-actions">
-
                                         <a class="btn-outline small"
                                             href="index.php?page=edit-product&id=<?= $product['product_id'] ?>">
                                             Modifier
                                         </a>
 
                                         <form method="POST" action="index.php?page=craftman-products&action=delete">
-
                                             <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
-
                                             <button class="btn-danger small" type="submit">
                                                 Supprimer
                                             </button>
                                         </form>
-
                                     </div>
                                 </div>
                         </div>
-
-
                     <?php endforeach; ?>
                 </div>
+            </div>
 
-
-
-
+        </div>
     </main>
 </body>
 

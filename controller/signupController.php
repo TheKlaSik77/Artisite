@@ -11,6 +11,27 @@ function blockBackslashes(array $values): void
     }
 }
 
+
+function renderSignupWithError(string $msg): void
+{
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    $_SESSION['signup_error'] = $msg;
+
+    require "./view/layout/header.php";
+    require "./view/pages/signup.php";
+    require "./view/layout/footer.php";
+    exit;
+}
+
+
+function isValidName(string $name): bool
+{
+    $name = trim($name);
+    if ($name === '') return false;
+
+    return (bool)preg_match("/^[\p{L}\s'-]+$/u", $name);
+}
+
 function signupController(PDO $pdo)
 {
     $action = $_GET['action'] ?? 'read';
@@ -110,13 +131,13 @@ function userAddController(PDO $pdo)
         return;
     }
 
-    $username = $_POST['username'];
-    $last_name = $_POST['last_name'];
-    $first_name = $_POST['first_name'];
-    $email = $_POST['email'];
-    $phone_number = $_POST['phone_number'];
-    $password = $_POST['password'];
-    $password_confirm = $_POST['password_confirm'];
+    $username = $_POST['username'] ?? '';
+    $last_name = $_POST['last_name'] ?? '';
+    $first_name = $_POST['first_name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $phone_number = $_POST['phone_number'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $password_confirm = $_POST['password_confirm'] ?? '';
 
     blockBackslashes([
         $username,
@@ -128,16 +149,41 @@ function userAddController(PDO $pdo)
         $password_confirm
     ]);
 
+
+    if (!isValidName($first_name)) {
+        renderSignupWithError("Prénom invalide (pas de chiffres).");
+    }
+    if (!isValidName($last_name)) {
+        renderSignupWithError("Nom invalide (pas de chiffres).");
+    }
+
     if ($password !== $password_confirm) {
-        die("Les mots de passe ne correspondent pas");
+        renderSignupWithError("Les mots de passe ne correspondent pas.");
+    }
+
+    $emailNorm = strtolower(trim($email));
+    $phoneNorm = preg_replace('/\s+/', '', $phone_number);
+
+    if (usernameExists($pdo, $username)) {
+        renderSignupWithError("Pseudo déjà utilisé.");
+    }
+    if (emailExists($pdo, $emailNorm)) {
+        renderSignupWithError("Email déjà utilisé.");
+    }
+    if (phoneExists($pdo, $phoneNorm)) {
+        renderSignupWithError("Téléphone déjà utilisé.");
     }
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    insertUser($pdo, $username, $last_name, $first_name, $email, $phone_number, $hashed_password);
+    insertUser($pdo, $username, $last_name, $first_name, $emailNorm, $phoneNorm, $hashed_password);
 
-    $user_id = getUserIdByEmail($pdo, $email);
-    CreateCartForUser($pdo, $user_id);
+    $user_id = getUserIdByEmail($pdo, $emailNorm);
+    if (!$user_id) {
+        renderSignupWithError("Erreur serveur: utilisateur introuvable après création.");
+    }
+
+    CreateCartForUser($pdo, (int)$user_id);
 
     header("Location: index.php?page=home");
     exit;
@@ -150,11 +196,11 @@ function craftmanAddController(PDO $pdo)
         return;
     }
 
-    $company_name = $_POST['company_name'];
-    $siret = $_POST['siret'];
-    $description = $_POST['description'];
-    $password = $_POST['password'];
-    $password_confirm = $_POST['password_confirm'];
+    $company_name = $_POST['company_name'] ?? '';
+    $siret = $_POST['siret'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $password_confirm = $_POST['password_confirm'] ?? '';
 
     blockBackslashes([
         $company_name,
@@ -164,13 +210,21 @@ function craftmanAddController(PDO $pdo)
         $password_confirm
     ]);
 
+
     if ($password !== $password_confirm) {
-        die("Les mots de passe ne correspondent pas");
+        renderSignupWithError("Les mots de passe ne correspondent pas.");
+    }
+
+    $siretNorm = preg_replace('/\s+/', '', $siret);
+
+
+    if (siretExists($pdo, $siretNorm)) {
+        renderSignupWithError("SIRET déjà utilisé.");
     }
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    insertCraftman($pdo, $company_name, $siret, $description, $hashed_password);
+    insertCraftman($pdo, $company_name, $siretNorm, $description, $hashed_password);
 
     header("Location: index.php?page=home");
     exit;
