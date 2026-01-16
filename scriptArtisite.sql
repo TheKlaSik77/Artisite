@@ -162,3 +162,27 @@ CREATE TABLE image_gallery (
     image_link VARCHAR(255) NOT NULL,
     placeholder VARCHAR(50) NOT NULL
 );
+
+CREATE TABLE support_ticket (
+  ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+  subject VARCHAR(255) NOT NULL,
+  status ENUM('nouveau','en_cours','resolu') NOT NULL DEFAULT 'nouveau',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NULL,
+
+  customer_id INT NULL,
+  craftman_id INT NOT NULL
+);
+
+CREATE TABLE support_message (
+  message_id INT AUTO_INCREMENT PRIMARY KEY,
+  ticket_id INT NOT NULL,
+  sender_role ENUM('customer','craftman','admin') NOT NULL,
+  sender_id INT NULL,
+  body TEXT NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_support_ticket
+    FOREIGN KEY (ticket_id) REFERENCES support_ticket(ticket_id)
+    ON DELETE CASCADE
+);
