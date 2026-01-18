@@ -8,10 +8,18 @@ function getAllProducts(PDO $pdo)
             product.name,
             product.unit_price,
             product.quantity,
-            craftman.company_name
+            product.description,
+            craftman.company_name,
+            category.category_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
         FROM product
         INNER JOIN craftman
             ON product.craftman_id = craftman.craftman_id
+        INNER JOIN category
+            ON product.category_id = category.category_id
+        LEFT JOIN image
+            ON image.product_id = product.product_id
+        GROUP BY product.product_id
         ORDER BY product.product_id DESC
     ";
 
@@ -31,13 +39,17 @@ function getProductById(PDO $pdo, int $id)
             product.unit_price,
             product.quantity,
             category.category_name,
-            craftman.company_name
+            craftman.company_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
         FROM product
         INNER JOIN category
             ON product.category_id = category.category_id
         INNER JOIN craftman
             ON product.craftman_id = craftman.craftman_id
+        LEFT JOIN image
+            ON image.product_id = product.product_id
         WHERE product.product_id = ?
+        GROUP BY product.product_id
     ";
 
     $stmt = $pdo->prepare($sql);

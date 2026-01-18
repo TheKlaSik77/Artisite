@@ -131,7 +131,10 @@ function addProductController(PDO $pdo)
 
             $relativePath = "uploads/products/" . $product_id . "/" . $filename;
 
-            $ok = insertProductImage($pdo, $product_id, $relativePath, null);
+            // Generate placeholder from product name
+            $placeholder = substr($name, 0, 50);
+            
+            $ok = insertProductImage($pdo, $product_id, $relativePath, $placeholder);
             if (!$ok) {
                 throw new RuntimeException("Erreur insertion image en DB");
             }

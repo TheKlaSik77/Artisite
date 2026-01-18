@@ -64,16 +64,17 @@
                                 data-status="published" data-stock="12">
                                 <div class="prod-left">
                                     <div class="prod-thumb">
-                                        <img
-                                            src="<?= htmlspecialchars($product['image_link'] ?? 'https://picsum.photos/200/300') ?>"
+                                        <img src="<?= htmlspecialchars($product['image_link'] ?? 'https://picsum.photos/200/300') ?>"
                                             alt="<?= htmlspecialchars($product['name']) ?>">
                                     </div>
 
                                     <div class="prod-meta">
                                         <h3 class="prod-title"><?= htmlspecialchars($product['name']) ?></h3>
                                         <div class="prod-sub">
-                                            <span class="badge cat"><?= htmlspecialchars($product['category_name']) ?></span>
-                                            <span class="price"><?= number_format($product['unit_price'], 2, ',', ' ') ?> €</span>
+                                            <span
+                                                class="badge cat"><?= htmlspecialchars($product['category_name']) ?></span>
+                                            <span class="price"><?= number_format($product['unit_price'], 2, ',', ' ') ?>
+                                                €</span>
                                         </div>
                                         <p class="prod-desc"><?= htmlspecialchars($product['description']) ?></p>
                                     </div>
@@ -89,7 +90,7 @@
 
                                         <input type="text" value="<?= $product['quantity'] ?>" readonly>
 
-                                        <form method="POST" action="index.php?page=craftman-products&action=update">
+                                        <form method="POST" action="index.php?page=craftman-products&action=updateQuantity">
                                             <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
                                             <input type="hidden" name="quantity" value="<?= $product['quantity'] + 1 ?>">
                                             <button type="submit">+</button>

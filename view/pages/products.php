@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./assets/css/pages/products.css">
 </head>
 <script src="./assets/js/products/image_cycle.js"></script>
+
 <body>
     <main class="products-section">
         <h1 class="products-title">Nos Produits Artisanaux</h1>
@@ -71,49 +72,50 @@
             </p>
         <?php else: ?>
 
-        <!-- ================== GRILLE PRODUITS ================== -->
-        <div class="products-grid">
+            <!-- ================== GRILLE PRODUITS ================== -->
+            <div class="products-grid">
 
-            <?php foreach ($products as $product): ?>
-                <div class="product-card product-appear">
+                <?php foreach ($products as $product): ?>
+                    <div class="product-card product-appear">
 
-                    <?php
-                    $links = [];
-                    if (!empty($product['image_links'])) {
-                        $links = array_values(array_filter(explode('||', $product['image_links'])));
-                    }
-                    $first = $links[0] ?? 'https://picsum.photos/500/300';
-                    ?>
+                        <?php
+                        $links = [];
+                        if (!empty($product['image_links'])) {
+                            $rawLinks = array_values(array_filter(explode('||', $product['image_links'])));
+                            // Ajouter le préfixe /Artisite/ pour chaque lien
+                            foreach ($rawLinks as $link) {
+                                $links[] = '/Artisite/' . ltrim($link, '/');
+                            }
+                        }
+                        $first = $links[0] ?? 'https://picsum.photos/500/300';
+                        ?>
 
-                    <img
-                        class="js-product-img"
-                        src="<?= htmlspecialchars($first) ?>"
-                        data-images='<?= htmlspecialchars(json_encode($links, JSON_UNESCAPED_SLASHES)) ?>'
-                        style="width: 400px; height: 300px;"
-                        alt="<?= htmlspecialchars($product['name']) ?>">
+                        <img class="js-product-img" src="<?= htmlspecialchars($first) ?>"
+                            data-images='<?= htmlspecialchars(json_encode($links, JSON_UNESCAPED_SLASHES)) ?>'
+                            style="width: 400px; height: 300px;" alt="<?= htmlspecialchars($product['name']) ?>">
 
-                    <div class="product-info">
-                        <h3 class="product-name">
-                            <?= htmlspecialchars($product['name']) ?>
-                        </h3>
+                        <div class="product-info">
+                            <h3 class="product-name">
+                                <?= htmlspecialchars($product['name']) ?>
+                            </h3>
 
-                        <p class="product-artisan">
-                            <?= htmlspecialchars($product['company_name']) ?>
-                        </p>
+                            <p class="product-artisan">
+                                <?= htmlspecialchars($product['company_name']) ?>
+                            </p>
 
-                        <p class="product-price">
-                            <?= number_format($product['unit_price'], 2, ',', ' ') ?> €
-                        </p>
+                            <p class="product-price">
+                                <?= number_format($product['unit_price'], 2, ',', ' ') ?> €
+                            </p>
 
-                        <a href="index.php?page=product&id=<?= $product['product_id'] ?>" class="product-btn">
-                            Acheter
-                        </a>
+                            <a href="index.php?page=product&id=<?= $product['product_id'] ?>" class="product-btn">
+                                Acheter
+                            </a>
+                        </div>
+
                     </div>
+                <?php endforeach; ?>
 
-                </div>
-            <?php endforeach; ?>
-
-        </div>
+            </div>
 
         <?php endif ?>
     </main>
