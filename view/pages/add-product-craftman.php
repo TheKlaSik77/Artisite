@@ -16,12 +16,16 @@
             <a class="btn-outline" href="index.php?page=craftman-products">← Retour</a>
         </header>
 
-        <form method="POST" class="form" action="index.php?page=add-product-craftman&action=add" id="productForm" enctype="multipart/form-data">
-            
+        <form method="POST"
+              class="form"
+              action="index.php?page=add-product-craftman&action=add"
+              id="productForm"
+              enctype="multipart/form-data">
+
             <!-- Infos principales -->
             <div class="field">
                 <label for="title">Nom du produit</label>
-                <input id="title" name="name" type="text" placeholder="" required>
+                <input id="title" name="name" type="text" required>
             </div>
 
             <div class="row">
@@ -42,25 +46,27 @@
                         <option value="" disabled selected>— Choisissez une catégorie —</option>
                         <?php foreach ($categories as $category): ?>
                             <option value="<?= $category['category_id'] ?>">
-                                <?= htmlspecialchars($category['category_name']) ?></option>
+                                <?= htmlspecialchars($category['category_name']) ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
-
-
             </div>
 
             <div class="field">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" rows="5" placeholder="Décris ton produit..."
-                    required></textarea>
+                <textarea id="description" name="description" rows="5" placeholder="Décris ton produit..." required></textarea>
             </div>
 
             <!-- Images -->
             <div class="field">
                 <label for="images">Images (3 à 6)</label>
-                <input id="images" name="images[]" type="file" multiple accept="image/jpeg,image/png,image/webp"
-                    >
+                <input id="images"
+                       name="images[]"
+                       type="file"
+                       multiple
+                       accept="image/jpeg,image/png,image/webp"
+                       required>
                 <div id="preview" class="preview"></div>
             </div>
 
@@ -71,9 +77,5 @@
         </form>
     </div>
 
-    
-
-
 </body>
-
 </html>

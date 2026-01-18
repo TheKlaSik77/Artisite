@@ -1,40 +1,66 @@
 <?php
 
-
-
 /* --------------------------------------
             READ FONCTIONS
 ----------------------------------------*/
 function getAllProducts(PDO $pdo) {
-    $stmt = $pdo->prepare("Select product.*, craftman.company_name From product INNER JOIN craftman ON product.craftman_id = craftman.craftman_id");
-    $stmt -> execute();
+    $stmt = $pdo->prepare("
+        SELECT
+            product.*,
+            craftman.company_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
+        FROM product
+        INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
+        LEFT JOIN image ON image.product_id = product.product_id
+        GROUP BY product.product_id
+    ");
+    $stmt->execute();
     return $stmt->fetchAll();
 }
 
 function getProductById(PDO $pdo, int $id){
     $stmt = $pdo->prepare("
-    Select product.*, craftman.company_name, category.category_name From category INNER JOIN product ON category.category_id = product.category_id INNER JOIN craftman ON product.craftman_id = craftman.craftman_id Where product.product_id = ?");
-    $stmt -> execute([$id]);
+        SELECT
+            product.*,
+            craftman.company_name,
+            category.category_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
+        FROM category
+        INNER JOIN product ON category.category_id = product.category_id
+        INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
+        LEFT JOIN image ON image.product_id = product.product_id
+        WHERE product.product_id = ?
+        GROUP BY product.product_id
+    ");
+    $stmt->execute([$id]);
     return $stmt->fetchAll();
 }
 
 function getProductsByCategory(PDO $pdo, string $category_name){
     $stmt = $pdo->prepare("
-    Select product.*, craftman.company_name  
-    From product INNER JOIN category ON product.category_id = category.category_id
-    Where category_name = ?");
-    $stmt -> execute([$category_name]);
+        SELECT
+            product.*,
+            craftman.company_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
+        FROM product
+        INNER JOIN category ON product.category_id = category.category_id
+        INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
+        LEFT JOIN image ON image.product_id = product.product_id
+        WHERE category_name = ?
+        GROUP BY product.product_id
+    ");
+    $stmt->execute([$category_name]);
     return $stmt->fetchAll();
 }
 
 function getProductsBySearch(PDO $pdo, string $search){
     $stmt = $pdo->prepare("
-    Select product.*, craftman.company_name 
-    FROM product INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
-    WHERE description LIKE '%?%' OR product_name LIKE '%?%'
+        Select product.*, craftman.company_name 
+        FROM product INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
+        WHERE description LIKE '%?%' OR product_name LIKE '%?%'
     ");
-    $stmt -> execute([$search]);
-    return $stmt -> fetchAll();
+    $stmt->execute([$search]);
+    return $stmt->fetchAll();
 }
 
 function getNbProductsOfCraftman(PDO $pdo, int $craftman_id){

@@ -1,5 +1,8 @@
 <?php session_start();
 
+$isAjax = ($_GET['page'] ?? '') === 'signup' && ($_GET['action'] ?? '') === 'checkDuplicate';
+
+
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 
@@ -44,6 +47,16 @@ if (in_array($page, $ajaxPages, true)) {
     exit;
 }
 
+if ($isAjax) {
+    $page = $_GET['page'] ?? '';
+    if ($page === "signup") {
+        require_once "./controller/signupController.php";
+        signupController($pdo);
+        exit;
+    }
+    http_response_code(404);
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -54,18 +67,14 @@ if (in_array($page, $ajaxPages, true)) {
     <title>Arti'Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- Intègre toutes les variables css nécéssaires aux autres fichiers css -->
     <link rel="stylesheet" href="./assets/css/variables.css">
 </head>
 
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
 # Décommenter pour ajouter un admin
 # require_once "create_admin.php";
+
+$page = $_GET['page'] ?? 'home';
 
 
 switch ($page) {
@@ -82,13 +91,18 @@ switch ($page) {
 
     case "product":
         require_once "./controller/productController.php";
-        $id = $_GET['id'];
+        $id = (int)($_GET['id'] ?? 0);
         productController($pdo, $id);
         break;
 
     case "cart":
         require_once "./controller/cartController.php";
         cartController($pdo);
+        break;
+
+    case "profil":
+        require_once "./controller/profilController.php";
+        profilController($pdo);
         break;
 
     case "signup":
@@ -244,4 +258,3 @@ switch ($page) {
         require "./view/layout/footer.php";
         break;
 }
-

@@ -1,45 +1,39 @@
 <?php
 
-
-
-/* --------------------------------------
-            READ FONCTIONS
-----------------------------------------*/
-function getAllProductsOfCraftman(PDO $pdo, int $craftman_id) {
-    $stmt = $pdo->prepare("SELECT product.product_id, product.name, craftman.company_name, category.category_name, product.unit_price, product.description, product.quantity FROM craftman INNER JOIN product ON craftman.craftman_id = product.craftman_id INNER JOIN category ON product.category_id = category.category_id WHERE craftman.craftman_id = ?");
-    $stmt -> execute([$craftman_id]);
-    return $stmt->fetchAll();
-}
-
-
-function updateCraftmanProductsQuantity(PDO $pdo, int $product_id, int $new_quantity){
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        require "./view/pages/404.php";
-        return;
-    }
-
-    $product_id = $_POST["product_id"];
-    $new_quantity = $_POST["quantity"];
-
-    if ($product_id != null) {
-        $stmt = $pdo->prepare("
-        UPDATE product
-        SET quantity = ?
-        WHERE product_id = ?
-    ");
-
-        return $stmt->execute([$new_quantity, $product_id]);
-    }
-    header("Location: index.php?page=craftman-products");
-    exit;
-}
-
-function deleteProduct(PDO $pdo, int $product_id): bool{
+function getAllProductsOfCraftman(PDO $pdo, int $craftman_id): array
+{
     $stmt = $pdo->prepare("
-        DELETE FROM product
-        WHERE product_id = ?
+        SELECT
+            p.product_id,
+            p.name,
+            p.quantity,
+            p.unit_price,
+            p.description,
+            c.category_name,
+            i.image_link
+        FROM product p
+        JOIN category c ON c.category_id = p.category_id
+        LEFT JOIN (
+            SELECT product_id, MIN(image_id) AS min_image_id
+            FROM image
+            GROUP BY product_id
+        ) first_img ON first_img.product_id = p.product_id
+        LEFT JOIN image i ON i.image_id = first_img.min_image_id
+        WHERE p.craftman_id = ?
+        ORDER BY p.product_id DESC
     ");
+    $stmt->execute([$craftman_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    $stmt->execute([$product_id]);
-    return $stmt -> rowCount() > 0;
+function updateCraftmanProductsQuantity(PDO $pdo, int $product_id, int $new_quantity): bool
+{
+    $stmt = $pdo->prepare("UPDATE product SET quantity = ? WHERE product_id = ?");
+    return $stmt->execute([$new_quantity, $product_id]);
+}
+
+function deleteProduct(PDO $pdo, int $product_id): bool
+{
+    $stmt = $pdo->prepare("DELETE FROM product WHERE product_id = ?");
+    return $stmt->execute([$product_id]);
 }

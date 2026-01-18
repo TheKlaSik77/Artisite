@@ -1,9 +1,10 @@
 CREATE TABLE administrator (
-    admin_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    phone_number VARCHAR(20) NOT NULL,
-    hashed_password VARCHAR(255) NOT NULL
+        admin_id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        phone_number VARCHAR(20) NOT NULL,
+        hashed_password VARCHAR(255) NOT NULL,
+        profile_image VARCHAR(255) NULL
 );
 
 CREATE TABLE craftman (
@@ -14,6 +15,7 @@ CREATE TABLE craftman (
         description VARCHAR(255),
         hashed_password VARCHAR(255) NOT NULL,
         validator_id INT,
+        profile_image VARCHAR(255) NULL,
         FOREIGN KEY (validator_id) REFERENCES administrator (admin_id) ON UPDATE CASCADE
     );
 
@@ -45,15 +47,16 @@ CREATE TABLE product (
 );
 
 CREATE TABLE user (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    last_name VARCHAR(50) NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    phone_number VARCHAR(20) NOT NULL UNIQUE,
-    hashed_password VARCHAR(255) NOT NULL,
-    accepted_terms_of_use_id INT,
-    FOREIGN KEY (accepted_terms_of_use_id) REFERENCES terms_of_use (terms_of_use_id) ON UPDATE CASCADE
+        user_id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        last_name VARCHAR(50) NOT NULL,
+        first_name VARCHAR(50) NOT NULL,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        phone_number VARCHAR(20) NOT NULL UNIQUE,
+        hashed_password VARCHAR(255) NOT NULL,
+        accepted_terms_of_use_id INT,
+        profile_image VARCHAR(255) NULL,
+        FOREIGN KEY (accepted_terms_of_use_id) REFERENCES terms_of_use (terms_of_use_id) ON UPDATE CASCADE
 );
 
 CREATE TABLE address (
@@ -194,3 +197,17 @@ CREATE TABLE support_message (
     FOREIGN KEY (ticket_id) REFERENCES support_ticket(ticket_id)
     ON DELETE CASCADE
 );
+
+INSERT INTO category (category_name) VALUES
+('Décoration & Maison'),
+('Bijoux & Accessoires'),
+('Mode & Textile'),
+('Art & Illustration'),
+('Céramique & Verrerie'),
+('Bois & Sculpture'),
+('Bien-être & Nature'),
+('Papeterie & Écriture'),
+('Enfants & Jouets'),
+('Cadeaux & Personnalisation'),
+('Artisanat du Monde'),
+('Pièces uniques & Collections');

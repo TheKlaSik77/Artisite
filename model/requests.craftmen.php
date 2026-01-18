@@ -1,9 +1,7 @@
 <?php
 
-
-
 /* --------------------------------------
-            READ FONCTIONS
+            READ FUNCTIONS
 ----------------------------------------*/
 function getAllCraftmen(PDO $pdo)
 {
@@ -15,10 +13,12 @@ function getAllCraftmen(PDO $pdo)
             craftman.description,
             craftman.validator_id,
             administrator.email AS validator_email,
-            craftman.company_name
+            craftman.company_name,
+            craftman.profile_image
         FROM craftman
         LEFT JOIN administrator 
             ON craftman.validator_id = administrator.admin_id
+        ORDER BY company_name ASC
     ");
     $stmt->execute();
     return $stmt->fetchAll();
@@ -34,11 +34,13 @@ function getAllValidatedCraftmen(PDO $pdo)
             craftman.description,
             craftman.validator_id,
             administrator.email AS validator_email,
-            craftman.company_name
+            craftman.company_name,
+            craftman.profile_image
         FROM craftman
         LEFT JOIN administrator 
             ON craftman.validator_id = administrator.admin_id
         where craftman.validator_id IS NOT NULL
+        ORDER BY company_name ASC
     ");
     $stmt->execute();
     return $stmt->fetchAll();
@@ -47,9 +49,10 @@ function getAllValidatedCraftmen(PDO $pdo)
 function getCraftmanById(PDO $pdo, int $craftman_id)
 {
     $stmt = $pdo->prepare("
-    Select craftman_id, siret, email, description, validator_id, company_name from craftman where craftman_id = ?");
+    Select craftman_id, siret, email, description, validator_id, company_name, profile_image from craftman where craftman_id = ?");
     $stmt->execute([$craftman_id]);
-    return $stmt->fetchAll();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row ?: null;
 }
 
 /* --------------------------------------

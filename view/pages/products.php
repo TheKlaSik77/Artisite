@@ -6,7 +6,7 @@
     <title>Nos Produits – Marketplace Artisans</title>
     <link rel="stylesheet" href="./assets/css/pages/products.css">
 </head>
-
+<script src="./assets/js/products/image_cycle.js"></script>
 <body>
     <main class="products-section">
         <h1 class="products-title">Nos Produits Artisanaux</h1>
@@ -65,8 +65,7 @@
         </div>
 
         <!-- Message aucun résultat -->
-        <?php
-        if (empty($products)): ?>
+        <?php if (empty($products)): ?>
             <p id="noResults" class="no-results">
                 Aucun produit ne correspond à vos filtres.
             </p>
@@ -78,7 +77,20 @@
             <?php foreach ($products as $product): ?>
                 <div class="product-card product-appear">
 
-                    <img src="https://picsum.photos/500/300" style="width: 400px; height: 300px;">
+                    <?php
+                    $links = [];
+                    if (!empty($product['image_links'])) {
+                        $links = array_values(array_filter(explode('||', $product['image_links'])));
+                    }
+                    $first = $links[0] ?? 'https://picsum.photos/500/300';
+                    ?>
+
+                    <img
+                        class="js-product-img"
+                        src="<?= htmlspecialchars($first) ?>"
+                        data-images='<?= htmlspecialchars(json_encode($links, JSON_UNESCAPED_SLASHES)) ?>'
+                        style="width: 400px; height: 300px;"
+                        alt="<?= htmlspecialchars($product['name']) ?>">
 
                     <div class="product-info">
                         <h3 class="product-name">
@@ -103,18 +115,9 @@
 
         </div>
 
-        
-
-            <!-- Pagination -->
-        <!-- 
-            <div class="pagination">
-                <button id="prevPage" class="pagination-btn" disabled>‹ Précédent</button>
-                <span id="pageIndicator"></span>
-                <button id="nextPage" class="pagination-btn">Suivant ›</button>
-            </div>
-            -->
-        <?php endif ?> 
+        <?php endif ?>
     </main>
+
 </body>
 
 </html>

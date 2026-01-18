@@ -1,6 +1,16 @@
 <?php
 require_once './model/requests.signin.php';
 
+function blockBackslashes(array $values): void
+{
+    foreach ($values as $v) {
+        if (is_string($v) && strpos($v, '\\') !== false) {
+            http_response_code(400);
+            die('Backslash interdit');
+        }
+    }
+}
+
 function signinController(PDO $pdo)
 {
     $action = $_GET['action'] ?? 'read';
@@ -33,7 +43,17 @@ function signinController(PDO $pdo)
 function signinProcessController(PDO $pdo)
 {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        die("Mauvaise requête");
+        require "./view/pages/404.php";
+        return;
+    }
+
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    blockBackslashes([$email, $password]);
+
+    if ($email === '') {
+        die("Veuillez renseigner l'email.");
     }
 
     $email = trim($_POST['email'] ?? '');
@@ -47,7 +67,7 @@ function signinProcessController(PDO $pdo)
 
         if ($user && password_verify($password, $user['hashed_password'])) {
             $_SESSION['user'] = [
-                'id' => $user['user_id'],
+                'id' => (int)$user['user_id'],
                 'role' => 'user',
                 'email' => $email
             ];
@@ -74,14 +94,14 @@ function signinProcessController(PDO $pdo)
             die("Identifiants incorrects");
         }
 
-        // 🔒 Bloquer si pas validé (validator_id NULL)
+        // Bloquer si pas validé (validator_id NULL)
         if ($craftman['validator_id'] === null) {
             header("Location: index.php?page=signin&action=not_validated");
             exit;
         }
 
         $_SESSION['user'] = [
-            'id' => $craftman['craftman_id'],
+            'id' => (int)$craftman['craftman_id'],
             'role' => 'craftman',
             'email' => $craftman['email']
         ];
