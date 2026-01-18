@@ -31,6 +31,7 @@ if ($isAjax) {
 
 <?php
 $page = $_GET['page'] ?? 'home';
+
 switch ($page) {
     case "home":
         require "./view/layout/header.php";
@@ -45,13 +46,18 @@ switch ($page) {
 
     case "product":
         require_once "./controller/productController.php";
-        $id = $_GET['id'];
+        $id = (int)($_GET['id'] ?? 0);
         productController($pdo, $id);
         break;
 
     case "cart":
         require_once "./controller/cartController.php";
         cartController($pdo);
+        break;
+
+    case "profil":
+        require_once "./controller/profilController.php";
+        profilController($pdo);
         break;
 
     case "signup":

@@ -4,7 +4,8 @@ CREATE TABLE
         username VARCHAR(50) NOT NULL UNIQUE,
         email VARCHAR(100) NOT NULL UNIQUE,
         phone_number VARCHAR(20) NOT NULL,
-        hashed_password VARCHAR(255) NOT NULL
+        hashed_password VARCHAR(255) NOT NULL,
+        profile_image VARCHAR(255) NULL
     );
 
 CREATE TABLE
@@ -15,6 +16,7 @@ CREATE TABLE
         description VARCHAR(255),
         hashed_password VARCHAR(255) NOT NULL,
         validator_id INT,
+        profile_image VARCHAR(255) NULL,
         FOREIGN KEY (validator_id) REFERENCES administrator (admin_id) ON UPDATE CASCADE
     );
 
@@ -59,6 +61,7 @@ CREATE TABLE
         hashed_password VARCHAR(255) NOT NULL,
         description TEXT,
         accepted_terms_of_use_id INT,
+        profile_image VARCHAR(255) NULL,
         FOREIGN KEY (accepted_terms_of_use_id) REFERENCES terms_of_use (terms_of_use_id) ON UPDATE CASCADE
     );
 

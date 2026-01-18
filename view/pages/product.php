@@ -3,8 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bol en céramique - Artisite</title>
+    <title><?= htmlspecialchars($product['name'] ?? 'Produit') ?> - Artisite</title>
+
     <link rel="stylesheet" href="./assets/css/pages/product.css">
+
+    <!-- Product page JS (gallery + reviews) -->
+    <script src="./assets/js/products/image.js" defer></script>
 </head>
 
 <body>
@@ -15,44 +19,70 @@
 
         <!-- ================== HEADER CHEMIN ================== -->
         <div class="breadcrumb">
-            <a href="index.html">Accueil</a> /
-            <a href="produit.html">Produits</a> /
-            <span>Bol en céramique</span>
+            <a href="index.php">Accueil</a> /
+            <a href="index.php?page=products">Produits</a> /
+            <span><?= htmlspecialchars($product['name'] ?? 'Produit') ?></span>
         </div>
+
+        <?php
+        // Build images array from GROUP_CONCAT result
+        $images = [];
+
+        if (!empty($product['image_links'])) {
+            $images = explode('||', $product['image_links']);
+            $images = array_values(array_filter($images, fn($v) => trim($v) !== ''));
+        }
+
+        // fallback if no image
+        $mainImage = $images[0] ?? './assets/img/placeholder.png';
+        ?>
 
         <!-- ================== BLOC PRODUIT ================== -->
         <section class="product-hero">
 
             <!-- Colonne image(s) -->
             <div class="product-gallery">
+
+                <!-- Main image -->
                 <div class="product-main-image">
-                    <img src="https://picsum.photos/200/300" alt="Bol en céramique">
+                    <img
+                        id="mainProductImage"
+                        src="<?= htmlspecialchars($mainImage) ?>"
+                        alt="<?= htmlspecialchars($product['name'] ?? 'Produit') ?>">
                 </div>
-                <div class="product-thumbs">
-                    <button class="thumb thumb-active">
-                        <img src="https://picsum.photos/200/300" alt="Vue 1 bol en céramique">
-                    </button>
-                    <button class="thumb">
-                        <img src="https://picsum.photos/200/300" alt="Vue 2 bol en céramique">
-                    </button>
-                    <button class="thumb">
-                        <img src="https://picsum.photos/200/300" alt="Vue 3 bol en céramique">
-                    </button>
-                </div>
+
+                <!-- Thumbnails -->
+                <?php if (!empty($images)): ?>
+                    <div class="product-thumbs">
+                        <?php foreach ($images as $index => $imgPath): ?>
+                            <button
+                                type="button"
+                                class="thumb <?= $index === 0 ? 'thumb-active' : '' ?>"
+                                data-img="<?= htmlspecialchars($imgPath) ?>"
+                                aria-label="Voir image <?= $index + 1 ?>">
+                                <img
+                                    src="<?= htmlspecialchars($imgPath) ?>"
+                                    alt="<?= htmlspecialchars($product['name'] ?? 'Produit') ?> - Vue <?= $index + 1 ?>">
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+
             </div>
 
             <!-- Colonne infos produit -->
             <div class="product-info">
 
                 <p class="product-category">
-                    <?= htmlspecialchars($product['category_name']) ?>
+                    <?= htmlspecialchars($product['category_name'] ?? '') ?>
                 </p>
+
                 <h1 class="product-title">
-                    <?= htmlspecialchars($product['name']) ?>
+                    <?= htmlspecialchars($product['name'] ?? '') ?>
                 </h1>
 
                 <p class="product-artisan">
-                    <?= htmlspecialchars($product['company_name']) ?>
+                    <?= htmlspecialchars($product['company_name'] ?? '') ?>
                 </p>
 
                 <div class="product-rating">
@@ -61,7 +91,9 @@
                 </div>
 
                 <p class="product-price">
-                    <?= number_format($product['unit_price'], 2, ',', ' ') ?> €
+                    <?= isset($product['unit_price'])
+                        ? number_format((float)$product['unit_price'], 2, ',', ' ')
+                        : '' ?> €
                 </p>
 
                 <div class="product-actions">
@@ -75,7 +107,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+                        <input type="hidden" name="product_id" value="<?= (int)($product['product_id'] ?? 0) ?>">
 
                         <button type="submit" class="btn-primary">
                             Ajouter au panier
@@ -100,14 +132,14 @@
             <div>
                 <h2>Description détaillée</h2>
                 <p>
-                    <?= htmlspecialchars($product['description']) ?>
+                    <?= htmlspecialchars($product['description'] ?? '') ?>
                 </p>
             </div>
-
         </section>
 
         <!-- ================== AVIS CLIENTS ================== -->
         <section class="reviews-section" id="avis">
+
             <div class="reviews-header">
                 <h2>Avis clients</h2>
                 <div class="reviews-summary">
@@ -121,6 +153,7 @@
 
             <!-- Liste des avis -->
             <div class="reviews-list">
+
                 <article class="review-card">
                     <header class="review-header">
                         <div>
@@ -148,17 +181,21 @@
                         que sur les photos, mais ça reste très joli.
                     </p>
                 </article>
+
             </div>
 
             <!-- Formulaire pour laisser un avis -->
             <div class="review-form-card">
                 <h3>Laisser un avis</h3>
+
                 <form class="review-form">
+
                     <div class="form-row">
                         <div class="form-field">
                             <label for="reviewName">Votre prénom</label>
                             <input type="text" id="reviewName" name="name" placeholder="Ex : Camille" required>
                         </div>
+
                         <div class="form-field">
                             <label for="reviewRating">Note</label>
                             <select id="reviewRating" name="rating" required>
@@ -174,8 +211,12 @@
 
                     <div class="form-field">
                         <label for="reviewText">Votre avis</label>
-                        <textarea id="reviewText" name="message" rows="4"
-                            placeholder="Parlez de la qualité, de l’emballage, de la livraison…" required></textarea>
+                        <textarea
+                            id="reviewText"
+                            name="message"
+                            rows="4"
+                            placeholder="Parlez de la qualité, de l’emballage, de la livraison…"
+                            required></textarea>
                     </div>
 
                     <button type="submit" class="btn-primary">
@@ -189,18 +230,5 @@
 
     </main>
 
-    <!-- Petit JS facultatif juste pour afficher un message de confirmation -->
-    <script>
-        const reviewForm = document.querySelector(".review-form");
-        const reviewFeedback = document.querySelector(".review-feedback");
-
-        reviewForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            reviewFeedback.textContent = "Merci pour votre avis ! Il sera publié après validation.";
-            reviewForm.reset();
-        });
-    </script>
-
 </body>
-
 </html>

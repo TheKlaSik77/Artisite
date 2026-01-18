@@ -33,9 +33,12 @@
                 <a href="index.php?page=signup" class="btn-signup">S'inscrire</a>
 
             <?php elseif (isUser()): ?>
-                <a href="index.php?page=cart" class="icon-btn">🛒</a>
+                <a href="index.php?page=profil" class="icon-btn" aria-label="Mon profil">👤</a>
+                <a href="index.php?page=cart" class="icon-btn" aria-label="Panier">🛒</a>
                 <a href="index.php?page=logout" class="btn-signin logout">Se déconnecter</a>
+
             <?php else: ?>
+                <a href="index.php?page=profil" class="icon-btn" aria-label="Mon profil">👤</a>
                 <a href="index.php?page=logout" class="btn-signin logout">Se déconnecter</a>
 
             <?php endif; ?>
