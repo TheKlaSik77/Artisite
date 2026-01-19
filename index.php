@@ -73,6 +73,11 @@ switch ($page) {
         require_once "./controller/addProductCraftmanController.php";
         addProductCraftmanController($pdo);
         break;
+    
+    case "edit-product":
+        require_once "./controller/craftmanProductsController.php";
+         editCraftmanProductController($pdo);
+        break;
 
     case "craftmen":
         require_once "./controller/craftmenController.php";
