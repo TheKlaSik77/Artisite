@@ -176,9 +176,9 @@ switch ($page) {
         craftmanSupportController($pdo);
         break;
 
-        /*------------------------------------ 
-                    PAGES ADMIN 
-        -------------------------------------*/
+    /*------------------------------------ 
+                PAGES ADMIN 
+    -------------------------------------*/
     
     case "admin-craftmen":
         if (isAdmin()) {
