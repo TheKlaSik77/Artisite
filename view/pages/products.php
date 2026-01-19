@@ -9,14 +9,22 @@
 <script src="./assets/js/products/image_cycle.js"></script>
 
 <body>
+
     <main class="products-section">
+
         <h1 class="products-title">Nos Produits Artisanaux</h1>
         <p class="products-subtitle">
             Découvrez des pièces uniques créées par nos artisans.
         </p>
 
         <!-- ================== FILTRES ================== -->
-        <div class="filter-card">
+        <form method="GET" action="index.php" class="filter-card">
+
+            <input type="hidden" name="page" value="products">
+            <input type="hidden" name="category" id="categoryInput"
+                value="<?= htmlspecialchars($_GET['category'] ?? 'Tous') ?>">
+            <input type="hidden" name="material" id="materialInput"
+                value="<?= htmlspecialchars($_GET['material'] ?? 'Tous') ?>">
 
             <div class="filter-header">
                 <div class="filter-icon">⭮</div>
@@ -30,8 +38,9 @@
             <div class="filter-row">
                 <div class="filter-input-wrapper">
                     <span class="filter-input-icon">🔍</span>
-                    <input type="text" id="productSearch" class="filter-input"
-                        placeholder="Rechercher par produit ou artisan..." />
+                    <input type="text" name="search" class="filter-input"
+                        placeholder="Rechercher par produit ou artisan..."
+                        value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" />
                 </div>
             </div>
 
@@ -39,12 +48,13 @@
             <div class="filter-row">
                 <p class="filter-label">Catégorie :</p>
                 <div class="chip-group" id="categoryChips">
-                    <button class="chip chip-active" data-category="Tous">Tous</button>
-                    <button class="chip" data-category="Poterie">Poterie</button>
-                    <button class="chip" data-category="Vêtements">Vêtements</button>
-                    <button class="chip" data-category="Décoration">Décoration</button>
-                    <button class="chip" data-category="Accessoires">Accessoires</button>
-                    <button class="chip" data-category="Autre">Autre</button>
+                    <?php foreach (['Tous', 'Poterie', 'Vêtements', 'Décoration', 'Accessoires', 'Autre'] as $cat): ?>
+                        <button type="button"
+                            class="chip <?= ($_GET['category'] ?? 'Tous') === $cat ? 'chip-active' : '' ?>"
+                            data-value="<?= $cat ?>">
+                            <?= $cat ?>
+                        </button>
+                    <?php endforeach; ?>
                 </div>
             </div>
 
@@ -52,27 +62,27 @@
             <div class="filter-row">
                 <p class="filter-label">Matière :</p>
                 <div class="chip-group" id="materialChips">
-                    <button class="chip chip-active" data-material="Tous">Tous</button>
-                    <button class="chip" data-material="Céramique">Céramique</button>
-                    <button class="chip" data-material="Bois">Bois</button>
-                    <button class="chip" data-material="Cuir">Cuir</button>
-                    <button class="chip" data-material="Textile">Textile</button>
-                    <button class="chip" data-material="Métal">Métal</button>
-                    <button class="chip" data-material="Verre">Verre</button>
-                    <button class="chip" data-material="Papier">Papier</button>
-                    <button class="chip" data-material="Autre">Autre</button>
+                    <?php foreach (['Tous', 'Céramique', 'Bois', 'Cuir', 'Textile', 'Métal', 'Verre', 'Papier', 'Autre'] as $mat): ?>
+                        <button type="button"
+                            class="chip <?= ($_GET['material'] ?? 'Tous') === $mat ? 'chip-active' : '' ?>"
+                            data-value="<?= $mat ?>">
+                            <?= $mat ?>
+                        </button>
+                    <?php endforeach; ?>
                 </div>
             </div>
-        </div>
 
-        <!-- Message aucun résultat -->
+        </form>
+
+        <!-- ================== RÉSULTATS ================== -->
         <?php if (empty($products)): ?>
-            <p id="noResults" class="no-results">
+
+            <p class="no-results">
                 Aucun produit ne correspond à vos filtres.
             </p>
+
         <?php else: ?>
 
-            <!-- ================== GRILLE PRODUITS ================== -->
             <div class="products-grid">
 
                 <?php foreach ($products as $product): ?>
@@ -111,14 +121,15 @@
                                 Acheter
                             </a>
                         </div>
-
                     </div>
                 <?php endforeach; ?>
-
             </div>
 
-        <?php endif ?>
+        <?php endif; ?>
+
     </main>
+
+    <script src="./assets/js/signup/products.js"></script>
 
 </body>
 

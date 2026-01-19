@@ -37,3 +37,38 @@ function deleteProduct(PDO $pdo, int $product_id): bool
     $stmt = $pdo->prepare("DELETE FROM product WHERE product_id = ?");
     return $stmt->execute([$product_id]);
 }
+
+function getCraftmanProductById(PDO $pdo, int $product_id, int $craftman_id)
+{
+    $stmt = $pdo->prepare("
+        SELECT product_id, name, unit_price, quantity, description, category_id
+        FROM product
+        WHERE product_id = ? AND craftman_id = ?
+    ");
+    $stmt->execute([$product_id, $craftman_id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function updateCraftmanProduct(PDO $pdo, int $product_id, int $craftman_id, array $data)
+{
+    $stmt = $pdo->prepare("
+        UPDATE product
+        SET
+            name = ?,
+            unit_price = ?,
+            quantity = ?,
+            description = ?,
+            category_id = ?
+        WHERE product_id = ? AND craftman_id = ?
+    ");
+
+    return $stmt->execute([
+        $data['name'],
+        $data['unit_price'],
+        $data['quantity'],
+        $data['description'],
+        $data['category_id'],
+        $product_id,
+        $craftman_id
+    ]);
+}

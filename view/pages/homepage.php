@@ -16,14 +16,31 @@
             <div class="search-inner">
                 <h1>Découvrez et soutenez le savoir-faire artisanal français</h1>
 
-                <form class="search-search-bar" action="#">
-                    <input type="text" placeholder="Recherchez un artisan, un métier ou un produit…" />
+                <form
+                    class="search-search-bar"
+                    method="GET"
+                    action="index.php"
+                >
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Recherchez un produit…"
+                        required
+                    />
+
+                    <input type="hidden" name="page" value="products">
+
+                    <div class="search-actions">
+                        <button type="submit" class="btn-primary">
+                            Rechercher
+                        </button>
+
+                        <a href="index.php?page=craftmen" class="btn-secondary">
+                            Découvrir les artisans
+                        </a>
+                    </div>
                 </form>
 
-                <div class="search-actions">
-                    <a href="#" class="btn-primary">Rechercher</a>
-                    <a href="#" class="btn-secondary">Découvrir les artisans</a>
-                </div>
             </div>
         </section>
 

@@ -32,8 +32,13 @@ function buildCraftmanImageUrl(?string $dbPath): string
 
 function craftmenController(PDO $pdo): void
 {
-    $craftmen = getAllCraftmen($pdo);
+    $search = trim($_GET['search'] ?? '');
 
+    if ($search !== '') {
+        $craftmen = searchCraftmen($pdo, $search);
+    } else {
+        $craftmen = getAllCraftmen($pdo);
+    }
     // Add a computed URL for each craftman
     foreach ($craftmen as &$c) {
         $c['profile_image_url'] = buildCraftmanImageUrl($c['profile_image'] ?? null);
