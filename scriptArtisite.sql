@@ -158,16 +158,6 @@ CREATE TABLE legal_notices (
     FOREIGN KEY (writer_administrator_id) REFERENCES administrator (admin_id) ON UPDATE CASCADE
 );
 
-CREATE TABLE support_ticket (
-    ticket_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    writing_date DATE NOT NULL,
-    content TEXT NOT NULL,
-    answer_administrator_id INT,
-    FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (answer_administrator_id) REFERENCES administrator (admin_id) ON UPDATE CASCADE
-);
-
 CREATE TABLE image_gallery (
     image_gallery_id INT AUTO_INCREMENT PRIMARY KEY,
     image_link VARCHAR(255) NOT NULL,
