@@ -1,17 +1,19 @@
 <?php
 
 require_once './model/requests.product.php';
+require_once './model/requests.category.php';
 
 /**
  * Affiche la liste des produits
  */
 function productsController(PDO $pdo)
 {
-    $search   = trim($_GET['search'] ?? '');
+    $search = trim($_GET['search'] ?? '');
     $category = $_GET['category'] ?? 'Tous';
-    $material = $_GET['material'] ?? 'Tous';
+    $sort = $_GET['sort'] ?? 'newest';
 
-    $products = filterProducts($pdo, $search, $category, $material);
+    $products = filterProducts($pdo, $search, $category, $sort);
+    $categories = getAllCategories($pdo);
 
     require './view/layout/header.php';
     require './view/pages/products.php';

@@ -18,13 +18,7 @@
         </p>
 
         <!-- ================== FILTRES ================== -->
-        <form method="GET" action="index.php" class="filter-card">
-
-            <input type="hidden" name="page" value="products">
-            <input type="hidden" name="category" id="categoryInput"
-                value="<?= htmlspecialchars($_GET['category'] ?? 'Tous') ?>">
-            <input type="hidden" name="material" id="materialInput"
-                value="<?= htmlspecialchars($_GET['material'] ?? 'Tous') ?>">
+        <div class="filter-card">
 
             <div class="filter-header">
                 <div class="filter-icon">⭮</div>
@@ -48,31 +42,44 @@
             <div class="filter-row">
                 <p class="filter-label">Catégorie :</p>
                 <div class="chip-group" id="categoryChips">
-                    <?php foreach (['Tous', 'Poterie', 'Vêtements', 'Décoration', 'Accessoires', 'Autre'] as $cat): ?>
+                    <button type="button"
+                        class="chip <?= ($_GET['category'] ?? 'Tous') === 'Tous' ? 'chip-active' : '' ?>"
+                        data-value="Tous">
+                        Tous
+                    </button>
+                    <?php foreach ($categories as $cat): ?>
                         <button type="button"
-                            class="chip <?= ($_GET['category'] ?? 'Tous') === $cat ? 'chip-active' : '' ?>"
-                            data-value="<?= $cat ?>">
-                            <?= $cat ?>
+                            class="chip <?= ($_GET['category'] ?? 'Tous') === $cat['category_name'] ? 'chip-active' : '' ?>"
+                            data-value="<?= htmlspecialchars($cat['category_name']) ?>">
+                            <?= htmlspecialchars($cat['category_name']) ?>
                         </button>
                     <?php endforeach; ?>
                 </div>
             </div>
 
-            <!-- Matière -->
+            <!-- Tri -->
             <div class="filter-row">
-                <p class="filter-label">Matière :</p>
-                <div class="chip-group" id="materialChips">
-                    <?php foreach (['Tous', 'Céramique', 'Bois', 'Cuir', 'Textile', 'Métal', 'Verre', 'Papier', 'Autre'] as $mat): ?>
-                        <button type="button"
-                            class="chip <?= ($_GET['material'] ?? 'Tous') === $mat ? 'chip-active' : '' ?>"
-                            data-value="<?= $mat ?>">
-                            <?= $mat ?>
-                        </button>
-                    <?php endforeach; ?>
+                <p class="filter-label">Trier par :</p>
+                <div class="chip-group" id="sortChips">
+                    <button type="button"
+                        class="chip <?= ($_GET['sort'] ?? 'newest') === 'newest' ? 'chip-active' : '' ?>"
+                        data-value="newest">
+                        Ordre d'ajout
+                    </button>
+                    <button type="button"
+                        class="chip <?= ($_GET['sort'] ?? 'newest') === 'price_asc' ? 'chip-active' : '' ?>"
+                        data-value="price_asc">
+                        Prix croissant
+                    </button>
+                    <button type="button"
+                        class="chip <?= ($_GET['sort'] ?? 'newest') === 'price_desc' ? 'chip-active' : '' ?>"
+                        data-value="price_desc">
+                        Prix décroissant
+                    </button>
                 </div>
             </div>
 
-        </form>
+        </div>
 
         <!-- ================== RÉSULTATS ================== -->
         <?php if (empty($products)): ?>
@@ -86,7 +93,10 @@
             <div class="products-grid">
 
                 <?php foreach ($products as $product): ?>
-                    <div class="product-card product-appear">
+                    <div class="product-card product-appear"
+                        data-category="<?= htmlspecialchars($product['category_name'] ?? 'Autre') ?>"
+                        data-price="<?= htmlspecialchars($product['unit_price']) ?>"
+                        data-id="<?= htmlspecialchars($product['product_id']) ?>">
 
                         <?php
                         $links = [];
@@ -129,7 +139,7 @@
 
     </main>
 
-    <script src="./assets/js/signup/products.js"></script>
+    <script src="./assets/js/products/products.js"></script>
 
 </body>
 

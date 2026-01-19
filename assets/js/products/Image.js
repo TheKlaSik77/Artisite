@@ -18,19 +18,4 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
-  // =========================
-  // Review form (optional)
-  // =========================
-  const reviewForm = document.querySelector(".review-form");
-  const reviewFeedback = document.querySelector(".review-feedback");
-
-  if (reviewForm && reviewFeedback) {
-    reviewForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      reviewFeedback.textContent =
-        "Merci pour votre avis ! Il sera publié après validation.";
-      reviewForm.reset();
-    });
-  }
 });

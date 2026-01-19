@@ -100,7 +100,7 @@ function searchProducts(PDO $pdo, string $search)
 }
 
 
-function filterProducts(PDO $pdo, string $search, string $category, string $material)
+function filterProducts(PDO $pdo, string $search, string $category, string $sort)
 {
     $sql = "
         SELECT
@@ -108,10 +108,13 @@ function filterProducts(PDO $pdo, string $search, string $category, string $mate
             product.name,
             product.unit_price,
             product.quantity,
-            craftman.company_name
+            craftman.company_name,
+            category.category_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
         FROM product
         INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
         INNER JOIN category ON product.category_id = category.category_id
+        LEFT JOIN image ON image.product_id = product.product_id
         WHERE 1=1
     ";
 
@@ -128,12 +131,20 @@ function filterProducts(PDO $pdo, string $search, string $category, string $mate
         $params[] = $category;
     }
 
-    if ($material !== 'Tous') {
-        $sql .= " AND product.description LIKE ?";
-        $params[] = "%$material%";
-    }
+    $sql .= " GROUP BY product.product_id";
 
-    $sql .= " ORDER BY product.product_id DESC";
+    switch ($sort) {
+        case 'price_asc':
+            $sql .= " ORDER BY product.unit_price ASC";
+            break;
+        case 'price_desc':
+            $sql .= " ORDER BY product.unit_price DESC";
+            break;
+        case 'newest':
+        default:
+            $sql .= " ORDER BY product.product_id DESC";
+            break;
+    }
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
