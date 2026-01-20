@@ -2,7 +2,6 @@
 
 $isAjax = ($_GET['page'] ?? '') === 'signup' && ($_GET['action'] ?? '') === 'checkDuplicate';
 
-
 require_once "./model/utils/connexion.php";
 require_once "./model/utils/auth.php";
 
@@ -22,7 +21,6 @@ if (in_array($page, $ajaxPages, true)) {
         case 'admin-delete-craftman':
             adminDeleteCraftmanController($pdo);
             break;
-
 
         case 'admin-validate-craftman':
             adminValidateCraftmanController($pdo);
@@ -66,16 +64,15 @@ if ($isAjax) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arti'Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@200;300;400;500;600;700&display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/variables.css">
 </head>
 
 <?php
 # Décommenter pour ajouter un admin
-# require_once "create_admin.php";
+// require_once "create_admin.php";
 
 $page = $_GET['page'] ?? 'home';
-
 
 switch ($page) {
     case "home":
@@ -129,7 +126,6 @@ switch ($page) {
             die("Vous n'êtes pas artisan");
         }
 
-
     case "add-product-craftman":
         require_once "./controller/addProductCraftmanController.php";
         addProductCraftmanController($pdo);
@@ -146,8 +142,9 @@ switch ($page) {
         break;
 
     case "craftman":
-        require_once "./controller/craftmenController.php";
-        getCraftmanController($pdo);
+        // ✅ IMPORTANT: uses the dedicated craftman page controller
+        require_once __DIR__ . "/controller/craftmanController.php";
+        craftmanController($pdo);
         break;
 
     case "order":
@@ -235,7 +232,6 @@ switch ($page) {
             break;
         }
 
-
     case "admin-support":
         if (isAdmin()) {
             require_once "./controller/adminSupportController.php";
@@ -255,7 +251,6 @@ switch ($page) {
             $page = "home";
             break;
         }
-
 
     default:
         require "./view/layout/header.php";

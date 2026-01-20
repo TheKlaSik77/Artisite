@@ -71,3 +71,20 @@ function getCraftmanController(PDO $pdo): void
     require "./view/pages/craftman.php";
     require "./view/layout/footer.php";
 }
+function getProductsWithImagesByCraftmanId(PDO $pdo, int $craftman_id): array
+{
+    $stmt = $pdo->prepare("
+        SELECT
+            product.*,
+            craftman.company_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
+        FROM product
+        INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
+        LEFT JOIN image ON image.product_id = product.product_id
+        WHERE product.craftman_id = ?
+        GROUP BY product.product_id
+        ORDER BY product.product_id DESC
+    ");
+    $stmt->execute([$craftman_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+}
