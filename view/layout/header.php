@@ -38,7 +38,6 @@
                 <a href="index.php?page=logout" class="btn-signin logout">Se déconnecter</a>
 
             <?php else: ?>
-                <a href="index.php?page=profil" class="icon-btn" aria-label="Mon profil">👤</a>
                 <a href="index.php?page=logout" class="btn-signin logout">Se déconnecter</a>
 
             <?php endif; ?>

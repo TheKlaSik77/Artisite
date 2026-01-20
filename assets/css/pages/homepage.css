@@ -11,7 +11,8 @@ main {
     width: 100%;
     height: calc(100vh - 70px);
     min-height: 550px;
-    background: url("../../img/placeholder0.jpeg") center center / cover no-repeat;
+    background: url("../../img/placeholder0.jpeg") center center / cover
+        no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,6 +58,10 @@ main {
     color: white;
     font-size: 1rem;
     backdrop-filter: blur(12px);
+}
+
+.search-search-bar input[type="text"] {
+    margin-bottom: 20px;
 }
 
 .search-search-bar input::placeholder {
@@ -122,7 +127,6 @@ main {
     color: #666;
     line-height: 1.5;
 }
-
 
 /* --------------------------------------------- */
 /*               ARTISANS section                */
@@ -205,7 +209,6 @@ main {
     color: var(--accent-gold);
     text-decoration: none;
 }
-
 
 /* --------------------------------------------- */
 /*                EVENTS Section                 */
