@@ -4,16 +4,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>[Nom de l'artisan]</title>
+  <title><?= htmlspecialchars($craftman['company_name'] ?? "Artisan") ?></title>
+
   <link rel="stylesheet" href="./assets/css/pages/craftman.css" />
+  <link rel="stylesheet" href="./assets/css/pages/products.css" />
 </head>
 
 <body>
   <main>
     <div class="cover" role="banner">
-      <img
-        src="https://picsum.photos/1600/300"
-        alt="atelier cover">
+      <img src="https://picsum.photos/1600/300" alt="atelier cover">
       <button type="button" class="back-btn" aria-label="Retour" onclick="location.href='index.php?page=craftmen'">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round" style="color:#000000">
@@ -26,145 +26,111 @@
     <div class="profile-wrap">
       <div class="profile-card">
         <div class="avatar">
-          <img
-            src="https://picsum.photos/300/300"
-            alt="Sophie Martin">
+          <img src="<?= htmlspecialchars($craftmanImageUrl) ?>"
+               alt="<?= htmlspecialchars($craftman['company_name'] ?? 'Artisan') ?>">
         </div>
+
         <div class="profile-main">
           <div class="profile-top">
             <div>
-              <h2 class="name" name="craftman_name"><?= htmlspecialchars($craftman['company_name']) ?></h2>
-              <p class="occupation">Métier</p>
+              <h2 class="name"><?= htmlspecialchars($craftman['company_name'] ?? '') ?></h2>
+              <p class="occupation">Artisan</p>
+
               <div class="meta" style="margin-top:.6rem;">
-                <div class="chip" title="Localisation">
+                <div class="chip" title="SIRET">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                   </svg>
-                </div>
-                <div class="chip" style="background:transparent;padding:0;color:var(--muted)">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                    <path
-                      d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z">
-                    </path>
-                  </svg>
-                  <span style="margin-left:.4rem">4.8 (127 avis)</span>
+                  <span><?= htmlspecialchars($craftman['siret'] ?? '—') ?></span>
                 </div>
               </div>
             </div>
 
             <div>
-              <button class="contact-btn">Contacter</button>
+              <button class="contact-btn" type="button">Contacter</button>
             </div>
           </div>
 
           <p class="muted" style="margin-top:.4rem;max-width:75ch">
-            <?= htmlspecialchars($craftman['description']) ?>
+            <?= htmlspecialchars($craftman['description'] ?? '') ?>
           </p>
         </div>
       </div>
     </div>
 
-    <section>
+    <!-- ✅ CREATIONS: dynamic + animated only -->
+    <section class="products-section" style="padding-top:0;">
       <div class="section-header">
         <div class="section-subtitle">Disponible maintenant</div>
         <h3 class="section-title">Créations</h3>
       </div>
 
-      <div class="grid">
-        <article class="card" aria-labelledby="prod-1">
-          <div class="media"><img
-              src="https://picsum.photos/300/300"
-              alt="Bol artisanal"></div>
-          <div class="body">
-            <h4 id="prod-1" class="product-title">Bol artisanal en grès</h4>
-            <div class="price">45€</div>
-            <div class="meta-list">
-              <div style="font-size:.93rem;color:var(--muted)">Grès naturel, émaillage au four</div>
-              <div style="font-size:.93rem;color:var(--muted);margin-top:.4rem">Délai : 2-3 semaines</div>
-              <div style="margin-top:.6rem">
-                <a class="btn-gold" href="#">Commander</a>
+      <?php if (empty($products)): ?>
+        <p class="no-results" style="text-align:left;">Aucun produit pour le moment.</p>
+      <?php else: ?>
+        <div class="products-grid">
+
+          <?php foreach ($products as $product): ?>
+            <?php
+              $links = [];
+              if (!empty($product['image_links'])) {
+                  $rawLinks = array_values(array_filter(explode('||', $product['image_links'])));
+                  foreach ($rawLinks as $link) {
+                      // ✅ same behavior as your products page
+                      $links[] = '/Artisite/' . ltrim($link, '/');
+                  }
+              }
+              $first = $links[0] ?? 'https://picsum.photos/500/300';
+            ?>
+
+            <article class="product-card product-appear">
+              <img
+                class="product-img js-product-img"
+                src="<?= htmlspecialchars($first) ?>"
+                data-images='<?= htmlspecialchars(json_encode($links, JSON_UNESCAPED_SLASHES)) ?>'
+                alt="<?= htmlspecialchars($product['name'] ?? 'Produit') ?>"
+              >
+
+              <div class="product-info">
+                <h3 class="product-name"><?= htmlspecialchars($product['name'] ?? '') ?></h3>
+                <p class="product-artisan"><?= htmlspecialchars($product['company_name'] ?? '') ?></p>
+                <p class="product-price">
+                  <?= number_format((float)($product['unit_price'] ?? 0), 2, ',', ' ') ?> €
+                </p>
+                <a class="product-btn" href="index.php?page=product&id=<?= (int)$product['product_id'] ?>">
+                  Acheter
+                </a>
               </div>
-            </div>
-          </div>
-        </article>
+            </article>
+          <?php endforeach; ?>
 
-        <article class="card" aria-labelledby="prod-2">
-          <div class="media"><img
-              src="https://picsum.photos/300/300"
-              alt="Assiette décorative"></div>
-          <div class="body">
-            <h4 id="prod-2" class="product-title">Assiette décorative</h4>
-            <div class="price">65€</div>
-            <div class="meta-list">
-              <div style="font-size:.93rem;color:var(--muted)">Céramique tournée, finition mate</div>
-              <div style="font-size:.93rem;color:var(--muted);margin-top:.4rem">Délai : 3-4 semaines</div>
-              <div style="margin-top:.6rem"><a class="btn-gold" href="#">Commander</a></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" aria-labelledby="prod-3">
-          <div class="media"><img
-              src="https://picsum.photos/300/300"
-              alt="Tasses"></div>
-          <div class="body">
-            <h4 id="prod-3" class="product-title">Set de tasses à café</h4>
-            <div class="price">85€</div>
-            <div class="meta-list">
-              <div style="font-size:.93rem;color:var(--muted)">Porcelaine, émaillage artisanal</div>
-              <div style="font-size:.93rem;color:var(--muted);margin-top:.4rem">Délai : 2 semaines</div>
-              <div style="margin-top:.6rem"><a class="btn-gold" href="#">Commander</a></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" aria-labelledby="prod-4">
-          <div class="media"><img
-              src="https://picsum.photos/300/300"
-              alt="Vase"></div>
-          <div class="body">
-            <h4 id="prod-4" class="product-title">Vase contemporain</h4>
-            <div class="price">120€</div>
-            <div class="meta-list">
-              <div style="font-size:.93rem;color:var(--muted)">Grès, technique raku</div>
-              <div style="font-size:.93rem;color:var(--muted);margin-top:.4rem">Délai : 4 semaines</div>
-              <div style="margin-top:.6rem"><a class="btn-gold" href="#">Commander</a></div>
-            </div>
-          </div>
-        </article>
-      </div>
+        </div>
+      <?php endif; ?>
     </section>
 
+    <!-- keep your other sections as before (events/reviews static) -->
     <section>
       <div class="section-header">
         <div class="section-subtitle">Prochainement</div>
         <h3 class="section-title">Ateliers & Événements</h3>
-        <p class="muted" style="margin-top:.5rem">Découvrez les ateliers et événements organisés par Sophie Martin</p>
+        <p class="muted" style="margin-top:.5rem">Découvrez les ateliers et événements organisés par <?= htmlspecialchars($craftman['company_name'] ?? 'cet artisan') ?></p>
       </div>
 
       <div class="events-grid">
         <article class="card">
-          <div><img
-              src="https://picsum.photos/300/300"
-              alt="atelier"></div>
+          <div><img src="https://picsum.photos/300/300" alt="atelier"></div>
           <div>
-            <h4
-              style="padding:0 1rem 0 1rem;margin-top:.6rem">
-              Atelier poterie traditionnelle</h4>
+            <h4 style="padding:0 1rem 0 1rem;margin-top:.6rem">Atelier poterie traditionnelle</h4>
             <div class="muted" style="padding:0 1rem 0 1rem">15 novembre 2025 — Paris 11ème</div>
             <div style="padding:1rem 1rem 1.2rem 1rem"><a class="btn-gold" href="#">En savoir plus</a></div>
           </div>
         </article>
 
         <article class="card">
-          <div><img
-              src="https://picsum.photos/300/300"
-              alt="stage"></div>
+          <div><img src="https://picsum.photos/300/300" alt="stage"></div>
           <div>
-            <h4
-              style="padding:0 1rem 0 1rem;margin-top:.6rem">
-              Stage de tournage - Niveau avancé</h4>
+            <h4 style="padding:0 1rem 0 1rem;margin-top:.6rem">Stage de tournage - Niveau avancé</h4>
             <div class="muted" style="padding:0 1rem 0 1rem">22 novembre 2025 — Paris 11ème</div>
             <div style="padding:1rem 1rem 1.2rem 1rem"><a class="btn-gold" href="#">En savoir plus</a></div>
           </div>
@@ -183,105 +149,38 @@
           <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:.6rem">
             <div>
               <div style="font-size:1.05rem">Marie L.</div>
-              <div style="display:flex;gap:.25rem;margin-top:.35rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-              </div>
             </div>
             <div style="font-size:.85rem;color:var(--muted)">Il y a 2 semaines</div>
           </div>
-          <p style="margin:0;color:#374151">Magnifique travail ! Les bols sont encore plus beaux en vrai. La qualité est
-            exceptionnelle.</p>
+          <p style="margin:0;color:#374151">Magnifique travail !</p>
         </div>
 
         <div class="review">
           <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:.6rem">
             <div>
               <div style="font-size:1.05rem">Thomas D.</div>
-              <div style="display:flex;gap:.25rem;margin-top:.35rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-              </div>
             </div>
             <div style="font-size:.85rem;color:var(--muted)">Il y a 1 mois</div>
           </div>
-          <p style="margin:0;color:#374151">Artisane très professionnelle. Délais respectés et emballage soigné. Je
-            recommande vivement !</p>
+          <p style="margin:0;color:#374151">Je recommande vivement !</p>
         </div>
 
         <div class="review">
           <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:.6rem">
             <div>
               <div style="font-size:1.05rem">Claire B.</div>
-              <div style="display:flex;gap:.25rem;margin-top:.35rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--secondary)">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path
-                    d="M12 .587l3.668 7.431L24 9.748l-6 5.848 1.416 8.268L12 19.771 4.584 23.864 6 15.596 0 9.748l8.332-1.73z" />
-                </svg>
-              </div>
             </div>
             <div style="font-size:.85rem;color:var(--muted)">Il y a 2 mois</div>
           </div>
-          <p style="margin:0;color:#374151">Très belles pièces artisanales. Chaque objet est unique. Un vrai plaisir
-            d'utiliser ces créations au quotidien.</p>
+          <p style="margin:0;color:#374151">Très belles pièces artisanales.</p>
         </div>
       </div>
     </section>
 
     <div style="height:6rem"></div>
   </main>
+
+  <script src="./assets/js/products/image_cycle.js"></script>
 </body>
 
 </html>

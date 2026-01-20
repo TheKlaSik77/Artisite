@@ -1,5 +1,9 @@
 <?php
 
+/* ===========================
+   GET PROFILES
+=========================== */
+
 function getUserProfileById(PDO $pdo, int $user_id): ?array
 {
     $stmt = $pdo->prepare("
@@ -10,7 +14,6 @@ function getUserProfileById(PDO $pdo, int $user_id): ?array
             first_name,
             email,
             phone_number,
-            description,
             profile_image
         FROM `user`
         WHERE user_id = ?
@@ -41,6 +44,10 @@ function getCraftmanProfileById(PDO $pdo, int $craftman_id): ?array
     return $row ?: null;
 }
 
+/* ===========================
+   PROFILE IMAGE
+=========================== */
+
 function updateUserProfileImage(PDO $pdo, int $user_id, string $relativePath): bool
 {
     $stmt = $pdo->prepare("
@@ -59,4 +66,30 @@ function updateCraftmanProfileImage(PDO $pdo, int $craftman_id, string $relative
         WHERE craftman_id = ?
     ");
     return $stmt->execute([$relativePath, $craftman_id]);
+}
+
+/* ===========================
+   UPDATE PROFILE INFO
+=========================== */
+
+/* ✅ USER (NO DESCRIPTION) */
+function updateUserInfo(PDO $pdo, int $user_id, string $username, string $phone_number): bool
+{
+    $stmt = $pdo->prepare("
+        UPDATE `user`
+        SET username = ?, phone_number = ?
+        WHERE user_id = ?
+    ");
+    return $stmt->execute([$username, $phone_number, $user_id]);
+}
+
+/* ✅ CRAFTMAN (WITH DESCRIPTION) */
+function updateCraftmanInfo(PDO $pdo, int $craftman_id, string $company_name, string $siret, string $description): bool
+{
+    $stmt = $pdo->prepare("
+        UPDATE craftman
+        SET company_name = ?, siret = ?, description = ?
+        WHERE craftman_id = ?
+    ");
+    return $stmt->execute([$company_name, $siret, $description, $craftman_id]);
 }
