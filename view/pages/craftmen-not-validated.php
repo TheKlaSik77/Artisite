@@ -9,8 +9,8 @@
         Merci de patienter. Vous serez informé une fois la validation effectuée.
     </p>
 
-    <a href="index.php?page=home"
-       style="display:inline-block;margin-top:25px;padding:10px 18px;background:#000;color:#fff;text-decoration:none;border-radius:8px;">
+    <a href="index.php?page=homepage"
+        style="display:inline-block;margin-top:25px;padding:10px 18px;background:#000;color:#fff;text-decoration:none;border-radius:8px;">
         Retour à l’accueil
     </a>
 </div>

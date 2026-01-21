@@ -41,36 +41,34 @@
             </div>
 
             <!-- ================== LISTE ARTISANS ================== -->
-            <div class="craftmen-grid">
+            <div class="craftmen-grid products-grid">
 
                 <?php if (empty($craftmen)): ?>
                     <p class="no-results">Aucun artisan trouvé.</p>
                 <?php else: ?>
                     <?php foreach ($craftmen as $_craftman): ?>
-                        <div class="craftman-card" data-name="<?= strtolower($_craftman['company_name']) ?>"
-                            data-category="tous">
+                        <?php
+                        $img = !empty($_craftman['profile_image_url'])
+                            ? $_craftman['profile_image_url']
+                            : './assets/img/artisan.jpg';
+                        ?>
+                        <div class="craftman-card product-card product-appear"
+                            data-name="<?= strtolower($_craftman['company_name']) ?>" data-category="tous"
+                            data-id="<?= (int) $_craftman['craftman_id'] ?>">
 
-                            <div class="craftman-card-img-wrap">
-                                <img src="<?= htmlspecialchars($_craftman['profile_image_url']) ?>"
-                                    alt="<?= htmlspecialchars($_craftman['company_name']) ?>">
-                                <div class="img-gradient"></div>
-                            </div>
+                            <img class="js-product-img" src="<?= htmlspecialchars($img) ?>"
+                                data-images='<?= htmlspecialchars(json_encode([$img], JSON_UNESCAPED_SLASHES)) ?>'
+                                style="width: 400px; height: 300px;" alt="<?= htmlspecialchars($_craftman['company_name']) ?>">
 
-                            <div class="craftman-card-content">
-                                <h3><?= htmlspecialchars($_craftman['company_name']) ?></h3>
-                                <p class="craftman-description">
-                                    <?= htmlspecialchars($_craftman['description'] ?? 'Artisan professionnel') ?>
-                                </p>
+                            <div class="product-info">
+                                <h3 class="product-name">
+                                    <?= htmlspecialchars($_craftman['company_name']) ?>
+                                </h3>
 
-                                <a href="index.php?page=craftman&id=<?= $_craftman['craftman_id'] ?>" class="btn-discover">
-                                    <span>Découvrir</span>
-                                    <span class="icon-arrow-right">
-                                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                            <line x1="5" y1="12" x2="19" y2="12" />
-                                            <polyline points="12 5 19 12 12 19" />
-                                        </svg>
-                                    </span>
+                                <p class="product-artisan">Artisan</p>
+
+                                <a href="index.php?page=craftman&id=<?= (int) $_craftman['craftman_id'] ?>" class="product-btn">
+                                    Découvrir
                                 </a>
                             </div>
                         </div>
@@ -82,6 +80,7 @@
         </section>
     </main>
 
+    <script src="./assets/js/products/image_cycle.js"></script>
     <!-- JS FILTRES ARTISANS -->
     <script src="./assets/js/signup/craftmen-filters.js"></script>
 </body>

@@ -67,7 +67,7 @@ function signinProcessController(PDO $pdo)
 
         if ($user && password_verify($password, $user['hashed_password'])) {
             $_SESSION['user'] = [
-                'id' => (int)$user['user_id'],
+                'id' => (int) $user['user_id'],
                 'role' => 'user',
                 'email' => $email
             ];
@@ -85,7 +85,7 @@ function signinProcessController(PDO $pdo)
             ];
         }
 
-    // ---------------- CRAFTMAN ----------------
+        // ---------------- CRAFTMAN ----------------
     } else {
 
         $craftman = getCraftman($pdo, $email);
@@ -101,13 +101,13 @@ function signinProcessController(PDO $pdo)
         }
 
         $_SESSION['user'] = [
-            'id' => (int)$craftman['craftman_id'],
+            'id' => (int) $craftman['craftman_id'],
             'role' => 'craftman',
             'email' => $craftman['email']
         ];
     }
 
     session_regenerate_id(true);
-    header("Location: index.php?page=home");
+    header("Location: index.php?page=homepage");
     exit;
 }

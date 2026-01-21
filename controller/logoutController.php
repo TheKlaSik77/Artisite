@@ -19,6 +19,6 @@ function logoutController()
     }
 
     // Redirection vers l’accueil
-    header("Location: index.php?page=home");
+    header("Location: index.php?page=homepage");
     exit;
 }

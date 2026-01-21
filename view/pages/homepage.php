@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accueil – Arti'Site</title>
     <link rel="stylesheet" href="./assets/css/pages/homepage.css" />
+    <link rel="stylesheet" href="./assets/css/pages/products.css" />
 </head>
 
 <body>
@@ -40,18 +41,28 @@
             </p>
 
             <div class="container">
-                <div class="artisans-grid">
+                <div class="products-grid">
 
                     <?php if (!empty($latestCraftmen)): ?>
                         <?php foreach ($latestCraftmen as $craftman): ?>
-                            <div class="artisan-card">
-                                <img src="<?= htmlspecialchars($craftman['image_url']) ?>" class="event-img"
+                            <?php $artisanImg = $craftman['image_url']; ?>
+                            <div class="product-card product-appear" data-id="<?= (int) $craftman['craftman_id'] ?>">
+                                <img class="js-product-img" src="<?= htmlspecialchars($artisanImg) ?>"
+                                    data-images='<?= htmlspecialchars(json_encode([$artisanImg], JSON_UNESCAPED_SLASHES)) ?>'
+                                    style="width: 320px; height: 240px;"
                                     alt="<?= htmlspecialchars($craftman['company_name']) ?>">
-                                <div class="artisan-content">
-                                    <h3 class="artisan-name"><?= htmlspecialchars($craftman['company_name']) ?></h3>
-                                    <p class="artisan-job">Artisan</p>
+
+                                <div class="product-info">
+                                    <h3 class="product-name">
+                                        <?= htmlspecialchars($craftman['company_name']) ?>
+                                    </h3>
+
+                                    <p class="product-artisan">Artisan</p>
+
                                     <a href="index.php?page=craftman&id=<?= (int) $craftman['craftman_id'] ?>"
-                                        class="artisan-btn">Découvrir →</a>
+                                        class="product-btn">
+                                        Découvrir
+                                    </a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -75,52 +86,61 @@
                 à jour avec les nouvelles pièces uniques ajoutées à notre collection.
             </p>
 
-            <div class="events-grid">
-                <div class="event-card">
-                    <img src="assets/img/poterie.jpg" class="event-img">
-                    <div class="event-content">
-                        <h3 class="event-name">Atelier poterie traditionnelle</h3>
-                        <div class="event-info">
-                            <p>📅 15 novembre 2025</p>
-                            <p>📍 Paris 11ème</p>
-                        </div>
-                        <a href="#" class="event-btn">Participer →</a>
-                    </div>
-                </div>
+            <div class="products-grid">
+                <?php if (empty($latestProducts)): ?>
+                    <p class="no-results">Aucun produit disponible pour le moment.</p>
+                <?php else: ?>
+                    <?php foreach ($latestProducts as $product): ?>
+                        <div class="product-card product-appear"
+                            data-category="<?= htmlspecialchars($product['category_name'] ?? 'Autre') ?>"
+                            data-price="<?= htmlspecialchars($product['unit_price'] ?? ($product['price'] ?? 0)) ?>"
+                            data-id="<?= htmlspecialchars($product['product_id']) ?>">
 
-                <div class="event-card">
-                    <img src="assets/img/poterie.jpg" class="event-img">
-                    <div class="event-content">
-                        <h3 class="event-name">Salon des Métiers d’Art</h3>
-                        <div class="event-info">
-                            <p>📅 22 novembre 2025</p>
-                            <p>📍 Lyon</p>
-                        </div>
-                        <a href="#" class="event-btn">Participer →</a>
-                    </div>
-                </div>
+                            <?php
+                            $links = [];
+                            if (!empty($product['image_links'])) {
+                                $rawLinks = array_values(array_filter(explode('||', $product['image_links'])));
+                                foreach ($rawLinks as $link) {
+                                    $links[] = '/Artisite/' . ltrim($link, '/');
+                                }
+                            }
+                            $first = $links[0] ?? 'https://picsum.photos/500/300';
+                            ?>
 
-                <div class="event-card">
-                    <img src="assets/img/poterie.jpg" class="event-img">
-                    <div class="event-content">
-                        <h3 class="event-name">Exposition de maroquinerie artisanale</h3>
-                        <div class="event-info">
-                            <p>📅 5 décembre 2025</p>
-                            <p>📍 Bordeaux</p>
-                        </div>
-                        <a href="#" class="event-btn">Participer →</a>
-                    </div>
-                </div>
+                            <img class="js-product-img" src="<?= htmlspecialchars($first) ?>"
+                                data-images='<?= htmlspecialchars(json_encode($links, JSON_UNESCAPED_SLASHES)) ?>'
+                                style="width: 400px; height: 300px;" alt="<?= htmlspecialchars($product['name']) ?>">
 
+                            <div class="product-info">
+                                <h3 class="product-name">
+                                    <?= htmlspecialchars($product['name']) ?>
+                                </h3>
+
+                                <p class="product-artisan">
+                                    <?= htmlspecialchars($product['company_name'] ?? '') ?>
+                                </p>
+
+                                <p class="product-price">
+                                    <?= number_format(($product['unit_price'] ?? ($product['price'] ?? 0)), 2, ',', ' ') ?> €
+                                </p>
+
+                                <a href="index.php?page=product&id=<?= (int) $product['product_id'] ?>" class="product-btn">
+                                    Acheter
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
-
             <div class="events-center">
-                <a href="#" class="events-all-btn">Tous les événements</a>
+                <a href="index.php?page=products" class="events-all-btn">Tous les produits</a>
             </div>
         </section>
 
 
     </main>
+
+    <script src="./assets/js/products/image_cycle.js"></script>
 
 </body>
 

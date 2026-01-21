@@ -7,24 +7,24 @@ function homepageController($pdo)
 
     // Récupérer les 3 derniers artisans validés
     $latestCraftmen = getThreeLatestsValidatedCraftmen($pdo);
-    // Préparer les URLs des images
-    foreach ($latestCraftmen as &$craftman) {
+    // Préparer les URLs des images (éviter les foreach par référence)
+    foreach ($latestCraftmen as $idx => $craftman) {
         if (!empty($craftman['profile_image'])) {
-            $craftman['image_url'] = './' . ltrim($craftman['profile_image'], '/');
+            $latestCraftmen[$idx]['image_url'] = './' . ltrim($craftman['profile_image'], '/');
         } else {
-            $craftman['image_url'] = './assets/img/artisan.jpg';
+            $latestCraftmen[$idx]['image_url'] = './assets/img/artisan.jpg';
         }
     }
 
     // Récupérer les 3 derniers produits ajoutés
     $latestProducts = getThreeLatestProducts($pdo);
-    // Préparer les URLs des images
-    foreach ($latestProducts as &$product) {
+    // Préparer les URLs des images (éviter les foreach par référence)
+    foreach ($latestProducts as $idx => $product) {
         if (!empty($product['image_links'])) {
             $images = explode('||', $product['image_links']);
-            $product['image_url'] = './' . ltrim($images[0], '/');
+            $latestProducts[$idx]['image_url'] = './' . ltrim($images[0], '/');
         } else {
-            $product['image_url'] = './assets/img/produit.jpg';
+            $latestProducts[$idx]['image_url'] = './assets/img/produit.jpg';
         }
     }
 

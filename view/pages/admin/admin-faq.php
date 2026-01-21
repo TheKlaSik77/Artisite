@@ -1,6 +1,6 @@
 <main class="content">
   <div class="deconnexion">
-    <button class="btn-small" onclick="window.location.href='index.php?page=home'">Revenir à l'accueil</button>
+    <button class="btn-small" onclick="window.location.href='index.php?page=homepage'">Revenir à l'accueil</button>
     <button class="btn-small" onclick="window.location.href='index.php?page=logout'">Se déconnecter</button>
   </div>
   <div class="admin-faq">

@@ -80,7 +80,13 @@ function getThreeLatestProducts(PDO $pdo)
 {
     $stmt = $pdo->prepare("
         SELECT
-            product.*,
+            product.product_id,
+            product.name,
+            product.quantity,
+            product.unit_price AS price,
+            product.description,
+            product.category_id,
+            product.craftman_id,
             craftman.company_name,
             GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
         FROM product

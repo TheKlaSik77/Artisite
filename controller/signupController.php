@@ -14,7 +14,8 @@ function blockBackslashes(array $values): void
 
 function renderSignupWithError(string $msg): void
 {
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    if (session_status() === PHP_SESSION_NONE)
+        session_start();
     $_SESSION['signup_error'] = $msg;
 
     require "./view/layout/header.php";
@@ -27,9 +28,10 @@ function renderSignupWithError(string $msg): void
 function isValidName(string $name): bool
 {
     $name = trim($name);
-    if ($name === '') return false;
+    if ($name === '')
+        return false;
 
-    return (bool)preg_match("/^[\p{L}\s'-]+$/u", $name);
+    return (bool) preg_match("/^[\p{L}\s'-]+$/u", $name);
 }
 
 function signupController(PDO $pdo)
@@ -71,7 +73,7 @@ function checkDuplicateController(PDO $pdo): void
 {
     header('Content-Type: application/json; charset=utf-8');
 
-    $type  = $_GET['type']  ?? '';
+    $type = $_GET['type'] ?? '';
     $field = $_GET['field'] ?? '';
     $value = $_GET['value'] ?? '';
 
@@ -93,10 +95,13 @@ function checkDuplicateController(PDO $pdo): void
         exit;
     }
 
-    $value = trim((string)$value);
-    if ($field === 'email') $value = strtolower($value);
-    if ($field === 'phone_number') $value = preg_replace('/\s+/', '', $value);
-    if ($field === 'siret') $value = preg_replace('/\s+/', '', $value);
+    $value = trim((string) $value);
+    if ($field === 'email')
+        $value = strtolower($value);
+    if ($field === 'phone_number')
+        $value = preg_replace('/\s+/', '', $value);
+    if ($field === 'siret')
+        $value = preg_replace('/\s+/', '', $value);
 
     if (strpos($value, '\\') !== false) {
         echo json_encode(['exists' => false, 'message' => 'Backslash interdit']);
@@ -112,11 +117,15 @@ function checkDuplicateController(PDO $pdo): void
         $exists = false;
 
         if ($type === 'user') {
-            if ($field === 'username') $exists = usernameExists($pdo, $value);
-            if ($field === 'email') $exists = emailExists($pdo, $value);
-            if ($field === 'phone_number') $exists = phoneExists($pdo, $value);
+            if ($field === 'username')
+                $exists = usernameExists($pdo, $value);
+            if ($field === 'email')
+                $exists = emailExists($pdo, $value);
+            if ($field === 'phone_number')
+                $exists = phoneExists($pdo, $value);
         } else {
-            if ($field === 'siret') $exists = siretExists($pdo, $value);
+            if ($field === 'siret')
+                $exists = siretExists($pdo, $value);
         }
 
         echo json_encode([
@@ -188,9 +197,9 @@ function userAddController(PDO $pdo)
         renderSignupWithError("Erreur serveur: utilisateur introuvable après création.");
     }
 
-    CreateCartForUser($pdo, (int)$user_id);
+    CreateCartForUser($pdo, (int) $user_id);
 
-    header("Location: index.php?page=home");
+    header("Location: index.php?page=homepage");
     exit;
 }
 
@@ -235,6 +244,6 @@ function craftmanAddController(PDO $pdo)
 
     insertCraftman($pdo, $email, $company_name, $siretNorm, $description, $hashed_password);
 
-    header("Location: index.php?page=home");
+    header("Location: index.php?page=homepage");
     exit;
 }
