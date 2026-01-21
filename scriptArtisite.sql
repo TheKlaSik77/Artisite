@@ -78,23 +78,6 @@ CREATE TABLE image (
     FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE event (
-    event_id INT AUTO_INCREMENT PRIMARY KEY,
-    event_name VARCHAR(50),
-    creator_craftman_id INT NOT NULL,
-    place VARCHAR(255) NOT NULL,
-    date DATE NOT NULL,
-    FOREIGN KEY (creator_craftman_id) REFERENCES craftman (craftman_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE participate_to_event (
-    event_id INT NOT NULL,
-    craftman_id INT NOT NULL,
-    PRIMARY KEY (event_id, craftman_id),
-    FOREIGN KEY (event_id) REFERENCES event (event_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (craftman_id) REFERENCES craftman (craftman_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE shopping_cart (
     shopping_cart_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
