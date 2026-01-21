@@ -38,9 +38,9 @@
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     position: relative;
-    padding: 10px;
+    padding: 12px 22px;
     margin: 0px;
     border-radius: 10px;
 }
@@ -76,9 +76,9 @@ a:visited {
 .btn-signup,
 .btn-signin {
     color: var(--text-dark);
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 500;
-    padding: 8px 18px;
+    padding: 12px 24px;
     border-radius: 10px;
     text-decoration: none;
     border: 2px transparent solid;

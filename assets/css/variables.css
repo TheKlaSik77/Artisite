@@ -8,7 +8,7 @@
     --bg: #f5f3ef;
     --bg-panel: #ffffff;
     --border-soft: #e3ded6;
-    --accent: #E8B77A;
+    --accent: #e8b77a;
     --accent-soft: #f5e4c8;
     --text: #3c3023;
     --text-soft: #8b7c6a;
@@ -39,20 +39,18 @@
     box-sizing: border-box;
 }
 
-
 body {
-    font-family: "Playfair Display", "Comic Sans MS";
-    font-weight: 200;
     background-color: white;
     color: var(--text-dark);
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 1px;
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0px;
+    padding: 0px 0px;
 }
-
-
-
