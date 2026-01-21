@@ -101,13 +101,9 @@
                         <?php
                         $links = [];
                         if (!empty($product['image_links'])) {
-                            $rawLinks = array_values(array_filter(explode('||', $product['image_links'])));
-                            // Ajouter le préfixe /Artisite/ pour chaque lien
-                            foreach ($rawLinks as $link) {
-                                $links[] = '/Artisite/' . ltrim($link, '/');
-                            }
+                            $links = array_values(array_filter(explode('||', $product['image_links'])));
                         }
-                        $first = $links[0] ?? 'https://picsum.photos/500/300';
+                        $first = $links[0] ?? './assets/img/placeholder.png';
                         ?>
 
                         <img class="js-product-img" src="<?= htmlspecialchars($first) ?>"
