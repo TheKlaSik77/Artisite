@@ -27,8 +27,12 @@
         $images = [];
 
         if (!empty($product['image_links'])) {
-            $images = explode('||', $product['image_links']);
-            $images = array_values(array_filter($images, fn($v) => trim($v) !== ''));
+            $rawLinks = explode('||', $product['image_links']);
+            $rawLinks = array_values(array_filter($rawLinks, fn($v) => trim($v) !== ''));
+            foreach ($rawLinks as $link) {
+                // Use relative path from index.php
+                $images[] = './' . ltrim($link, '/');
+            }
         }
 
         // fallback if no image
