@@ -66,6 +66,49 @@ if ($page === 'signup' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
+# Traite les actions POST/redirections avant tout output
+$postPages = ['profil', 'order', 'checkout', 'support', 'craftman-support', 'add-product-craftman', 'edit-product', 'craftman-products', 'admin-faq'];
+if (in_array($page, $postPages, true) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    switch ($page) {
+        case 'profil':
+            require_once "./controller/profilController.php";
+            profilController($pdo);
+            exit;
+        case 'order':
+            require_once "./controller/orderController.php";
+            orderController($pdo);
+            exit;
+        case 'checkout':
+            require_once "./controller/checkoutController.php";
+            checkoutController($pdo);
+            exit;
+        case 'support':
+            require_once "./controller/supportController.php";
+            supportController($pdo);
+            exit;
+        case 'craftman-support':
+            require_once "./controller/craftmanSupportController.php";
+            craftmanSupportController($pdo);
+            exit;
+        case 'add-product-craftman':
+            require_once "./controller/addProductCraftmanController.php";
+            addProductCraftmanController($pdo);
+            exit;
+        case 'edit-product':
+            require_once "./controller/craftmanProductsController.php";
+            editCraftmanProductController($pdo);
+            exit;
+        case 'craftman-products':
+            require_once "./controller/craftmanProductsController.php";
+            craftmanProductsController($pdo);
+            exit;
+        case 'admin-faq':
+            require_once "./controller/adminFaqController.php";
+            adminFaqController($pdo);
+            exit;
+    }
+}
+
 if ($isAjax) {
     $page = $_GET['page'] ?? '';
     if ($page === "signup") {
