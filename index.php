@@ -70,7 +70,7 @@ if ($isAjax) {
 
 <?php
 # Décommenter pour ajouter un admin
-// require_once "create_admin.php";
+require_once "create_admin.php";
 
 $page = $_GET['page'] ?? 'homepage';
 
