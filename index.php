@@ -59,6 +59,13 @@ if ($page === 'logout') {
     exit;
 }
 
+# Traite l'inscription (POST) avant tout output pour éviter "headers already sent"
+if ($page === 'signup' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once "./controller/signupController.php";
+    signupController($pdo);
+    exit;
+}
+
 if ($isAjax) {
     $page = $_GET['page'] ?? '';
     if ($page === "signup") {
