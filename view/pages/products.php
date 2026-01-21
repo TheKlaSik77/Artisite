@@ -101,7 +101,11 @@
                         <?php
                         $links = [];
                         if (!empty($product['image_links'])) {
-                            $links = array_values(array_filter(explode('||', $product['image_links'])));
+                            $rawLinks = array_values(array_filter(explode('||', $product['image_links'])));
+                            foreach ($rawLinks as $link) {
+                                // Use relative path from index.php
+                                $links[] = './' . ltrim($link, '/');
+                            }
                         }
                         $first = $links[0] ?? './assets/img/placeholder.png';
                         ?>
