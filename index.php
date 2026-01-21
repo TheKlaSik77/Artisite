@@ -52,6 +52,13 @@ if ($page === 'signin' && (($_GET['action'] ?? '') === 'login' || $_SERVER['REQU
     exit;
 }
 
+# Traite la déconnexion avant tout output pour éviter "headers already sent"
+if ($page === 'logout') {
+    require_once "./controller/logoutController.php";
+    logoutController();
+    exit;
+}
+
 if ($isAjax) {
     $page = $_GET['page'] ?? '';
     if ($page === "signup") {
