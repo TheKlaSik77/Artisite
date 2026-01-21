@@ -64,7 +64,7 @@ if ($isAjax) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arti'Site</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@200;300;400;500;600;700&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/variables.css">
 </head>
 
@@ -72,13 +72,12 @@ if ($isAjax) {
 # Décommenter pour ajouter un admin
 // require_once "create_admin.php";
 
-$page = $_GET['page'] ?? 'home';
+$page = $_GET['page'] ?? 'homepage';
 
 switch ($page) {
-    case "home":
-        require "./view/layout/header.php";
-        require "./view/pages/homepage.php";
-        require "./view/layout/footer.php";
+    case "homepage":
+        require_once "./controller/homepageController.php";
+        homepageController($pdo);
         break;
 
     case "products":
@@ -88,7 +87,7 @@ switch ($page) {
 
     case "product":
         require_once "./controller/productController.php";
-        $id = (int)($_GET['id'] ?? 0);
+        $id = (int) ($_GET['id'] ?? 0);
         productController($pdo, $id);
         break;
 
@@ -130,10 +129,10 @@ switch ($page) {
         require_once "./controller/addProductCraftmanController.php";
         addProductCraftmanController($pdo);
         break;
-    
+
     case "edit-product":
         require_once "./controller/craftmanProductsController.php";
-         editCraftmanProductController($pdo);
+        editCraftmanProductController($pdo);
         break;
 
     case "craftmen":
@@ -169,19 +168,30 @@ switch ($page) {
         break;
 
     case "support":
-        require_once "./controller/supportController.php";
-        supportController($pdo);
+        if (!isUser()) {
+            require "./view/layout/header.php";
+            require "./view/pages/homepage.php";
+            require "./view/layout/footer.php";
+        } else {
+            require_once "./controller/supportController.php";
+            supportController($pdo);
+        }
         break;
 
     case "craftman-support":
-        require_once "./controller/craftmanSupportController.php";
-        craftmanSupportController($pdo);
+        if (!isCraftman()) {
+            $page = 'home';
+            break;
+        } else {
+            require_once "./controller/craftmanSupportController.php";
+            craftmanSupportController($pdo);
+        }
         break;
 
     /*------------------------------------ 
                 PAGES ADMIN 
     -------------------------------------*/
-    
+
     case "admin-craftmen":
         if (isAdmin()) {
             require "./controller/adminController.php";
@@ -253,8 +263,6 @@ switch ($page) {
         }
 
     default:
-        require "./view/layout/header.php";
-        require "./view/pages/homepage.php";
-        require "./view/layout/footer.php";
+        $page = 'homepage';
         break;
 }

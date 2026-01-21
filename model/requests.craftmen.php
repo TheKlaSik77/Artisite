@@ -46,6 +46,29 @@ function getAllValidatedCraftmen(PDO $pdo)
     return $stmt->fetchAll();
 }
 
+function getThreeLatestsValidatedCraftmen(PDO $pdo)
+{
+    $stmt = $pdo->prepare("
+        SELECT 
+            craftman.craftman_id,
+            craftman.siret,
+            craftman.email,
+            craftman.description,
+            craftman.validator_id,
+            administrator.email AS validator_email,
+            craftman.company_name,
+            craftman.profile_image
+        FROM craftman
+        LEFT JOIN administrator 
+            ON craftman.validator_id = administrator.admin_id
+        where craftman.validator_id IS NOT NULL
+        ORDER BY craftman_id DESC
+        LIMIT 3
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 function getCraftmanById(PDO $pdo, int $craftman_id)
 {
     $stmt = $pdo->prepare("
@@ -54,6 +77,7 @@ function getCraftmanById(PDO $pdo, int $craftman_id)
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row ?: null;
 }
+
 
 /* --------------------------------------
             UPDATE FONCTIONS

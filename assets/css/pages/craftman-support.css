@@ -3,238 +3,247 @@
 /* ======================= */
 
 .craftman-support-page {
-  max-width: 1100px;
-  margin: 28px auto;
-  padding: 0 16px;
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 0 16px;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
 }
 
 .craftman-support-top {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .craftman-support-top h1 {
-  font-size: 2.2rem;
-  margin: 0 0 6px 0;
+    font-size: 2.2rem;
+    margin: 0 0 6px 0;
 }
 
 .craftman-support-top p {
-  margin: 0;
-  color: var(--text-soft);
-  font-size: 0.95rem;
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 0.95rem;
 }
 
 .craftman-support-layout {
-  display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
+    display: grid;
+    grid-template-columns: 360px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
 }
 
 /* Cards */
 .craftman-card {
-  background: var(--bg-panel, #fff);
-  border: 1px solid var(--border-soft, #eadfce);
-  border-radius: 16px;
-  padding: 14px 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+    background: var(--bg-panel, #fff);
+    border: 1px solid var(--border-soft, #eadfce);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
 }
 
 .craftman-card h2 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
 }
 
 /* Tickets list */
 .craftman-items {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .craftman-item {
-  border: 1px solid transparent;
-  border-radius: 12px;
-  padding: 10px 12px;
-  transition: 0.15s ease;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    padding: 10px 12px;
+    transition: 0.15s ease;
 }
 
 .craftman-item:hover {
-  background: #faf7f3;
+    background: #faf7f3;
 }
 
 .craftman-item.active {
-  background: var(--accent-soft, #f4eadb);
-  border-color: var(--accent, #a26b1a);
+    background: var(--accent-soft, #f4eadb);
+    border-color: var(--accent, #a26b1a);
 }
 
 .craftman-item a {
-  text-decoration: none;
-  color: var(--text, #2b2b2b);
-  font-weight: 600;
-  display: block;
+    text-decoration: none;
+    color: var(--text, #2b2b2b);
+    font-weight: 600;
+    display: block;
 }
 
 /* Status badge */
 .craftman-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 6px;
-  font-size: 0.8rem;
-  color: var(--text-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-soft);
 }
 
 .craftman-status::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #bbb;
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #bbb;
 }
 
-.craftman-status[data-status="nouveau"]::before { background: #c25a2a; }
-.craftman-status[data-status="en_cours"]::before { background: #a26b1a; }
-.craftman-status[data-status="resolu"]::before { background: #2e7c57; }
+.craftman-status[data-status="nouveau"]::before {
+    background: #c25a2a;
+}
+.craftman-status[data-status="en_cours"]::before {
+    background: #a26b1a;
+}
+.craftman-status[data-status="resolu"]::before {
+    background: #2e7c57;
+}
 
 /* Meta */
 .craftman-meta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-  color: var(--text-soft);
-  font-size: 0.9rem;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    color: var(--text-soft);
+    font-size: 0.9rem;
 }
 
 .craftman-meta strong {
-  color: var(--text, #2b2b2b);
+    color: var(--text, #2b2b2b);
 }
 
 /* Select + buttons */
 .craftman-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 10px 0 12px 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0 12px 0;
 }
 
 .craftman-select,
 .craftman-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border-soft, #eadfce);
-  background: #fff;
-  outline: none;
-  font-size: 0.95rem;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border-soft, #eadfce);
+    background: #fff;
+    outline: none;
+    font-size: 0.95rem;
 }
 
 .craftman-select {
-  width: auto;
-  min-width: 180px;
+    width: auto;
+    min-width: 180px;
 }
 
 .craftman-select:focus,
 .craftman-textarea:focus {
-  border-color: var(--accent, #a26b1a);
-  box-shadow: 0 0 0 3px rgba(162, 107, 26, 0.12);
+    border-color: var(--accent, #a26b1a);
+    box-shadow: 0 0 0 3px rgba(162, 107, 26, 0.12);
 }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border-soft, #eadfce);
-  background: #fff;
-  padding: 10px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-soft, #eadfce);
+    background: #fff;
+    padding: 10px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: 0.15s ease;
 }
 
 .btn:hover {
-  background: #faf7f3;
+    background: #faf7f3;
 }
 
 .btn-primary {
-  background: var(--accent, #a26b1a);
-  border-color: var(--accent, #a26b1a);
-  color: #fff;
+    background: var(--accent, #a26b1a);
+    border-color: var(--accent, #a26b1a);
+    color: #fff;
 }
 
 .btn-primary:hover {
-  filter: brightness(0.95);
+    filter: brightness(0.95);
 }
 
 /* Messages container */
 .craftman-messages {
-  border: 1px solid var(--border-soft, #eadfce);
-  border-radius: 16px;
-  padding: 12px;
-  min-height: 240px;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    border: 1px solid var(--border-soft, #eadfce);
+    border-radius: 16px;
+    padding: 12px;
+    min-height: 240px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Message bubble */
 .craftman-message {
-  border-radius: 14px;
-  padding: 10px 12px;
-  border: 1px solid var(--border-soft, #eadfce);
-  background: #faf7f3;
+    border-radius: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-soft, #eadfce);
+    background: #faf7f3;
 }
 
 .craftman-message[data-role="craftman"] {
-  background: rgba(162, 107, 26, 0.10);
+    background: rgba(162, 107, 26, 0.1);
 }
 
 .craftman-message .meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 6px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 6px;
 }
 
 .craftman-message .meta strong {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 .craftman-message .meta small {
-  color: var(--text-soft);
-  font-size: 0.8rem;
+    color: var(--text-soft);
+    font-size: 0.8rem;
 }
 
 .craftman-message .body {
-  white-space: pre-line;
-  font-size: 0.95rem;
+    white-space: pre-line;
+    font-size: 0.95rem;
 }
 
 /* Reply */
 .craftman-reply {
-  margin-top: 12px;
-  display: grid;
-  gap: 10px;
+    margin-top: 12px;
+    display: grid;
+    gap: 10px;
 }
 
 .craftman-textarea {
-  min-height: 110px;
-  resize: vertical;
+    min-height: 110px;
+    resize: vertical;
 }
 
 /* Responsive */
 @media (max-width: 900px) {
-  .craftman-support-layout {
-    grid-template-columns: 1fr;
-  }
-  .craftman-select {
-    width: 100%;
-  }
+    .craftman-support-layout {
+        grid-template-columns: 1fr;
+    }
+    .craftman-select {
+        width: 100%;
+    }
 }

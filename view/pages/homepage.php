@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -42,74 +42,37 @@
             <div class="container">
                 <div class="artisans-grid">
 
-                    <div class="artisan-card">
-                        <img src="assets/img/artisan.jpg" class="event-img">
-                        <div class="artisan-content">
-                            <h3 class="artisan-name">Sophie Martin</h3>
-                            <p class="artisan-job">Céramiste</p>
-                            <a href="#" class="artisan-btn">Découvrir →</a>
-                        </div>
-                    </div>
-
-                    <div class="artisan-card">
-                        <img src="assets/img/artisan.jpg" class="event-img">
-                        <div class="artisan-content">
-                            <h3 class="artisan-name">Thomas Dubois</h3>
-                            <p class="artisan-job">Menuisier ébéniste</p>
-                            <a href="#" class="artisan-btn">Découvrir →</a>
-                        </div>
-                    </div>
-
-                    <div class="artisan-card">
-                        <img src="assets/img/artisan.jpg" class="event-img">
-                        <div class="artisan-content">
-                            <h3 class="artisan-name">Marie Leroux</h3>
-                            <p class="artisan-job">Maroquinière</p>
-                            <a href="#" class="artisan-btn">Découvrir →</a>
-                        </div>
-                    </div>
-
-                    <div class="artisan-card">
-                        <img src="assets/img/artisan.jpg" class="event-img">
-                        <div class="artisan-content">
-                            <h3 class="artisan-name">Julien Rousseau</h3>
-                            <p class="artisan-job">Tisserand</p>
-                            <a href="#" class="artisan-btn">Découvrir →</a>
-                        </div>
-                    </div>
-
-                    <div class="artisan-card">
-                        <img src="assets/img/artisan.jpg" class="event-img">
-                        <div class="artisan-content">
-                            <h3 class="artisan-name">Claire Bernard</h3>
-                            <p class="artisan-job">Joaillière</p>
-                            <a href="#" class="artisan-btn">Découvrir →</a>
-                        </div>
-                    </div>
-
-                    <div class="artisan-card">
-                        <img src="assets/img/artisan.jpg" class="event-img">
-                        <div class="artisan-content">
-                            <h3 class="artisan-name">Antoine Moreau</h3>
-                            <p class="artisan-job">Ferronnier d'art</p>
-                            <a href="#" class="artisan-btn">Découvrir →</a>
-                        </div>
-                    </div>
+                    <?php if (!empty($latestCraftmen)): ?>
+                        <?php foreach ($latestCraftmen as $craftman): ?>
+                            <div class="artisan-card">
+                                <img src="<?= htmlspecialchars($craftman['image_url']) ?>" class="event-img"
+                                    alt="<?= htmlspecialchars($craftman['company_name']) ?>">
+                                <div class="artisan-content">
+                                    <h3 class="artisan-name"><?= htmlspecialchars($craftman['company_name']) ?></h3>
+                                    <p class="artisan-job">Artisan</p>
+                                    <a href="index.php?page=craftman&id=<?= (int) $craftman['craftman_id'] ?>"
+                                        class="artisan-btn">Découvrir →</a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Aucun artisan pour le moment.</p>
+                    <?php endif; ?>
 
                 </div>
 
                 <div class="artisans-center">
-                    <a href="#" class="artisans-all-btn">Voir tous les artisans</a>
+                    <a href="index.php?page=craftmen" class="artisans-all-btn">Voir tous les artisans</a>
                 </div>
             </div>
         </section>
 
         <section class="events">
-            <p class="section-subtitle">PROCHAINEMENT</p>
-            <h1 class="section-title">Événements à venir</h1>
+            <p class="section-subtitle">NOUVEAUTÉS</p>
+            <h1 class="section-title">Derniers produits ajoutés</h1>
             <p class="section-desc">
-                Participez à nos ateliers, salons et expositions pour rencontrer les artisans
-                et découvrir leurs techniques.
+                Découvrez les créations les plus récentes de nos artisans et restez
+                à jour avec les nouvelles pièces uniques ajoutées à notre collection.
             </p>
 
             <div class="events-grid">

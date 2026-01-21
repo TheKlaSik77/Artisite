@@ -3,7 +3,8 @@
 /* --------------------------------------
             READ FONCTIONS
 ----------------------------------------*/
-function getAllProducts(PDO $pdo) {
+function getAllProducts(PDO $pdo)
+{
     $stmt = $pdo->prepare("
         SELECT
             product.*,
@@ -18,7 +19,8 @@ function getAllProducts(PDO $pdo) {
     return $stmt->fetchAll();
 }
 
-function getProductById(PDO $pdo, int $id){
+function getProductById(PDO $pdo, int $id)
+{
     $stmt = $pdo->prepare("
         SELECT
             product.*,
@@ -36,7 +38,8 @@ function getProductById(PDO $pdo, int $id){
     return $stmt->fetchAll();
 }
 
-function getProductsByCategory(PDO $pdo, string $category_name){
+function getProductsByCategory(PDO $pdo, string $category_name)
+{
     $stmt = $pdo->prepare("
         SELECT
             product.*,
@@ -53,7 +56,8 @@ function getProductsByCategory(PDO $pdo, string $category_name){
     return $stmt->fetchAll();
 }
 
-function getProductsBySearch(PDO $pdo, string $search){
+function getProductsBySearch(PDO $pdo, string $search)
+{
     $stmt = $pdo->prepare("
         Select product.*, craftman.company_name 
         FROM product INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
@@ -63,12 +67,31 @@ function getProductsBySearch(PDO $pdo, string $search){
     return $stmt->fetchAll();
 }
 
-function getNbProductsOfCraftman(PDO $pdo, int $craftman_id){
+function getNbProductsOfCraftman(PDO $pdo, int $craftman_id)
+{
     $stmt = $pdo->prepare("
     Select COUNT(*) FROM Products WHERE craftman_id = ?
     ");
-    $stmt -> execute([$craftman_id]);
+    $stmt->execute([$craftman_id]);
     return (int) $stmt->fetchColumn();
+}
+
+function getThreeLatestProducts(PDO $pdo)
+{
+    $stmt = $pdo->prepare("
+        SELECT
+            product.*,
+            craftman.company_name,
+            GROUP_CONCAT(image.image_link ORDER BY image.image_id SEPARATOR '||') AS image_links
+        FROM product
+        INNER JOIN craftman ON product.craftman_id = craftman.craftman_id
+        LEFT JOIN image ON image.product_id = product.product_id
+        GROUP BY product.product_id
+        ORDER BY product.product_id DESC
+        LIMIT 3
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll();
 }
 
 /* --------------------------------------
@@ -76,7 +99,8 @@ function getNbProductsOfCraftman(PDO $pdo, int $craftman_id){
 ----------------------------------------*/
 
 # Insère un produit et met à null description et craft
-function insertProduct(PDO $pdo, string $name, int $quantity, int $unit_price, int $category_id, int $craftman_id): bool{
+function insertProduct(PDO $pdo, string $name, int $quantity, int $unit_price, int $category_id, int $craftman_id): bool
+{
     $stmt = $pdo->prepare("
         INSERT INTO product (name, quantity, unit_price, category_id, craftman_id)
         VALUES (?, ?, ?, ?, ?)
@@ -87,7 +111,7 @@ function insertProduct(PDO $pdo, string $name, int $quantity, int $unit_price, i
         $quantity,
         $unit_price,
         $category_id,
-        $craftman_id,  
+        $craftman_id,
     ]);
 }
 

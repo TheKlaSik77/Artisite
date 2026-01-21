@@ -43,9 +43,7 @@
 
                 <!-- Main image -->
                 <div class="product-main-image">
-                    <img
-                        id="mainProductImage"
-                        src="<?= htmlspecialchars($mainImage) ?>"
+                    <img id="mainProductImage" src="<?= htmlspecialchars($mainImage) ?>"
                         alt="<?= htmlspecialchars($product['name'] ?? 'Produit') ?>">
                 </div>
 
@@ -53,13 +51,9 @@
                 <?php if (!empty($images)): ?>
                     <div class="product-thumbs">
                         <?php foreach ($images as $index => $imgPath): ?>
-                            <button
-                                type="button"
-                                class="thumb <?= $index === 0 ? 'thumb-active' : '' ?>"
-                                data-img="<?= htmlspecialchars($imgPath) ?>"
-                                aria-label="Voir image <?= $index + 1 ?>">
-                                <img
-                                    src="<?= htmlspecialchars($imgPath) ?>"
+                            <button type="button" class="thumb <?= $index === 0 ? 'thumb-active' : '' ?>"
+                                data-img="<?= htmlspecialchars($imgPath) ?>" aria-label="Voir image <?= $index + 1 ?>">
+                                <img src="<?= htmlspecialchars($imgPath) ?>"
                                     alt="<?= htmlspecialchars($product['name'] ?? 'Produit') ?> - Vue <?= $index + 1 ?>">
                             </button>
                         <?php endforeach; ?>
@@ -85,7 +79,7 @@
 
                 <p class="product-price">
                     <?= isset($product['unit_price'])
-                        ? number_format((float)$product['unit_price'], 2, ',', ' ')
+                        ? number_format((float) $product['unit_price'], 2, ',', ' ')
                         : '' ?> €
                 </p>
 
@@ -101,24 +95,26 @@
                     </p>
                 <?php endif; ?>
 
-                <div class="product-actions">
+                <?php if (isUser()): ?>
+                    <div class="product-actions">
 
-                    <form method="POST" action="index.php?page=cart&action=add">
+                        <form method="POST" action="index.php?page=cart&action=add">
 
-                        <div class="quantity">
-                            <label for="qty">Quantité</label>
-                            <div class="quantity-input">
-                                <input id="qty" name="quantity" type="number" min="1" value="1">
+                            <div class="quantity">
+                                <label for="qty">Quantité</label>
+                                <div class="quantity-input">
+                                    <input id="qty" name="quantity" type="number" min="1" value="1">
+                                </div>
                             </div>
-                        </div>
 
-                        <input type="hidden" name="product_id" value="<?= (int)($product['product_id'] ?? 0) ?>">
+                            <input type="hidden" name="product_id" value="<?= (int) ($product['product_id'] ?? 0) ?>">
 
-                        <button type="submit" class="btn-primary">
-                            Ajouter au panier
-                        </button>
-                    </form>
-                </div>
+                            <button type="submit" class="btn-primary">
+                                Ajouter au panier
+                            </button>
+                        </form>
+                    </div>
+                <?php endif; ?>
 
                 <div class="product-extra">
                     <p>🚚 Livraison estimée : 3 à 5 jours ouvrés</p>
@@ -139,4 +135,5 @@
     </main>
 
 </body>
+
 </html>

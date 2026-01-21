@@ -24,9 +24,18 @@
             <ul class="footer-links">
                 <li><a href="index.php?page=homepage">Accueil</a></li>
                 <li><a href="index.php?page=craftmen">Nos Artisans</a></li>
-                <li><a href="index.php?page=products">Produits</a></li>
-                <li><a href="index.php?page=events">Événements</a></li>
-                <li><a href="#">Devenir Artisan</a></li>
+                <li><a href="index.php?page=products">Nos Produits</a></li>
+                <?php if (isUser()): ?>
+                    <li><a href="#">Devenir Artisan</a></li>
+                <?php endif; ?>
+                <?php if (isUser() || isCraftman()): ?>
+                    <?php if (isCraftman()): ?>
+                        <li><a href="index.php?page=craftman-support">Support</a></li>
+                    <?php else: ?>
+                        <li><a href="index.php?page=support">Support</a></li>
+                    <?php endif; ?>
+                    <li><a href="index.php?page=faq">FAQ</a></li>
+                <?php endif; ?>
             </ul>
         </div>
 
@@ -34,21 +43,21 @@
             <h3 class="footer-title">Contact</h3>
 
             <ul class="footer-contact">
-                <li><span class="contact-icon">*</span>
+                <li><span class="contact-icon">✉️</span>
                     <div>
                         <p class="contact-label">Email</p>
                         <p>contact@artisite.fr</p>
                     </div>
                 </li>
 
-                <li><span class="contact-icon">*</span>
+                <li><span class="contact-icon">📞</span>
                     <div>
                         <p class="contact-label">Téléphone</p>
                         <p>+33 1 23 45 67 89</p>
                     </div>
                 </li>
 
-                <li><span class="contact-icon">*</span>
+                <li><span class="contact-icon">📍</span>
                     <div>
                         <p class="contact-label">Adresse</p>
                         <p>Paris, France</p>

@@ -8,6 +8,7 @@
     padding: 80px 20px;
     display: flex;
     justify-content: center;
+    min-height: calc(100vh - 200px);
 }
 
 .faq-inner {
@@ -95,7 +96,10 @@
     border: 1px solid var(--accent-beige-pill);
     background-color: #fdf8f1;
     overflow: hidden;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .faq-item:hover {
@@ -139,8 +143,11 @@
     line-height: 1.5;
     color: var(--text-dark);
     border-top: 1px solid transparent;
-    transition: max-height 0.25s ease, padding-top 0.25s ease,
-                padding-bottom 0.25s ease, border-color 0.25s ease;
+    transition:
+        max-height 0.25s ease,
+        padding-top 0.25s ease,
+        padding-bottom 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .faq-answer p + p {

@@ -24,7 +24,14 @@
             <?php if (isCraftman()): ?>
                 <a href="index.php?page=craftman-products" class="nav-link">Mes Produits</a>
             <?php endif; ?>
-            <a href="index.php?page=events" class="nav-link">Événements</a>
+            <?php if (isUser() || isCraftman()): ?>
+                <?php if (isCraftman()): ?>
+                    <a href="index.php?page=craftman-support" class="nav-link">Support</a>
+                <?php else: ?>
+                    <a href="index.php?page=support" class="nav-link">Support</a>
+                <?php endif; ?>
+                <a href="index.php?page=faq" class="nav-link">FAQ</a>
+            <?php endif; ?>
         </nav>
 
         <div class="nav-right">
