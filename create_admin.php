@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+echo "<pre>create_admin.php exécuté</pre>";
 // ⚠️ SUPPRIME CE FICHIER APRÈS UTILISATION ⚠️
 
 // Connexion à la base
