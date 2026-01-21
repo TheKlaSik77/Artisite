@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-echo "<pre>create_admin.php exécuté</pre>";
 // ⚠️ SUPPRIME CE FICHIER APRÈS UTILISATION ⚠️
 
 // Connexion à la base
@@ -13,7 +9,7 @@ require_once "./model/utils/connexion.php";
 $username = "admin";
 $email = "admin@artisite.fr";
 $phone_number = "0612234556";
-$password = "1234"; 
+$password = "@rtis1te"; 
 
 // Hash du mot de passe
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
