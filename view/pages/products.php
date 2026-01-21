@@ -6,7 +6,6 @@
     <title>Nos Produits – Marketplace Artisans</title>
     <link rel="stylesheet" href="./assets/css/pages/products.css">
 </head>
-<script src="./assets/js/products/image_cycle.js"></script>
 
 <body>
 
@@ -110,9 +109,8 @@
                         $first = $links[0] ?? './assets/img/placeholder.png';
                         ?>
 
-                        <img class="js-product-img" src="<?= htmlspecialchars($first) ?>"
-                            data-images='<?= htmlspecialchars(json_encode($links, JSON_UNESCAPED_SLASHES)) ?>'
-                            style="width: 400px; height: 300px;" alt="<?= htmlspecialchars($product['name']) ?>">
+                        <img src="<?= htmlspecialchars($first) ?>" style="width: 400px; height: 300px;"
+                            alt="<?= htmlspecialchars($product['name']) ?>">
 
                         <div class="product-info">
                             <h3 class="product-name">

@@ -45,6 +45,7 @@
                 <a href="index.php?page=logout" class="btn-signin logout">Se déconnecter</a>
 
             <?php else: ?>
+                
                 <a href="index.php?page=logout" class="btn-signin logout">Se déconnecter</a>
 
             <?php endif; ?>
