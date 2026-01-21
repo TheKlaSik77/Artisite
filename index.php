@@ -45,6 +45,13 @@ if (in_array($page, $ajaxPages, true)) {
     exit;
 }
 
+# Traite la connexion avant tout output pour éviter "headers already sent"
+if ($page === 'signin' && (($_GET['action'] ?? '') === 'login' || $_SERVER['REQUEST_METHOD'] === 'POST')) {
+    require_once "./controller/signinController.php";
+    signinController($pdo);
+    exit;
+}
+
 if ($isAjax) {
     $page = $_GET['page'] ?? '';
     if ($page === "signup") {
@@ -70,7 +77,7 @@ if ($isAjax) {
 
 <?php
 # Décommenter pour ajouter un admin
-# require_once "create_admin.php";
+require_once "create_admin.php";
 
 $page = $_GET['page'] ?? 'homepage';
 
