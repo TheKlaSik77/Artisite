@@ -1,4 +1,6 @@
-<?php session_start();
+<?php
+ob_start();
+session_start();
 
 $isAjax = ($_GET['page'] ?? '') === 'signup' && ($_GET['action'] ?? '') === 'checkDuplicate';
 
@@ -45,70 +47,6 @@ if (in_array($page, $ajaxPages, true)) {
     exit;
 }
 
-# Traite la connexion avant tout output pour éviter "headers already sent"
-if ($page === 'signin' && (($_GET['action'] ?? '') === 'login' || $_SERVER['REQUEST_METHOD'] === 'POST')) {
-    require_once "./controller/signinController.php";
-    signinController($pdo);
-    exit;
-}
-
-# Traite la déconnexion avant tout output pour éviter "headers already sent"
-if ($page === 'logout') {
-    require_once "./controller/logoutController.php";
-    logoutController();
-    exit;
-}
-
-# Traite l'inscription (POST) avant tout output pour éviter "headers already sent"
-if ($page === 'signup' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once "./controller/signupController.php";
-    signupController($pdo);
-    exit;
-}
-
-# Traite les actions POST/redirections avant tout output
-$postPages = ['profil', 'order', 'checkout', 'support', 'craftman-support', 'add-product-craftman', 'edit-product', 'craftman-products', 'admin-faq'];
-if (in_array($page, $postPages, true) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    switch ($page) {
-        case 'profil':
-            require_once "./controller/profilController.php";
-            profilController($pdo);
-            exit;
-        case 'order':
-            require_once "./controller/orderController.php";
-            orderController($pdo);
-            exit;
-        case 'checkout':
-            require_once "./controller/checkoutController.php";
-            checkoutController($pdo);
-            exit;
-        case 'support':
-            require_once "./controller/supportController.php";
-            supportController($pdo);
-            exit;
-        case 'craftman-support':
-            require_once "./controller/craftmanSupportController.php";
-            craftmanSupportController($pdo);
-            exit;
-        case 'add-product-craftman':
-            require_once "./controller/addProductCraftmanController.php";
-            addProductCraftmanController($pdo);
-            exit;
-        case 'edit-product':
-            require_once "./controller/craftmanProductsController.php";
-            editCraftmanProductController($pdo);
-            exit;
-        case 'craftman-products':
-            require_once "./controller/craftmanProductsController.php";
-            craftmanProductsController($pdo);
-            exit;
-        case 'admin-faq':
-            require_once "./controller/adminFaqController.php";
-            adminFaqController($pdo);
-            exit;
-    }
-}
-
 if ($isAjax) {
     $page = $_GET['page'] ?? '';
     if ($page === "signup") {
@@ -135,7 +73,7 @@ if ($isAjax) {
 
 <?php
 # Décommenter pour ajouter un admin
-# require_once "create_admin.php";
+// require_once "create_admin.php";
 
 $page = $_GET['page'] ?? 'homepage';
 
@@ -234,9 +172,8 @@ switch ($page) {
 
     case "support":
         if (!isUser()) {
-            require "./view/layout/header.php";
-            require "./view/pages/homepage.php";
-            require "./view/layout/footer.php";
+            $page = 'homepage';
+            break;
         } else {
             require_once "./controller/supportController.php";
             supportController($pdo);
@@ -245,7 +182,7 @@ switch ($page) {
 
     case "craftman-support":
         if (!isCraftman()) {
-            $page = 'home';
+            $page = 'homepage';
             break;
         } else {
             require_once "./controller/craftmanSupportController.php";
@@ -263,7 +200,7 @@ switch ($page) {
             adminCraftmenController($pdo);
             break;
         } else {
-            $page = "home";
+            $page = "homepage";
             break;
         }
 
@@ -273,7 +210,7 @@ switch ($page) {
             adminCustomersController($pdo);
             break;
         } else {
-            $page = "home";
+            $page = "homepage";
             break;
         }
 
@@ -283,7 +220,7 @@ switch ($page) {
             adminProductsController($pdo);
             break;
         } else {
-            $page = "home";
+            $page = "homepage";
             break;
         }
 
@@ -293,7 +230,7 @@ switch ($page) {
             adminOrdersController($pdo);
             break;
         } else {
-            $page = "home";
+            $page = "homepage";
             break;
         }
 
@@ -303,7 +240,7 @@ switch ($page) {
             adminReviewsController($pdo);
             break;
         } else {
-            $page = "home";
+            $page = "homepage";
             break;
         }
 
@@ -313,7 +250,7 @@ switch ($page) {
             adminSupportController($pdo);
             break;
         } else {
-            $page = "home";
+            $page = "homepage";
             break;
         }
 
@@ -323,7 +260,7 @@ switch ($page) {
             adminFaqController($pdo);
             break;
         } else {
-            $page = "home";
+            $page = "homepage";
             break;
         }
 
@@ -331,3 +268,5 @@ switch ($page) {
         $page = 'homepage';
         break;
 }
+
+ob_end_flush();
