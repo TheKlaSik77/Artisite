@@ -180,6 +180,7 @@
         </div>
     </main>
 
+    <script src="./assets/js/shared/password-toggle.js"></script>
     <script src="./assets/js/signup/switch_craftman_user_signup.js"></script>
     <script src="./assets/js/signup/ajax_verif.js"></script>
     <script src="./assets/js/signup/form_validation.js"></script>

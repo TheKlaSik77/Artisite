@@ -82,7 +82,7 @@ switch ($page) {
         require_once "./controller/homepageController.php";
         homepageController($pdo);
         break;
-
+        
     case "products":
         require_once "./controller/productController.php";
         productsController($pdo);

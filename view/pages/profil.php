@@ -125,15 +125,6 @@
                             </div>
                         </div>
 
-                        <div class="info-block">
-                            <div class="label">Description</div>
-                            <div class="value">
-                                <span class="value-text"><?= htmlspecialchars($profile['description'] ?? '') ?></span>
-                                <textarea class="value-textarea" name="description" rows="4"
-                                    disabled><?= htmlspecialchars($profile['description'] ?? '') ?></textarea>
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="profile-actions">

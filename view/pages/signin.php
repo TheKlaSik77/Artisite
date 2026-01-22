@@ -51,6 +51,8 @@
 
         </div>
     </main>
+
+    <script src="./assets/js/shared/password-toggle.js"></script>
 </body>
 
 </html>
