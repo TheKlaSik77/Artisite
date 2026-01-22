@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (mainImg && thumbs.length > 0) {
     thumbs.forEach((btn) => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
         const src = btn.getAttribute("data-img");
         if (!src) return;
 

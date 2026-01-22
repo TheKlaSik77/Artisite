@@ -6,9 +6,6 @@
     <title><?= htmlspecialchars($product['name'] ?? 'Produit') ?> - Artisite</title>
 
     <link rel="stylesheet" href="./assets/css/pages/product.css">
-
-    <!-- Product page JS (gallery + reviews) -->
-    <script src="./assets/js/products/image.js" defer></script>
 </head>
 
 <body>
@@ -138,6 +135,7 @@
         </section>
     </main>
 
+    <script src="./assets/js/products/image.js"></script>
 </body>
 
 </html>
