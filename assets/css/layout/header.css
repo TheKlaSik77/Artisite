@@ -14,6 +14,38 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 101;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-dark);
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 3px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
 .nav-left {
     display: flex;
     align-items: center;
@@ -95,4 +127,100 @@ a:visited {
 .btn-signup:hover {
     border: 2px var(--accent-gold) solid;
     background-color: transparent;
+}
+
+/* --------------------------------------------- */
+/*           RESPONSIVE MOBILE                   */
+/* --------------------------------------------- */
+
+@media screen and (max-width: 1024px) {
+    .navbar {
+        padding: 16px 25px;
+    }
+
+    .logo {
+        width: 250px;
+        height: 50px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-center {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        flex-direction: column;
+        background-color: white;
+        width: 80%;
+        max-width: 350px;
+        height: 100vh;
+        padding-top: 80px;
+        gap: 0;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: left 0.3s ease;
+        transform: none;
+        overflow-y: auto;
+    }
+
+    .nav-center.active {
+        left: 0;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: left;
+        padding: 20px 30px;
+        border-radius: 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-right {
+        position: fixed;
+        bottom: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 350px;
+        flex-direction: column;
+        background-color: white;
+        padding: 20px 30px;
+        gap: 12px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: left 0.3s ease;
+        z-index: 99;
+    }
+
+    .nav-right.active {
+        left: 0;
+    }
+
+    .btn-signup,
+    .btn-signin {
+        width: 100%;
+        text-align: center;
+    }
+
+    .icon-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar {
+        padding: 12px 15px;
+    }
+
+    .logo {
+        width: 180px;
+        height: 40px;
+    }
+
+    .nav-center,
+    .nav-right {
+        width: 85%;
+    }
 }

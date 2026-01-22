@@ -14,7 +14,13 @@
             <img src="./assets/img/logo_artisite_vf.png" alt="Logo Arti'Site" class="logo" />
         </div>
 
-        <nav class="nav-center">
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-center" id="navMenu">
             <a href="index.php?page=homepage" class="nav-link">Accueil</a>
             <?php if (isAdmin()): ?>
                 <a href="index.php?page=admin-craftmen" class="nav-link">Admin Dashboard</a>
@@ -41,9 +47,9 @@
 
             <?php elseif (!isAdmin()): ?>
                 <a href="index.php?page=profil" class="icon-btn" aria-label="Mon profil">👤</a>
-                    <?php if (isUser()): ?>
-                        <a href="index.php?page=cart" class="icon-btn" aria-label="Panier">🛒</a>
-                    <?php endif; ?>
+                <?php if (isUser()): ?>
+                    <a href="index.php?page=cart" class="icon-btn" aria-label="Panier">🛒</a>
+                <?php endif; ?>
                 <a href="index.php?page=logout" class="btn-signin logout">Se déconnecter</a>
 
             <?php else: ?>
@@ -54,4 +60,24 @@
 
     </header>
 
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const navRight = document.querySelector('.nav-right');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            navRight.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                navRight.classList.remove('active');
+            });
+        });
+    </script>
 </body>
