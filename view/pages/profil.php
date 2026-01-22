@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mon profil - Arti'Site</title>
-    <link rel="stylesheet" href="/Artisite/assets/css/pages/profil.css">
+    <link rel="stylesheet" href="./assets/css/pages/profil.css">
 </head>
 
 <body>
